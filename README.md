@@ -1,3 +1,3 @@
-### TE PAGO  
-# Monedero Virtual  
-# SO: Android 11+
+# TE PAGO  
+## Monedero Virtual  
+#### SO: Android 11+
