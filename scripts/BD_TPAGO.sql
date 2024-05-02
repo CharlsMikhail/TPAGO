@@ -45,13 +45,32 @@ create table cuenta_usuario (
 	unique(num_movil)
 );
 
+create table departamento (
+	id_departamento serial not null primary key,
+	nombre_departamento varchar(50) not null,
+	descripcion text null
+);
+
+create table provincia ( 
+	id_provincia serial not null primary key,
+	id_departamento integer not null references departamento(id_departamento),
+	nombre_provincia varchar(50) not null,
+	descripcion text null
+);
+
+create table distrito (
+	id_distrito serial not null primary key,
+	id_provincia integer not null references provincia(id_provincia),
+	nombre_distrito varchar(50) not null,
+	descripcion text null
+);
+
 create table direccion_usuario_cuenta (
 	id_cuenta_usuario integer not null primary key references cuenta_usuario(id_cuenta_usuario),
 	direcccion_exacta varchar(100) not null,
-	distrito varchar(30) not null,
-    provincia varchar(30) not null,
-    departamento varchar(30) not null,
-    codigo_postal varchar(10) null
+   	id_departamento integer not null references departamento(id_departamento),
+	id_provincia integer not null references provincia(id_provincia),
+	id_distrito integer not null references distrito(id_distrito)
 );
 
 -- Por el momento tiene todos los permisos.
@@ -100,8 +119,3 @@ create table planilla_empleado (
 	fecha_acceso date not null,
 	unique(id_usuario_empleador, id_usuario_empleado)
 );
-
--- ¿Se guardaran un registro de las recargas?
-
-
-
