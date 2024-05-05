@@ -2,7 +2,7 @@
 -- Materia: Procesos de Software - ULS.
 -- Colaboradores: Carlos Mamani, Yony Vilca, Leandro Estrada y Esthephany Choquehuanca.
 -- Fecha de creación: 15/04/2024
--- Fecha de modificación: 03/05/2024
+-- Fecha de modificación: 05/05/2024
 
 create table persona (
 	dni_persona serial not null primary key,
@@ -60,8 +60,8 @@ create table distrito (
 	descripcion text null
 );
 
-create table direccion_usuario_cuenta (
-	id_cuenta_usuario char(9) not null primary key references cuenta_usuario(num_movil_usuario),
+create table direccion_usuario (
+	num_movil_usuario char(9) not null primary key references usuario(num_movil),
 	direcccion_exacta varchar(100) not null,
    	id_departamento integer not null references departamento(id_departamento),
 	id_provincia integer not null references provincia(id_provincia),
@@ -89,13 +89,15 @@ create table operacion (
 
 create table tarjeta_usuario (
 	num_tarjeta varchar(20) not null primary key,
-	id_cuenta_usuario char(9) not null references cuenta_usuario(num_movil_usuario),
+	num_movil_usuario char(9) not null references usuario(num_movil),
 	fecha_vencimiento date not null,
 	codigo_csv varchar(3) not null
 );
 
 create table registro_recarga (
 	id_registro_recarga serial not null primary key,
+	-- A que cuenta va dirigida la recarga?
+	-- Sale de los datos de la tarjeta: 2 campo, por cada usuario o cuenta que lo use se crea una nueva tabla.
 	-- Uno de los dos tiene que rellenarse, no pueden ser nulos los dos
 	num_tarjeta varchar(20)  null references tarjeta_usuario(num_tarjeta), -- Primer método de recarga
 	codigo_generado varchar(30) null, -- Segundo método de recarga
