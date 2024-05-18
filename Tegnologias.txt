@@ -1,0 +1,30 @@
+Tegnologias:
+ID: Android Studio
+LP: Kotlin
+BD: MySQL
+ConectorConBD: ...
+Repositorio: Git
+Repositorio en Linea: Git-Hub
+
+
+Git-Hub:
+-> Project planing
+
+-> Branchs: cada desarrolador tien su rama, hay una rama principal(MAIN) que solo uno tiene permisos para fusionar.
+
+-> Pull Request
+ 
+REGLAS:
+Artefactos reutilizables(estandarizar internamente).
+Buenas practicas de programación: 
+
+-> Se siguen estrictamente las convenciones de nomenclatura de Kotlin, se evitan repeticiones de código innecesarias y se utilizan tipos de datos adecuados para todas las variables y funciones. Se aplican de manera consistente los principios de diseño de software como encapsulamiento, modularidad y cohesión.
+
+-> Git se utiliza de manera efectiva para controlar la versión del proyecto, con commits frecuentes y mensajes descriptivos que ofrecen una clara comprensión de los cambios realizados. El archivo README.md está completo y bien redactado, proporcionando una descripción detallada del proyecto y cómo ejecutarlo. Además, incluye un enlace al repositorio de GitHub y se mantiene completamente actualizado con los cambios relevantes en el proyecto.
+
+
+ROLES: AMBAS APPS
+-> FRONTEND: El consumo de APIS del backend y el diseño visual.                                     -> YONY, ERIKA, ...
+-> BACKEND: Crear APIS, la logica por detras, la inteaccón con la BD.                               -> CARLOS, LEANDRO, YONY, ERIKA
+-> BASE DE DATOS: La conexión la base de datos y las actualizaciones(//se va clientes-debatible).   -> CARLOS, LEANDRO, YONY, ...
+-> REVICIÓN: Criterios de revisión, resultados. TODOS... () REVISORES DE FUNCIONAMIETO(CREATIVOS), COHERENCIA CON LOS ARTEFACTOS ANTERIORES.
