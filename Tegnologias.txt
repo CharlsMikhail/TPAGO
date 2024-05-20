@@ -6,12 +6,9 @@ ConectorConBD: ...
 Repositorio: Git
 Repositorio en Linea: Git-Hub
 
-
 Git-Hub:
 -> Project planing
-
 -> Branchs: cada desarrolador tien su rama, hay una rama principal(MAIN) que solo uno tiene permisos para fusionar.
-
 -> Pull Request
  
 REGLAS:
