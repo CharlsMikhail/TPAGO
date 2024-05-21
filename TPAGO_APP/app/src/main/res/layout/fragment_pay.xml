@@ -50,17 +50,39 @@
             android:textColor="#3B38EA"
             android:text="@string/txt_soles" />
 
-        <TextView
+        <EditText
             android:id="@+id/txt_monto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:autofillHints="phone"
+            android:inputType="phone"
             android:textSize="40sp"
+            android:hint="@string/txt_pagar_0"
             tools:text="28"
             tools:textSize="40sp"
             tools:textStyle="bold"/>
 
     </TableRow>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#B0AFBC"
+        android:text="@string/txt_limite_pago"
+        android:textAlignment="center"
+        android:textSize="15sp"/>
+
+    <Button
+        android:id="@+id/btn_pagar"
+        android:gravity="center"
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/btn_pagar"
+        android:textSize="23sp"/>
 
 
 </LinearLayout>
