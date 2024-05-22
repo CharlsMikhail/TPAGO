@@ -40,7 +40,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="DuplicateIds" />
 
         <ImageView
             android:id="@+id/imageView5"
@@ -72,7 +73,7 @@
             tools:layout_editor_absoluteX="40dp">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textView1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -96,14 +97,14 @@
             tools:layout_editor_absoluteX="0dp">
 
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/background_menu"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/textView7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
@@ -137,14 +138,14 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/pagar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     app:srcCompat="@drawable/pagar" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/pagar1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -165,14 +166,14 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/Escanear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     app:srcCompat="@drawable/scanear" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/Escanear1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -193,14 +194,14 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/nfc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     app:srcCompat="@drawable/nfc" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/nfc1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -231,14 +232,14 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/recargar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     app:srcCompat="@drawable/telefono" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/recargar1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -259,14 +260,14 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/accesos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     app:srcCompat="@drawable/accesos" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/accesos1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -288,14 +289,14 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/chamba"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     app:srcCompat="@drawable/chamba" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/chamba1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
