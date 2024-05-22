@@ -20,7 +20,7 @@
         android:id="@+id/fragmen_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.example.tpago.PayFragment"
+        android:name="com.example.tpago.realizarOperacion.PayFragment"
         />
 
 </LinearLayout>
