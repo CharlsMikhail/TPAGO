@@ -7,4 +7,9 @@
     <string name="txt_limite_pago">Límite por pago S/500, límite total por día S/2000</string>
     <string name="btn_pagar">Pagar</string>
     <string name="txt_pagar_0">0</string>
+    <string name="txt_detalles_operacion">Detalles de operación</string>
+    <string name="txt_pagaste">Pagaste</string>
+    <string name="img_check">image check</string>
+    <string name="btn_compartir">Compatir</string>
+    <string name="btn_inicio">Menu Principal</string>
 </resources>
