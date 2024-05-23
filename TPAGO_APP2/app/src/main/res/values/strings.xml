@@ -15,5 +15,6 @@
     <string name="sv_contactos">ingrese el número</string>
     <string name="btn_eliminar">Eliminar</string>
     <string name="btn_star">test</string>
+    <string name="btn_consultar">CONSULTAR</string>
 
 </resources>

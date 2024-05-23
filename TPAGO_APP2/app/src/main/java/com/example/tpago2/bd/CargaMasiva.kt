@@ -7,19 +7,17 @@ import android.database.sqlite.SQLiteDatabase
 import java.io.IOException
 
 class CargaMasiva(private val context: Context) {
-    private var dbHelper: DataBaseHelper
 
-    init {
-        dbHelper = DataBaseHelper(context)
-    }
+    private var dbHelper: DataBaseHelper = DataBaseHelper(context)
 
-    fun realizarCargaMasiva() {
+    fun realizarCargaMasiva(): DataBaseHelper{
         val db = dbHelper.writableDatabase
+        //db.execSQL("INSERT INTO persona (dni_persona, primer_nombre, segundo_nombre, ape_paterno, ape_materno) VALUES ('72864753', 'John', 'Doe', 'Smith', 'Johnson')")
 
         db.beginTransaction()
         try {
-            cargarDatosDesdeCSV(db, "persona.csv", TABLE_PERSONA_INSERT)
-            cargarDatosDesdeCSV(db, "administrador.csv", TABLE_ADMINISTRADOR_INSERT)
+            cargarDatosDesdeCSV(db, "csv_files/persona.csv", TABLE_PERSONA_INSERT)
+            /*cargarDatosDesdeCSV(db, "administrador.csv", TABLE_ADMINISTRADOR_INSERT)
             cargarDatosDesdeCSV(db, "cliente.csv", TABLE_CLIENTE_INSERT)
             cargarDatosDesdeCSV(db, "usuario.csv", TABLE_USUARIO_INSERT)
             cargarDatosDesdeCSV(db, "cuenta_usuario.csv", TABLE_CUENTA_USUARIO_INSERT)
@@ -31,7 +29,7 @@ class CargaMasiva(private val context: Context) {
             cargarDatosDesdeCSV(db, "operacion.csv", TABLE_OPERACION_INSERT)
             cargarDatosDesdeCSV(db, "tarjeta_usuario.csv", TABLE_TARJETA_USUARIO_INSERT)
             cargarDatosDesdeCSV(db, "registro_recarga.csv", TABLE_REGISTRO_RECARGA_INSERT)
-            cargarDatosDesdeCSV(db, "acceso_empleado.csv", TABLE_ACCESO_EMPLEADO_INSERT)
+            cargarDatosDesdeCSV(db, "acceso_empleado.csv", TABLE_ACCESO_EMPLEADO_INSERT)*/
 
             db.setTransactionSuccessful()
         } catch (e: IOException) {
@@ -39,6 +37,7 @@ class CargaMasiva(private val context: Context) {
         } finally {
             db.endTransaction()
         }
+        return dbHelper
     }
 
     private fun cargarDatosDesdeCSV(db: SQLiteDatabase, fileName: String, insertStatement: String) {

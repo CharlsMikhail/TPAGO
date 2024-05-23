@@ -9,6 +9,7 @@ const val DATABASE_VERSION = 1
 
 class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
+    //Un singleton
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(CREATE_TABLE_PERSONA)
         db?.execSQL(CREATE_TABLE_ADMINISTRADOR)
