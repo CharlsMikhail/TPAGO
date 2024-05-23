@@ -33,10 +33,10 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
-            android:text="Hola, Leandro!"
             android:textColor="#ffff"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textStyle="bold"
+            tools:text="Hola, Leandro!"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,11 +79,11 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="30dp"
-                android:text="Mostrar Saldo"
                 android:textAlignment="center"
                 android:textColor="#ffff"
-                android:textSize="14dp"
-                android:textStyle="italic" />
+                android:textSize="14sp"
+                android:textStyle="italic"
+                tools:text="Mostrar Saldo"/>
 
         </LinearLayout>
 
@@ -110,11 +110,11 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="0dp"
                     android:layout_marginEnd="30dp"
-                    android:text="S/*******"
                     android:textAlignment="center"
                     android:textColor="#ffff"
-                    android:textSize="40dp"
-                    android:textStyle="bold" />
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    tools:text="S/*******"/>
 
             </LinearLayout>
         </LinearLayout>
@@ -130,6 +130,7 @@
             tools:layout_editor_absoluteX="40dp">
 
             <LinearLayout
+                android:id="@+id/ll_pagar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
@@ -152,7 +153,7 @@
                     android:text="Pagar"
                     android:textAlignment="center"
                     android:textColor="#fff"
-                    android:textSize="10dp"
+                    android:textSize="10sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -180,7 +181,7 @@
                     android:text="Escanear"
                     android:textAlignment="center"
                     android:textColor="#fff"
-                    android:textSize="10dp"
+                    android:textSize="10sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -208,7 +209,7 @@
                     android:text="NFC"
                     android:textAlignment="center"
                     android:textColor="#fff"
-                    android:textSize="10dp"
+                    android:textSize="10sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -246,7 +247,7 @@
                     android:text="Recargar"
                     android:textAlignment="center"
                     android:textColor="#fff"
-                    android:textSize="10dp"
+                    android:textSize="10sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -274,7 +275,7 @@
                     android:text="Accesos"
                     android:textAlignment="center"
                     android:textColor="#fff"
-                    android:textSize="10dp"
+                    android:textSize="10sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -303,7 +304,7 @@
                     android:text="Chamba"
                     android:textAlignment="center"
                     android:textColor="#fff"
-                    android:textSize="10dp"
+                    android:textSize="10sp"
                     android:textStyle="bold" />
 
             </LinearLayout>

@@ -3,8 +3,10 @@ package com.example.tpago2.gui.realizarOperacion
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.findNavController
 import com.example.tpago2.R
 
 class PagarFragment : Fragment(R.layout.fragment_pagar) {
@@ -13,11 +15,14 @@ class PagarFragment : Fragment(R.layout.fragment_pagar) {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val x = view.findViewById<TextView>(R.id.txt_nombre_usuario)
+        eventos(view)
+    }
 
-        x.setOnClickListener{
-            Toast.makeText(context, "hola amigos", Toast.LENGTH_LONG).show()
+    private fun eventos(view: View) {
+        val btnPagar = view.findViewById<Button>(R.id.btn_pagar)
+
+        btnPagar.setOnClickListener{
+            view.findNavController().navigate(R.id.action_pagarFragment_to_detalleOperacionFragment)
         }
-
     }
 }

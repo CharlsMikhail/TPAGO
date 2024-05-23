@@ -12,5 +12,8 @@
     <string name="img_check">image check</string>
     <string name="btn_compartir">Compatir</string>
     <string name="btn_inicio">Menu Principal</string>
+    <string name="sv_contactos">ingrese el número</string>
+    <string name="btn_eliminar">Eliminar</string>
+    <string name="btn_star">test</string>
 
 </resources>

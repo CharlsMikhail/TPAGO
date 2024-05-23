@@ -47,7 +47,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     companion object {
         const val CREATE_TABLE_PERSONA = """
             CREATE TABLE persona (
-                dni_persona INTEGER PRIMARY KEY,
+                dni_persona TEXT NOT NULL PRIMARY KEY,
                 primer_nombre TEXT NOT NULL,
                 segundo_nombre TEXT,
                 ape_paterno TEXT NOT NULL,
@@ -57,7 +57,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         const val CREATE_TABLE_ADMINISTRADOR = """
             CREATE TABLE administrador (
-                id_admin INTEGER PRIMARY KEY,
+                id_admin TEXT NOT NULL PRIMARY KEY,
                 email TEXT,
                 FOREIGN KEY (id_admin) REFERENCES persona(dni_persona)
             )
@@ -65,7 +65,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         const val CREATE_TABLE_CLIENTE = """
             CREATE TABLE cliente (
-                dni_cliente INTEGER PRIMARY KEY,
+                dni_cliente TEXT NOT NULL PRIMARY KEY,
                 historial_cretidicio TEXT NOT NULL,
                 FOREIGN KEY (dni_cliente) REFERENCES persona(dni_persona)
             )
@@ -73,8 +73,8 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         const val CREATE_TABLE_USUARIO = """
             CREATE TABLE usuario (
-                num_movil TEXT PRIMARY KEY,
-                dni_usuario INTEGER NOT NULL,
+                num_movil TEXT NOT NULL PRIMARY KEY,
+                dni_usuario TEXT NOT NULL,
                 fecha_inicio DATE NOT NULL,
                 observaciones TEXT,
                 FOREIGN KEY (dni_usuario) REFERENCES cliente(dni_cliente)
@@ -83,20 +83,20 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         const val CREATE_TABLE_CUENTA_USUARIO = """
             CREATE TABLE cuenta_usuario (
-                num_movil_usuario TEXT PRIMARY KEY,
-                saldo DECIMAL(10, 5) NOT NULL,
+                num_movil_usuario TEXT NOT NULL PRIMARY KEY,
+                saldo INTEGER NOT NULL,
                 ip_cuenta_usuario TEXT NOT NULL,
                 contraseña TEXT NOT NULL,
-                limite_por_dia DECIMAL(10, 3) NOT NULL,
+                limite_por_dia INTEGER NOT NULL,
                 email TEXT,
-                estado_de_actividad BOOLEAN,
+                estado_de_actividad BOOLEAN NOT NULL,
                 FOREIGN KEY (num_movil_usuario) REFERENCES usuario(num_movil)
             )
         """
 
         const val CREATE_TABLE_DEPARTAMENTO = """
             CREATE TABLE departamento (
-                id_departamento INTEGER PRIMARY KEY AUTOINCREMENT,
+                id_departamento INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                 nombre_departamento TEXT NOT NULL,
                 descripcion TEXT
             )
@@ -105,7 +105,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         const val CREATE_TABLE_PROVINCIA = """
             CREATE TABLE provincia (
                 id_departamento INTEGER NOT NULL,
-                id_provincia INTEGER PRIMARY KEY AUTOINCREMENT,
+                id_provincia INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                 nombre_provincia TEXT NOT NULL,
                 descripcion TEXT,
                 FOREIGN KEY (id_departamento) REFERENCES departamento(id_departamento)
@@ -114,7 +114,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         const val CREATE_TABLE_DISTRITO = """
             CREATE TABLE distrito (
-                id_distrito INTEGER PRIMARY KEY AUTOINCREMENT,
+                id_distrito INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                 id_provincia INTEGER NOT NULL,
                 nombre_distrito TEXT NOT NULL,
                 descripcion TEXT,
@@ -124,7 +124,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         const val CREATE_TABLE_DIRECCION_USUARIO = """
             CREATE TABLE direccion_usuario (
-                num_movil_usuario TEXT PRIMARY KEY,
+                num_movil_usuario TEXT NOT NULL PRIMARY KEY,
                 direcccion_exacta TEXT NOT NULL,
                 id_departamento INTEGER NOT NULL,
                 id_provincia INTEGER NOT NULL,
@@ -138,7 +138,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         const val CREATE_TABLE_CUENTA_ADMIN = """
             CREATE TABLE cuenta_admin (
-                id_cuenta_admin INTEGER PRIMARY KEY,
+                id_cuenta_admin TEXT NOT NULL PRIMARY KEY,
                 ip_cuenta_admin TEXT NOT NULL,
                 contraseña TEXT NOT NULL,
                 estado_de_actividad BOOLEAN NOT NULL,
@@ -148,12 +148,12 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         const val CREATE_TABLE_OPERACION = """
             CREATE TABLE operacion (
-                id_operacion INTEGER PRIMARY KEY AUTOINCREMENT,
+                id_operacion INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                 cuenta_origen TEXT NOT NULL,
                 cuenta_destino TEXT NOT NULL,
                 hora_operacion TIME NOT NULL,
                 fecha_operacion DATE NOT NULL,
-                monto_operacion DECIMAL(10, 3) NOT NULL,
+                monto_operacion INTEGER NOT NULL,
                 FOREIGN KEY (cuenta_origen) REFERENCES cuenta_usuario(num_movil_usuario),
                 FOREIGN KEY (cuenta_destino) REFERENCES cuenta_usuario(num_movil_usuario)
             )
@@ -161,7 +161,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         const val CREATE_TABLE_TARJETA_USUARIO = """
             CREATE TABLE tarjeta_usuario (
-                num_tarjeta TEXT PRIMARY KEY,
+                num_tarjeta TEXT NOT NULL PRIMARY KEY,
                 num_movil_usuario TEXT NOT NULL,
                 fecha_vencimiento DATE NOT NULL,
                 codigo_csv TEXT NOT NULL,
@@ -171,20 +171,20 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         const val CREATE_TABLE_REGISTRO_RECARGA = """
             CREATE TABLE registro_recarga (
-                id_registro_recarga INTEGER PRIMARY KEY AUTOINCREMENT,
+                id_registro_recarga INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                 num_tarjeta TEXT,
                 codigo_generado TEXT,
-                monto DECIMAL(3, 3) NOT NULL,
+                monto INTEGER NOT NULL,
                 fecha DATE NOT NULL,
                 hora TIME NOT NULL,
-                estado_recarga TEXT NOT NULL,
+                estado_recarga BOOLEAN NOT NULL,
                 FOREIGN KEY (num_tarjeta) REFERENCES tarjeta_usuario(num_tarjeta)
             )
         """
 
         const val CREATE_TABLE_ACCESO_EMPLEADO = """
             CREATE TABLE acceso_empleado (
-                id_acceso INTEGER PRIMARY KEY AUTOINCREMENT,
+                id_acceso INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                 num_movil_empleador TEXT NOT NULL,
                 num_movil_empleado TEXT NOT NULL,
                 estado_acceso BOOLEAN NOT NULL,
