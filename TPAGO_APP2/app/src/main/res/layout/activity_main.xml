@@ -8,9 +8,22 @@
     android:orientation="vertical"
     tools:context=".gui.menuPrincipal.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmen_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:navGraph="@navigation/navegacion"
+        app:defaultNavHost="true" />
 
+    <!--
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmen_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:name="com.example.tpago2.gui.realizarOperacion.PagarFragment"
+        />
+        -->
 </LinearLayout>
