@@ -1,11 +1,11 @@
-package com.example.tpago2.gui.recargartSaldo
+package com.example.tpago2.gui.recargarSaldo
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import com.example.tpago2.R
 
-class DetalleRecargaFragment : Fragment(R.layout.fragment_detalle_recarga) {
+class ConfirmarPagoFragment : Fragment(R.layout.fragment_confirmar_pago) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }

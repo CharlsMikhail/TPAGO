@@ -15,7 +15,7 @@ class TestFragment : Fragment(R.layout.fragment_test) {
 
         val carga = CargaMasiva(view.context)
 
-        dbHelper = carga.realizarCargaMasiva()
+        //dbHelper = carga.realizarCargaMasiva()
 
         // Para consultar en la BD
         val db = dbHelper.writableDatabase

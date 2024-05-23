@@ -16,5 +16,8 @@
     <string name="btn_eliminar">Eliminar</string>
     <string name="btn_star">test</string>
     <string name="btn_consultar">CONSULTAR</string>
+    <string name="btn_recargar">Recargar</string>
+    <string name="txt_ingresar_monto">Ingresar monto</string>
+    <string name="txt_detalles_recarga">Detalle Recarga</string>
 
 </resources>

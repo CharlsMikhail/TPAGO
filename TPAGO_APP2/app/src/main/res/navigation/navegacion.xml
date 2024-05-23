@@ -86,7 +86,7 @@
         tools:layout="@layout/fragment_detalle_operacion" />
     <fragment
         android:id="@+id/recargarFragment"
-        android:name="com.example.tpago2.gui.recargartSaldo.RecargarFragment"
+        android:name="com.example.tpago2.gui.recargarSaldo.RecargarFragment"
         android:label="fragment_recargar"
         tools:layout="@layout/fragment_recargar" >
         <action
@@ -95,7 +95,7 @@
     </fragment>
     <fragment
         android:id="@+id/metodoRecargaFragment"
-        android:name="com.example.tpago2.gui.recargartSaldo.MetodoRecargaFragment"
+        android:name="com.example.tpago2.gui.recargarSaldo.MetodoRecargaFragment"
         android:label="fragment_metodo_recarga"
         tools:layout="@layout/fragment_metodo_recarga" >
         <action
@@ -107,12 +107,12 @@
     </fragment>
     <fragment
         android:id="@+id/detalleRecargaFragment"
-        android:name="com.example.tpago2.gui.recargartSaldo.DetalleRecargaFragment"
+        android:name="com.example.tpago2.gui.recargarSaldo.DetalleRecargaFragment"
         android:label="fragment_detalle_recarga"
         tools:layout="@layout/fragment_detalle_recarga" />
     <fragment
         android:id="@+id/confirmarPagoFragment"
-        android:name="com.example.tpago2.gui.recargartSaldo.ConfirmarPagoFragment"
+        android:name="com.example.tpago2.gui.recargarSaldo.ConfirmarPagoFragment"
         android:label="fragment_confirmar_pago"
         tools:layout="@layout/fragment_confirmar_pago" >
         <action

@@ -1,4 +1,4 @@
-package com.example.tpago2.gui.recargartSaldo
+package com.example.tpago2.gui.recargarSaldo
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

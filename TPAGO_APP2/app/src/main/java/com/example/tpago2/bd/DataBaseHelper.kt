@@ -4,12 +4,8 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-const val DATABASE_NAME = "tpago.db"
-const val DATABASE_VERSION = 1
-
 class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
-    //Un singleton
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(CREATE_TABLE_PERSONA)
         db?.execSQL(CREATE_TABLE_ADMINISTRADOR)
@@ -195,5 +191,16 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 UNIQUE(num_movil_empleador, num_movil_empleado)
             )
         """
+        private const val DATABASE_NAME = "tpago.db"
+        private const val DATABASE_VERSION = 1
+        private var instance: DataBaseHelper? = null
+
+        @Synchronized
+        fun getInstance(context: Context): DataBaseHelper {
+            if (instance == null) {
+                instance = DataBaseHelper(context.applicationContext)
+            }
+            return instance!!
+        }
     }
 }
