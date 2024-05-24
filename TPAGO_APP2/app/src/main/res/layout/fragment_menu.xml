@@ -29,12 +29,12 @@
             app:srcCompat="@drawable/menu"/>
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/txt_user_name"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:textColor="#ffff"
-            android:textSize="18sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             tools:text="Hola, Leandro!"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,18 +47,18 @@
             android:id="@+id/imageView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/textView2"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_user_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.859"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintStart_toEndOf="@+id/txt_user_name"
             app:srcCompat="@drawable/notificacion" />
 
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/textView2"
-            app:layout_constraintEnd_toStartOf="@+id/textView2"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_user_name"
+            app:layout_constraintEnd_toStartOf="@+id/txt_user_name"
             app:layout_constraintHorizontal_bias="0.15"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/menu1" />
@@ -69,7 +69,7 @@
             android:layout_height="20dp"
             android:background="@drawable/background_menu"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/txt_user_name"
             tools:layout_editor_absoluteX="40dp">
 
             <TextView

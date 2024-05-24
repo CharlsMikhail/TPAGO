@@ -1,4 +1,7 @@
-package com.example.tpago2.service
+package com.example.tpago2.data.entidades
+
+import java.io.Serializable
+import java.sql.Date
 
 data class Usuario(
     var nombre: String,

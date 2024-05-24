@@ -1,5 +1,7 @@
 package com.example.tpago2.service
 
+import com.example.tpago2.data.entidades.Usuario
+
 class UsuarioProvider {
     companion object {
         val listaUsuarios = arrayListOf<Usuario>(

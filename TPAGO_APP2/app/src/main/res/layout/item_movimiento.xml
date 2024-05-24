@@ -17,7 +17,7 @@
         android:layout_marginBottom="8dp"/>
 
     <TextView
-        android:id="@+id/txt_numero"
+        android:id="@+id/txt_fecha_y_hora"
         android:textAlignment="center"
         tools:text="12"
         android:layout_width="match_parent"
@@ -25,5 +25,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"/>
 
+    <TextView
+        android:id="@+id/txt_monto"
+        android:textAlignment="center"
+        tools:text="12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
 
 </LinearLayout>

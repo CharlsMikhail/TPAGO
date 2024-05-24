@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tpago2.R
-import com.example.tpago2.service.Usuario
+import com.example.tpago2.data.entidades.Usuario
 
 class UsuariosAdapter(val items: MutableList<Usuario>): RecyclerView.Adapter<UsuarioViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsuarioViewHolder {
