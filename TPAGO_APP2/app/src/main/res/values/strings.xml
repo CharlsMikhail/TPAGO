@@ -20,5 +20,6 @@
     <string name="txt_ingresar_monto">Ingresar monto</string>
     <string name="txt_detalles_recarga">Detalle Recarga</string>
     <string name="btn_iniciar2">GO</string>
+    <string name="txt_key">INGRESA TU CLAVE</string>
 
 </resources>

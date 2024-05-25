@@ -76,7 +76,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 dni_persona INTEGER NOT NULL REFERENCES usuario(dni_persona),
                 saldo INTEGER NOT NULL,
                 ip_cuenta_usuario TEXT NOT NULL,
-                contrasenia TEXT NOT NULL,
+                contrasenia INTEGER NOT NULL,
                 limite_por_transaccion INTEGER NOT NULL,
                 email TEXT,
                 estado_de_actividad INTEGER
