@@ -3,12 +3,13 @@ package com.example.tpago2.data.entidades
 import java.io.Serializable
 
 data class CuentaUsuario(
-    var usuario: User,
-    var saldo: Int,
-    var ipCuenta: String,
-    var contrasenia: String,
-    var limitePorDia: Int,
-    var email: String,
-    var estado: Boolean
+    val num_movil: String,
+    val dni_persona: Int,
+    val saldo: Int,
+    val ip_cuenta_usuario: String,
+    val contrasenia: String,
+    val limite_por_transaccion: Int,
+    val email: String?,
+    val estado_de_actividad: Int
 ): Serializable
 

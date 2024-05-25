@@ -3,9 +3,9 @@ package com.example.tpago2.data.entidades
 import java.io.Serializable
 
 data class Persona(
-    var dniPersona: String,
-    var primerNombre: String,
-    var segundoNombre:String,
-    var apePaterno: String,
-    var apeMaterno: String
+    val dni_persona: Int,
+    val primer_nombre: String,
+    val segundo_nombre: String?,
+    val ape_paterno: String,
+    val ape_materno: String
 ): Serializable

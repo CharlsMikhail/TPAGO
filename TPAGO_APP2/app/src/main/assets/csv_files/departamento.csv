@@ -1,31 +1,10 @@
-id_departamento;nombre_departamento;descripcion
-1;Lima;Capital del Perú
-2;Arequipa;La Ciudad Blanca
-3;Cusco;Centro del Imperio Inca
-4;La Libertad;Tierra de Libertad
-5;Piura;La Ciudad del Eterno Calor
-6;Loreto;Selva Amazónica
-7;Ica;Tierra del Sol y del Vino
-8;Áncash;Montañas y Mar
-9;Junín;Valle del Mantaro
-10;Puno;Lago Titicaca
-11;Lambayeque;Tierra de la Amistad
-12;Callao;Primer puerto del Perú
-13;Tumbes;Sol y Playa
-14;Tacna;Heroica Ciudad
-15;Moquegua;Ciudad del Eterno Sol
-16;San Martín;Selva y Aventura
-17;Ayacucho;Tierra de Artesanos
-18;Huánuco;Ciudad de la Eterna Primavera
-19;Huancavelica;Corazón del Perú
-20;Ucayali;Puerta a la Amazonía
-21;Amazonas;Bosques y Cascadas
-22;Pasco;Corazón Minero
-23;Apurímac;Tierra de los Andenes
-24;Cajamarca;Cultura y Naturaleza
-25;Madre de Dios;Paraíso de la Biodiversidad
-26;Áncash;Costa y Sierra
-27;Huánuco;Cuna del Chasqui
-28;San Martín;Cataratas y Café
-29;Pasco;Capital Minera
-30;Ucayali;Naturaleza Salvaje
+1,Lima,"Capital del Perú"
+2,Arequipa,"Ciudad en el sur de Perú"
+3,Cusco,"Antigua capital del Imperio Inca"
+4,Puno,"Conocida por el lago Titicaca"
+5,Trujillo,"Ciudad histórica en la costa norte"
+6,Iquitos,"Ubicada en la selva amazónica"
+7,Cajamarca,"Famosa por su historia preincaica"
+8,Chiclayo,"Destino turístico en el norte"
+9,Huancayo,"Importante ciudad en los Andes"
+10,Ayacucho,"Conocida por su Semana Santa"

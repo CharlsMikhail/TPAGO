@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navegacion"
-    app:startDestination="@id/menuFragment">
+    app:startDestination="@id/ingresarSesionFragment">
 
     <fragment
         android:id="@+id/menuFragment"
@@ -118,5 +118,14 @@
         <action
             android:id="@+id/action_confirmarPagoFragment_to_detalleRecargaFragment"
             app:destination="@id/detalleRecargaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ingresarSesionFragment"
+        android:name="com.example.tpago2.gui.aperturarCuenta.IngresarSesionFragment"
+        android:label="fragment_ingresar_sesion"
+        tools:layout="@layout/fragment_ingresar_sesion" >
+        <action
+            android:id="@+id/action_ingresarSesionFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
 </navigation>
