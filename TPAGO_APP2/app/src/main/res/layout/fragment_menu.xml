@@ -10,6 +10,7 @@
     tools:context=".gui.menuPrincipal.MenuFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +27,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/menu"/>
+            app:srcCompat="@drawable/menu" />
 
         <TextView
             android:id="@+id/txt_user_name"
@@ -36,12 +37,12 @@
             android:textColor="#ffff"
             android:textSize="25sp"
             android:textStyle="bold"
-            tools:text="Hola, Leandro!"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="DuplicateIds" />
+            tools:ignore="DuplicateIds"
+            tools:text="Hola, Leandro!" />
 
         <ImageView
             android:id="@+id/imageView5"
@@ -61,7 +62,7 @@
             app:layout_constraintEnd_toStartOf="@+id/txt_user_name"
             app:layout_constraintHorizontal_bias="0.15"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/menu1" />
+            app:srcCompat="@drawable/power" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -83,7 +84,7 @@
                 android:textColor="#ffff"
                 android:textSize="14sp"
                 android:textStyle="italic"
-                tools:text="Mostrar Saldo"/>
+                android:text="Mostrar Saldo" />
 
         </LinearLayout>
 
@@ -114,7 +115,7 @@
                     android:textColor="#ffff"
                     android:textSize="40sp"
                     android:textStyle="bold"
-                    tools:text="S/*******"/>
+                    tools:text="S/*******" />
 
             </LinearLayout>
         </LinearLayout>
@@ -123,9 +124,9 @@
             android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
             tools:layout_editor_absoluteX="40dp">
 
@@ -143,14 +144,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    app:srcCompat="@drawable/pagar" />
+                    app:srcCompat="@drawable/tarjeta2" />
 
                 <TextView
                     android:id="@+id/pagar1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="Pagar"
+                    android:text="Tarjetas"
                     android:textAlignment="center"
                     android:textColor="#fff"
                     android:textSize="10sp"
@@ -217,6 +218,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ly_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -312,5 +314,34 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Movimientos:"
+        android:paddingStart="30dp"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/lista_movimientos"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lista_movimientos"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:padding="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_agregar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="35dp"
+        android:src="@drawable/pagar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

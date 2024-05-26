@@ -11,6 +11,5 @@ class MostrarSaldoFragment : Fragment(R.layout.fragment_mostrar_saldo) {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
     }
 }

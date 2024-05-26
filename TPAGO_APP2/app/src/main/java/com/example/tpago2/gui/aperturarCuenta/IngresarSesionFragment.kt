@@ -1,16 +1,20 @@
 package com.example.tpago2.gui.aperturarCuenta
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.tpago2.R
 import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.Usuario
+import kotlin.system.exitProcess
 
 class IngresarSesionFragment : Fragment(R.layout.fragment_ingresar_sesion) {
     // Estos datos se supone que ya los tengo...
@@ -24,8 +28,7 @@ class IngresarSesionFragment : Fragment(R.layout.fragment_ingresar_sesion) {
     }
 
     private fun eventos(view: View) {
-        val btnIniciar = view.findViewById<Button>(R.id.btn_iniciar)
-
+        val btnIniciar = view.findViewById<ImageButton>(R.id.btn_iniciar)
 
         btnIniciar.setOnClickListener {
             val txtKey = view.findViewById<EditText>(R.id.txt_key)
@@ -40,5 +43,7 @@ class IngresarSesionFragment : Fragment(R.layout.fragment_ingresar_sesion) {
     private fun validarDatos(key: Int): Boolean {
         return this.cuentaActual.contrasenia == key
     }
+
+
 
 }
