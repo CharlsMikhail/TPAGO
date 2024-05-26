@@ -6,20 +6,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tpago2.R
 import com.example.tpago2.data.entidades.Contacto
 
-class UsuariosAdapter(val items: MutableList<Contacto>): RecyclerView.Adapter<UsuarioViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsuarioViewHolder {
+class ContactoAdapter(private val items: MutableList<Contacto>, val onItemSelected: (Contacto) -> Unit): RecyclerView.Adapter<ContactoViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactoViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_contacto,parent, false)
-        return UsuarioViewHolder(itemView)
+        return ContactoViewHolder(itemView)
 
     }
 
     override fun getItemCount(): Int = items.size
 
-    override fun onBindViewHolder(holder: UsuarioViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ContactoViewHolder, position: Int) {
         val item = items[position]
-        holder.render(item) {
-            deleteUser(position)
-        }
+        holder.render(item, onItemSelected)
     }
 
     fun addUser(usuario: Contacto) {
@@ -27,7 +25,7 @@ class UsuariosAdapter(val items: MutableList<Contacto>): RecyclerView.Adapter<Us
         notifyItemInserted(0)
     }
 
-    fun deleteUser(index: Int) {
+    private fun deleteUser(index: Int) {
         items.removeAt(index)
         notifyItemRemoved(index)
         notifyItemRangeChanged(index, items.size)

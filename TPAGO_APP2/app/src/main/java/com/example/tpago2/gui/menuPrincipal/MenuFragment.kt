@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -14,13 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tpago2.R
 import com.example.tpago2.adapter.MovimientosAdapter
-import com.example.tpago2.adapter.UsuariosAdapter
 import com.example.tpago2.data.dao.OperacionDAO
 import com.example.tpago2.data.entidades.CuentaUsuario
+import com.example.tpago2.data.entidades.Movimiento
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.Usuario
-import com.example.tpago2.data.entidades.Usuario2
-import com.example.tpago2.service.ContactoProvider
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
@@ -70,12 +67,16 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
     private fun initRecycleView(view: View) {
         val operDAO = OperacionDAO(view.context)
         val manager = LinearLayoutManager(context)
-        moviAdapter = MovimientosAdapter(operDAO.obtenerOperacionesPorOrigen(cuentaUsuario.num_movil)) //ojito
+        moviAdapter = MovimientosAdapter(operDAO.obtenerMovimientosPorCuenta(cuentaUsuario.num_movil)) { user -> onItemSelected(user) } //ojito
         val decoration = DividerItemDecoration(context, manager.orientation)
         val usersRecyler = view.findViewById<RecyclerView>(R.id.lista_movimientos)
         usersRecyler.layoutManager = manager
         usersRecyler.adapter = moviAdapter
         usersRecyler.addItemDecoration(decoration)
+    }
+
+    private fun onItemSelected(user:Movimiento) {
+        Toast.makeText(requireActivity(), user.nombre, Toast.LENGTH_SHORT).show()
     }
 
     override fun onAttach(context: Context) {
@@ -86,7 +87,6 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callBack)
-
     }
 
 }
