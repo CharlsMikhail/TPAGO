@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tpago2.R
 import com.example.tpago2.adapter.UsuariosAdapter
+import com.example.tpago2.service.ContactoProvider
 import com.example.tpago2.service.UsuarioProvider
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
 
@@ -26,7 +28,7 @@ class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
     }
 
     private fun eventos(view: View) {
-        val btnTest = view.findViewById<Button>(R.id.btnStar)
+        val btnTest = view.findViewById<FloatingActionButton>(R.id.btnNumber)
         btnTest.setOnClickListener{
             //tiene que llevar el objeto Usuario(hayq ue hacer este usuario Serializable)
 
@@ -36,7 +38,7 @@ class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
 
     private fun initRecycleView(view: View) {
         val manager = LinearLayoutManager(context)
-        userAdapter = UsuariosAdapter(UsuarioProvider.listaUsuarios) //ojito
+        userAdapter = UsuariosAdapter(ContactoProvider.listaContactos) //ojito
         val decoration = DividerItemDecoration(context, manager.orientation)
         val usersRecyler = view.findViewById<RecyclerView>(R.id.lista_usuarios)
         usersRecyler.layoutManager = manager

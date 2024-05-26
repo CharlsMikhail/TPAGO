@@ -38,10 +38,10 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnStar"
+        android:id="@+id/btnNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/pagar"
+        android:src="@drawable/numero"
         android:layout_margin="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

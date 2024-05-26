@@ -14,6 +14,9 @@ import com.example.tpago2.R
 import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.Usuario
+import com.example.tpago2.service.KEY_CUENTA_USUARIO
+import com.example.tpago2.service.KEY_PERSONA
+import com.example.tpago2.service.KEY_USUARIO
 import kotlin.system.exitProcess
 
 class IngresarSesionFragment : Fragment(R.layout.fragment_ingresar_sesion) {
@@ -32,10 +35,21 @@ class IngresarSesionFragment : Fragment(R.layout.fragment_ingresar_sesion) {
 
         btnIniciar.setOnClickListener {
             val txtKey = view.findViewById<EditText>(R.id.txt_key)
-            if (validarDatos(txtKey.text.toString().toInt())) {
-                view.findNavController().navigate(R.id.action_ingresarSesionFragment_to_menuFragment)
+            if (txtKey.text.isNotEmpty()) {
+                if (validarDatos(txtKey.text.toString().toInt())) {
+                    val delivery = Bundle()
+                    delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
+                    delivery.putSerializable(KEY_USUARIO, usuarioActual)
+                    delivery.putSerializable(KEY_PERSONA, personaActual)
+                    view.findNavController()
+                        .navigate(R.id.action_ingresarSesionFragment_to_menuFragment, delivery)
+                } else {
+                    Toast.makeText(requireActivity(), "Contraseña incorrecta", Toast.LENGTH_SHORT)
+                        .show()
+                }
             } else {
-                Toast.makeText(requireActivity(), "Contraseña incorrecta", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireActivity(), "Ingrese su contraseña", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }

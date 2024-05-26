@@ -9,13 +9,31 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.tpago2.R
+import com.example.tpago2.adapter.MovimientosAdapter
+import com.example.tpago2.adapter.UsuariosAdapter
+import com.example.tpago2.data.dao.OperacionDAO
 import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.Usuario
+import com.example.tpago2.data.entidades.Usuario2
+import com.example.tpago2.service.ContactoProvider
+import com.example.tpago2.service.KEY_CUENTA_USUARIO
+import com.example.tpago2.service.KEY_PERSONA
+import com.example.tpago2.service.KEY_USUARIO
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlin.system.exitProcess
 
 class MenuFragment : Fragment(R.layout.fragment_menu) {
+
+    private lateinit var moviAdapter: MovimientosAdapter
+
+    private lateinit var cuentaUsuario: CuentaUsuario
+    private lateinit var usuario: Usuario
+    private lateinit var persona: Persona
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,13 +41,19 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        arguments?.let {
+            cuentaUsuario = it.getSerializable(KEY_CUENTA_USUARIO) as CuentaUsuario
+            usuario = it.getSerializable(KEY_USUARIO) as Usuario
+            persona = it.getSerializable(KEY_PERSONA) as Persona
+        }
+        initRecycleView(view)
         actualizarInterfaz(view)
         eventos(view)
 
     }
 
     private fun eventos(view: View) {
-        val btnPagar = view.findViewById<LinearLayout>(R.id.ll_pagar)
+        val btnPagar = view.findViewById<FloatingActionButton>(R.id.fl_pagar)
         btnPagar.setOnClickListener{
             view.findNavController().navigate(R.id.action_menuFragment_to_listarContactosFragment)
         }
@@ -37,6 +61,21 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
 
     private fun actualizarInterfaz(view: View) {
         val txtNameUser = view.findViewById<TextView>(R.id.txt_user_name)
+        txtNameUser.text = "Hola, " + persona.primer_nombre
+
+        val txtSaldo = view.findViewById<TextView>(R.id.txt_saldo22)
+        txtSaldo.text = "S/." + cuentaUsuario.saldo
+    }
+
+    private fun initRecycleView(view: View) {
+        val operDAO = OperacionDAO(view.context)
+        val manager = LinearLayoutManager(context)
+        moviAdapter = MovimientosAdapter(operDAO.obtenerOperacionesPorOrigen(cuentaUsuario.num_movil)) //ojito
+        val decoration = DividerItemDecoration(context, manager.orientation)
+        val usersRecyler = view.findViewById<RecyclerView>(R.id.lista_movimientos)
+        usersRecyler.layoutManager = manager
+        usersRecyler.adapter = moviAdapter
+        usersRecyler.addItemDecoration(decoration)
     }
 
     override fun onAttach(context: Context) {

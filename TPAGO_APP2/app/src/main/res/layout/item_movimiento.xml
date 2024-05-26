@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/txt_nombre"
+        android:id="@+id/txt_nombre2"
         android:textAlignment="center"
         tools:text="miguel"
         android:textColor="#CD4141"
@@ -17,7 +17,7 @@
         android:layout_marginBottom="8dp"/>
 
     <TextView
-        android:id="@+id/txt_fecha_y_hora"
+        android:id="@+id/txt_fecha_y_hora2"
         android:textAlignment="center"
         tools:text="12"
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
         android:layout_marginBottom="8dp"/>
 
     <TextView
-        android:id="@+id/txt_monto"
+        android:id="@+id/txt_monto2"
         android:textAlignment="center"
         tools:text="12"
         android:layout_width="match_parent"

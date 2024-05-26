@@ -77,7 +77,7 @@ class OperacionDAO(context: Context) {
     }
 
     @SuppressLint("Range")
-    fun obtenerOperacionesPorOrigen(numCuentaOrigen: Int): List<Operacion> {
+    fun obtenerOperacionesPorOrigen(numCuentaOrigen: Int): MutableList<Operacion> {
         val operaciones: MutableList<Operacion> = ArrayList()
         val cursor: Cursor = db.query(
             "operacion",
