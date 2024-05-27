@@ -1,28 +1,112 @@
 package com.example.tpago2.gui.realizarOperacion
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputFilter
+import android.text.Spanned
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.findNavController
 import com.example.tpago2.R
+import com.example.tpago2.data.entidades.CuentaDestino
+import com.example.tpago2.data.entidades.CuentaUsuario
+import com.example.tpago2.data.entidades.Persona
+import com.example.tpago2.data.entidades.Usuario
+import com.example.tpago2.service.KEY_CUENTA_USUARIO
+import com.example.tpago2.service.KEY_PERSONA
+import com.example.tpago2.service.KEY_USUARIO
+import com.example.tpago2.service.KEY_USUARIO_DESTINO
 
 class PagarFragment : Fragment(R.layout.fragment_pagar) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
+    private lateinit var cuentaActual: CuentaUsuario
+    private lateinit var usuarioActual: Usuario
+    private lateinit var personaActual: Persona
+    private lateinit var cuentaDestino: CuentaDestino
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        arguments?.let {
+            cuentaActual = it.getSerializable(KEY_CUENTA_USUARIO) as CuentaUsuario
+            usuarioActual = it.getSerializable(KEY_USUARIO) as Usuario
+            personaActual = it.getSerializable(KEY_PERSONA) as Persona
+            cuentaDestino = it.getSerializable(KEY_USUARIO_DESTINO) as CuentaDestino
+        }
         eventos(view)
+        actualizarInterfaz(view)
+    }
+
+    private fun actualizarInterfaz(view: View) {
+        val txtNombreUsuarioDestino = view.findViewById<TextView>(R.id.txt_nombre_usuario)
+        txtNombreUsuarioDestino.text = cuentaDestino.nombres
     }
 
     private fun eventos(view: View) {
         val btnPagar = view.findViewById<Button>(R.id.btn_pagar)
+        val txtMonto = view.findViewById<EditText>(R.id.txt_monto)
+
+        //Mascarita
+        txtMonto.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No implementation needed
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // No implementation needed
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Check if the first character is '0'
+                if (s != null && s.isNotEmpty() && s[0] == '0') {
+                    // Remove the first character
+                    txtMonto.setText(s.substring(1))
+                    txtMonto.setSelection(txtMonto.text.length) // Move cursor to the end
+                }
+            }
+        })
+
 
         btnPagar.setOnClickListener{
-            view.findNavController().navigate(R.id.action_pagarFragment_to_detalleOperacionFragment)
+            if (txtMonto.text.isEmpty()) {
+                Toast.makeText(requireContext(), "Escriba un monto, mínimo 1 sol", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            val monto = txtMonto.text.toString().toInt()
+            if ((monto <= 500) and (monto <= cuentaActual.saldo)) {
+                val delivery = Bundle()
+                delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
+                delivery.putSerializable(KEY_USUARIO, usuarioActual)
+                delivery.putSerializable(KEY_PERSONA, personaActual)
+                delivery.putSerializable(KEY_USUARIO_DESTINO, cuentaDestino)
+                view.findNavController()
+                    .navigate(R.id.action_pagarFragment_to_detalleOperacionFragment, delivery)
+            }
+            else if (monto > 500) {
+               Toast.makeText(requireContext(), "Supero el monto límite por transaccion, intente con un monto interior", Toast.LENGTH_LONG).show()
+            }
+            else if (monto > cuentaActual.saldo) {
+                saldoIsuiciente()
+            }
         }
+    }
+
+    private fun saldoIsuiciente() {
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.setTitle("Saldo Insuficiente")
+        dialog.setMessage("¿Desea realizar una recarga?")
+        dialog.setPositiveButton("Recargar") { dialog, which ->
+            Toast.makeText(requireContext(), "Recargar" , Toast.LENGTH_SHORT).show()
+            // me manda a la otra actividad.
+        }
+        dialog.setNegativeButton("Cancelar") { dialog, which ->
+            Toast.makeText(requireContext(), "Cancelar", Toast.LENGTH_SHORT).show()
+        }
+        dialog.show()
     }
 }

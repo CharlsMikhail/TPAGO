@@ -7,6 +7,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.example.tpago2.bd.DataBaseHelper
 import com.example.tpago2.data.entidades.CuentaUsuario
+import com.example.tpago2.data.entidades.CuentaDestino
 import java.util.ArrayList
 
 class CuentaUsuarioDAO(context: Context) {
@@ -20,7 +21,7 @@ class CuentaUsuarioDAO(context: Context) {
             put("dni_persona", dniPersona)
             put("saldo", saldo)
             put("ip_cuenta_usuario", ipCuentaUsuario)
-            put("contraseña", contraseña)
+            put("contrasenia", contraseña)
             put("limite_por_transaccion", limitePorTransaccion)
             put("email", email)
             put("estado_de_actividad", estadoActividad)
@@ -28,13 +29,35 @@ class CuentaUsuarioDAO(context: Context) {
         return db.insert("cuenta_usuario", null, contentValues)
     }
 
+    fun obtenerUsuarioDestinoPorNumMovil(numMovil: Int): CuentaDestino? {
+        val query = """
+            SELECT p.primer_nombre || ' ' || p.ape_paterno AS nombres, cu.num_movil
+            FROM cuenta_usuario cu
+            INNER JOIN persona p ON cu.dni_persona = p.dni_persona
+            WHERE cu.num_movil = ?
+        """
+        val cursor: Cursor = db.rawQuery(query, arrayOf(numMovil.toString()))
+
+        return if (cursor.moveToFirst()) {
+            val cuentaDestino = CuentaDestino(
+                nombres = cursor.getString(cursor.getColumnIndexOrThrow("nombres")),
+                numMovil = cursor.getInt(cursor.getColumnIndexOrThrow("num_movil"))
+            )
+            cursor.close()
+            cuentaDestino
+        } else {
+            cursor.close()
+            null
+        }
+    }
+
     @SuppressLint("Range")
-    fun obtenerCuentaUsuarioPorNumMovil(numMovil: String): CuentaUsuario? {
+    fun obtenerCuentaUsuarioPorNumMovil(numMovil: Int): CuentaUsuario? {
         val cursor: Cursor = db.query(
             "cuenta_usuario",
             null,
             "num_movil = ?",
-            arrayOf(numMovil),
+            arrayOf(numMovil.toString()),
             null,
             null,
             null
@@ -45,7 +68,7 @@ class CuentaUsuarioDAO(context: Context) {
                 cursor.getInt(cursor.getColumnIndex("dni_persona")),
                 cursor.getInt(cursor.getColumnIndex("saldo")),
                 cursor.getString(cursor.getColumnIndex("ip_cuenta_usuario")),
-                cursor.getInt(cursor.getColumnIndex("contraseña")),
+                cursor.getInt(cursor.getColumnIndex("contrasenia")),
                 cursor.getInt(cursor.getColumnIndex("limite_por_transaccion")),
                 cursor.getString(cursor.getColumnIndex("email")),
                 cursor.getInt(cursor.getColumnIndex("estado_de_actividad"))
@@ -63,7 +86,7 @@ class CuentaUsuarioDAO(context: Context) {
             put("dni_persona", nuevoDniPersona)
             put("saldo", nuevoSaldo)
             put("ip_cuenta_usuario", nuevaIpCuentaUsuario)
-            put("contraseña", nuevaContraseña)
+            put("contrasenia", nuevaContraseña)
             put("limite_por_transaccion", nuevoLimitePorTransaccion)
             put("email", nuevoEmail)
             put("estado_de_actividad", nuevoEstadoActividad)
@@ -91,7 +114,7 @@ class CuentaUsuarioDAO(context: Context) {
                     cursor.getInt(cursor.getColumnIndex("dni_persona")),
                     cursor.getInt(cursor.getColumnIndex("saldo")),
                     cursor.getString(cursor.getColumnIndex("ip_cuenta_usuario")),
-                    cursor.getInt(cursor.getColumnIndex("contraseña")),
+                    cursor.getInt(cursor.getColumnIndex("contrasenia")),
                     cursor.getInt(cursor.getColumnIndex("limite_por_transaccion")),
                     cursor.getString(cursor.getColumnIndex("email")),
                     cursor.getInt(cursor.getColumnIndex("estado_de_actividad"))

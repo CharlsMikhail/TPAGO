@@ -28,9 +28,9 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
 
     private lateinit var moviAdapter: MovimientosAdapter
 
-    private lateinit var cuentaUsuario: CuentaUsuario
-    private lateinit var usuario: Usuario
-    private lateinit var persona: Persona
+    private lateinit var cuentaActual: CuentaUsuario
+    private lateinit var usuarioActual: Usuario
+    private lateinit var personaActual: Persona
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,35 +39,38 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
-            cuentaUsuario = it.getSerializable(KEY_CUENTA_USUARIO) as CuentaUsuario
-            usuario = it.getSerializable(KEY_USUARIO) as Usuario
-            persona = it.getSerializable(KEY_PERSONA) as Persona
+            cuentaActual = it.getSerializable(KEY_CUENTA_USUARIO) as CuentaUsuario
+            usuarioActual = it.getSerializable(KEY_USUARIO) as Usuario
+            personaActual = it.getSerializable(KEY_PERSONA) as Persona
         }
         initRecycleView(view)
         actualizarInterfaz(view)
         eventos(view)
-
     }
 
     private fun eventos(view: View) {
         val btnPagar = view.findViewById<FloatingActionButton>(R.id.fl_pagar)
         btnPagar.setOnClickListener{
-            view.findNavController().navigate(R.id.action_menuFragment_to_listarContactosFragment)
+            val delivery = Bundle()
+            delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
+            delivery.putSerializable(KEY_USUARIO, usuarioActual)
+            delivery.putSerializable(KEY_PERSONA, personaActual)
+            view.findNavController().navigate(R.id.action_menuFragment_to_listarContactosFragment, delivery)
         }
     }
 
     private fun actualizarInterfaz(view: View) {
         val txtNameUser = view.findViewById<TextView>(R.id.txt_user_name)
-        txtNameUser.text = "Hola, " + persona.primer_nombre
+        txtNameUser.text = "Hola, " + personaActual.primer_nombre
 
         val txtSaldo = view.findViewById<TextView>(R.id.txt_saldo22)
-        txtSaldo.text = "S/." + cuentaUsuario.saldo
+        txtSaldo.text = "S/." + cuentaActual.saldo
     }
 
     private fun initRecycleView(view: View) {
         val operDAO = OperacionDAO(view.context)
         val manager = LinearLayoutManager(context)
-        moviAdapter = MovimientosAdapter(operDAO.obtenerMovimientosPorCuenta(cuentaUsuario.num_movil)) { user -> onItemSelected(user) } //ojito
+        moviAdapter = MovimientosAdapter(operDAO.obtenerMovimientosPorCuenta(cuentaActual.num_movil)) { user -> onItemSelected(user) } //ojito
         val decoration = DividerItemDecoration(context, manager.orientation)
         val usersRecyler = view.findViewById<RecyclerView>(R.id.lista_movimientos)
         usersRecyler.layoutManager = manager
