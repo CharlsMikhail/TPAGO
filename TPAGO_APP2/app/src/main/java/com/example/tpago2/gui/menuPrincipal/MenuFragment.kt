@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -51,12 +53,12 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
 
     private fun eventos(view: View) {
         val btnPagar = view.findViewById<FloatingActionButton>(R.id.fl_pagar)
+        val delivery = Bundle()
+        delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
+        delivery.putSerializable(KEY_USUARIO, usuarioActual)
+        delivery.putSerializable(KEY_PERSONA, personaActual)
 
         btnPagar.setOnClickListener{
-            val delivery = Bundle()
-            delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
-            delivery.putSerializable(KEY_USUARIO, usuarioActual)
-            delivery.putSerializable(KEY_PERSONA, personaActual)
             view.findNavController().navigate(R.id.action_menuFragment_to_listarContactosFragment, delivery)
         }
 
@@ -74,6 +76,26 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
                 txtMostrarSaldo.text = "Mostrar Saldo"
                 txtSaldo.text = "S/*******"
             }
+        }
+
+        val btnPagarQR = view.findViewById<LinearLayout>(R.id.ll_qr)
+        btnPagarQR.setOnClickListener() {
+            view.findNavController().navigate(R.id.action_menuFragment_to_qrFragment, delivery)
+        }
+
+        val btnPagarNFC = view.findViewById<LinearLayout>(R.id.ll_nfc)
+        btnPagarNFC.setOnClickListener() {
+            view.findNavController().navigate(R.id.action_menuFragment_to_nfcFragment, delivery)
+        }
+
+        val btnTarjetas = view.findViewById<LinearLayout>(R.id.ll_tarjetas)
+        btnTarjetas.setOnClickListener() {
+            view.findNavController().navigate(R.id.action_menuFragment_to_verTarjetasFragment, delivery)
+        }
+
+        val btnRecargar = view.findViewById<LinearLayout>(R.id.ll_recargar)
+        btnRecargar.setOnClickListener() {
+            view.findNavController().navigate(R.id.action_menuFragment_to_recargarFragment, delivery)
         }
 
     }

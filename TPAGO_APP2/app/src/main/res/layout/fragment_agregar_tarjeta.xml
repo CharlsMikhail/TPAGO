@@ -106,7 +106,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/btn_noti"
             android:layout_width="35dp"
             android:layout_height="23dp"
             android:src="@drawable/visa"
@@ -126,7 +126,7 @@
             android:hint="1111 2222 3333 4444"
             android:inputType="number"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView5"
+            app:layout_constraintEnd_toStartOf="@+id/btn_noti"
             app:layout_constraintHorizontal_bias="0.258"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
