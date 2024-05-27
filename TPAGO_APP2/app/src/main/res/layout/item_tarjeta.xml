@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:padding="25dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <TextView
+            android:id="@+id/txt_numero_tarjeta"
+            android:textAlignment="center"
+            tools:text="miguel"
+            android:textColor="#CD4141"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="200dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"/>
+
+        <ImageButton
+            android:id="@+id/btn_eliminar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="120dp"
+            android:layout_gravity="end"
+            android:contentDescription="TODO"
+            android:src="@drawable/equis"
+            android:background="#00FFFFFF"/>
+
+    </TableRow>
+
+</LinearLayout>

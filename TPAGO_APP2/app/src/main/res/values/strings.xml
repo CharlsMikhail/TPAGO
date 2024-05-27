@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">TPAGO</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">TPAGO2</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="txt_pagar_a">Pagar a</string>
     <string name="txt_soles">"S/. "</string>
     <string name="txt_limite_pago">Límite por pago S/500, límite total por día S/2000</string>
@@ -12,4 +12,15 @@
     <string name="img_check">image check</string>
     <string name="btn_compartir">Compatir</string>
     <string name="btn_inicio">Menu Principal</string>
+    <string name="sv_contactos">ingrese el número</string>
+    <string name="btn_eliminar">Eliminar</string>
+    <string name="btn_star">test</string>
+    <string name="btn_consultar">CONSULTAR</string>
+    <string name="btn_recargar">Recargar</string>
+    <string name="txt_ingresar_monto">Ingresar monto</string>
+    <string name="txt_detalles_recarga">Detalle Recarga</string>
+    <string name="btn_iniciar2">GO</string>
+    <string name="txt_key">INGRESA TU CLAVE</string>
+    <string name="ingresarNumero">Ingresar número</string>
+
 </resources>
