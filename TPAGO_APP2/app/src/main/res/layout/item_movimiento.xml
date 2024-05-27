@@ -36,15 +36,16 @@
             android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="8dp"/>
     </LinearLayout>
 
     <TextView
         android:id="@+id/txt_monto2"
         tools:text="12"
-        android:textSize="24sp"
-        android:layout_marginStart="50dp"
+        tools:textSize="24sp"
+        android:textSize="20sp"
+        android:layout_marginStart="40dp"
         android:layout_gravity="end|center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

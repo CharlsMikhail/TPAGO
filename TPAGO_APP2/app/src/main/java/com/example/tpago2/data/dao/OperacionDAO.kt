@@ -102,17 +102,20 @@ class OperacionDAO(context: Context) {
                 val nombre: String
                 val apellido: String
                 val movil: Int
+                val tipo: String
 
                 if (cursor.getInt(cursor.getColumnIndex("movil_origen")) == numCuenta) {
                     // La cuenta de origen es la cuenta proporcionada
                     nombre = cursor.getString(cursor.getColumnIndex("nombre_destino"))
                     apellido = cursor.getString(cursor.getColumnIndex("apellido_destino"))
                     movil = cursor.getInt(cursor.getColumnIndex("movil_destino"))
+                    tipo = "resta"
                 } else {
                     // La cuenta de destino es la cuenta proporcionada
                     nombre = cursor.getString(cursor.getColumnIndex("nombre_origen"))
                     apellido = cursor.getString(cursor.getColumnIndex("apellido_origen"))
                     movil = cursor.getInt(cursor.getColumnIndex("movil_origen"))
+                    tipo = "suma"
                 }
 
                 val movimiento = Movimiento(
@@ -121,7 +124,8 @@ class OperacionDAO(context: Context) {
                     movil = movil,
                     monto = montoOperacion,
                     fecha = fechaOperacion,
-                    hora = horaOperacion
+                    hora = horaOperacion,
+                    tipo = tipo
                 )
                 movimientos.add(movimiento)
             } while (cursor.moveToNext())

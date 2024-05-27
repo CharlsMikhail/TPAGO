@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tpago2.R
 import com.example.tpago2.adapter.MovimientosAdapter
+import com.example.tpago2.data.dao.CuentaUsuarioDAO
 import com.example.tpago2.data.dao.OperacionDAO
 import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Movimiento
@@ -50,6 +51,7 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
 
     private fun eventos(view: View) {
         val btnPagar = view.findViewById<FloatingActionButton>(R.id.fl_pagar)
+
         btnPagar.setOnClickListener{
             val delivery = Bundle()
             delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
@@ -57,14 +59,28 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
             delivery.putSerializable(KEY_PERSONA, personaActual)
             view.findNavController().navigate(R.id.action_menuFragment_to_listarContactosFragment, delivery)
         }
+
+        val txtMostrarSaldo = view.findViewById<TextView>(R.id.btn_mostrar_saldo)
+        val txtSaldo = view.findViewById<TextView>(R.id.txt_saldo22)
+        txtMostrarSaldo.setOnClickListener {
+            val cuentaDao = CuentaUsuarioDAO(requireContext())
+            cuentaActual.saldo = cuentaDao.obtenerSaldo(cuentaActual.num_movil)
+
+            if (txtMostrarSaldo.text != "Ocultar Saldo") {
+                txtSaldo.text = "S/" + cuentaActual.saldo
+                txtMostrarSaldo.text = "Ocultar Saldo"
+            }
+            else {
+                txtMostrarSaldo.text = "Mostrar Saldo"
+                txtSaldo.text = "S/*******"
+            }
+        }
+
     }
 
     private fun actualizarInterfaz(view: View) {
         val txtNameUser = view.findViewById<TextView>(R.id.txt_user_name)
         txtNameUser.text = "Hola, " + personaActual.primer_nombre
-
-        val txtSaldo = view.findViewById<TextView>(R.id.txt_saldo22)
-        txtSaldo.text = "S/." + cuentaActual.saldo
     }
 
     private fun initRecycleView(view: View) {

@@ -8,5 +8,6 @@ data class Movimiento(
     val movil: Int,
     val monto: Int,
     val fecha: String,
-    val hora: String
+    val hora: String,
+    val tipo: String
 ): Serializable

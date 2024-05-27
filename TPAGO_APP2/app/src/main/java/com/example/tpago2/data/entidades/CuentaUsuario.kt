@@ -5,7 +5,7 @@ import java.io.Serializable
 data class CuentaUsuario(
     val num_movil: Int,
     val dni_persona: Int,
-    val saldo: Int,
+    var saldo: Int,
     val ip_cuenta_usuario: String,
     val contrasenia: Int,
     val limite_por_transaccion: Int,

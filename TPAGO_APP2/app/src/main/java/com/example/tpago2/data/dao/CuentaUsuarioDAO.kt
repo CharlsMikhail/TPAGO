@@ -126,25 +126,53 @@ class CuentaUsuarioDAO(context: Context) {
         return cuentasUsuario
     }
 
-    fun actualizarSaldo(numMovil: String, nuevoSaldo: Int): Int {
-        val contentValues = ContentValues().apply {
-            put("saldo", nuevoSaldo)
-        }
-        return db.update(
+    fun actualizarSaldo(numMovil: Int, monto: Int, incrementar: Boolean): Int {
+        // Obtener el saldo actual del usuario
+        val cursor = db.query(
             "cuenta_usuario",
-            contentValues,
+            arrayOf("saldo"),
             "num_movil = ?",
-            arrayOf(numMovil)
+            arrayOf(numMovil.toString()),
+            null,
+            null,
+            null
         )
+
+        if (cursor.moveToFirst()) {
+            val saldoActual = cursor.getInt(cursor.getColumnIndexOrThrow("saldo"))
+            cursor.close()
+
+            // Calcular el nuevo saldo
+            val nuevoSaldo = if (incrementar) {
+                saldoActual + monto
+            } else {
+                saldoActual - monto
+            }
+
+            // Actualizar el saldo en la base de datos
+            val contentValues = ContentValues().apply {
+                put("saldo", nuevoSaldo)
+            }
+            return db.update(
+                "cuenta_usuario",
+                contentValues,
+                "num_movil = ?",
+                arrayOf(numMovil.toString())
+            )
+        } else {
+            cursor.close()
+            return 0 // No se encontró la cuenta
+        }
     }
 
+
     @SuppressLint("Range")
-    fun obtenerSaldo(numMovil: String): Int {
+    fun obtenerSaldo(numMovil: Int): Int {
         val cursor: Cursor = db.query(
             "cuenta_usuario",
             arrayOf("saldo"),
             "num_movil = ?",
-            arrayOf(numMovil),
+            arrayOf(numMovil.toString()),
             null,
             null,
             null

@@ -72,7 +72,7 @@ class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
     private fun onItemSelected(user:Contacto) {
         val daoCueUsu = CuentaUsuarioDAO(requireContext())
         val cuentaDestino = daoCueUsu.obtenerUsuarioDestinoPorNumMovil(user.numMovil)
-        if (cuentaDestino != null) {
+        if (cuentaDestino != null && user.numMovil != cuentaActual.num_movil) {
             val delivery = Bundle()
             delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
             delivery.putSerializable(KEY_USUARIO, usuarioActual)

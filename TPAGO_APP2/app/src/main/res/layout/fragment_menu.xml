@@ -74,7 +74,7 @@
             tools:layout_editor_absoluteX="40dp">
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/btn_mostrar_saldo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -115,7 +115,7 @@
                     android:textColor="#ffff"
                     android:textSize="40sp"
                     android:textStyle="bold"
-                    tools:text="S/*******" />
+                    android:text="S/*******" />
 
             </LinearLayout>
         </LinearLayout>

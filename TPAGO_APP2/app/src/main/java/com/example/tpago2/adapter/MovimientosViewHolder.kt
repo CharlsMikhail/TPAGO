@@ -1,6 +1,7 @@
 package com.example.tpago2.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.TextView
@@ -20,7 +21,14 @@ class MovimientosViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     fun render(item: Movimiento, onClickListener:(Movimiento) -> Unit) {
         viewNombre.text = item.nombre + " " +  item.apePaterno
         viewFecha.text = item.fecha +  ", " + item.hora
-        viewMonto.text = "S/" + item.monto
+        if (item.tipo == "suma") {
+            viewMonto.text = "+ S/" + item.monto
+            viewMonto.setTextColor(Color.GREEN)
+        } else {
+            viewMonto.text = "- S/" + item.monto
+            viewMonto.setTextColor(Color.RED)
+        }
+
         itemView.setOnClickListener() {
             onClickListener(item)
         }

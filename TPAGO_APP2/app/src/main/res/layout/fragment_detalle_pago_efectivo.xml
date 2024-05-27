@@ -20,7 +20,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout1">
 
         <TextView
-            android:id="@+id/textView31"
+            android:id="@+id/txt_num_destino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="176dp"
@@ -185,7 +185,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.064"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView31" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_num_destino" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -21,9 +21,9 @@ import kotlin.system.exitProcess
 
 class IngresarSesionFragment : Fragment(R.layout.fragment_ingresar_sesion) {
     // Estos datos se supone que ya los tengo...
-    val personaActual = Persona(12345678,"Alicia","María","González","López")
-    val usuarioActual = Usuario(12345678,"2024-05-01","Usuario activo")
-    val cuentaActual = CuentaUsuario(123456789,12345678,10000,"192.168.2.1",123224,1000,"user1@example.com",1)
+    private val personaActual = Persona(12345678,"Alicia","María","González","López")
+    private val usuarioActual = Usuario(12345678,"2024-05-01","Usuario activo")
+    private val cuentaActual = CuentaUsuario(123456789,12345678,10000,"192.168.2.1",123224,1000,"user1@example.com",1)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
