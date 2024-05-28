@@ -6,9 +6,6 @@ import android.view.View
 import com.example.tpago2.R
 
 class AgregarTarjetaFragment : Fragment(R.layout.fragment_agregar_tarjeta) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

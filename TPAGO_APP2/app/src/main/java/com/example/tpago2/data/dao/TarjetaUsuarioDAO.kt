@@ -29,29 +29,30 @@ class TarjetaUsuarioDAO(context: Context) {
     }
 
     @SuppressLint("Range")
-    fun obtenerTarjetaUsuarioPorNumero(numTarjeta: String): TarjetaUsuario? {
+    fun obtenerTarjetasUsuarioPorNumeroMovil(numMovilUsuario: Int): MutableList<TarjetaUsuario> {
+        val tarjetasUsuario: MutableList<TarjetaUsuario> = ArrayList()
         val cursor: Cursor = db.query(
             "tarjeta_usuario",
             null,
-            "num_tarjeta = ?",
-            arrayOf(numTarjeta),
+            "num_movil = ?",
+            arrayOf(numMovilUsuario.toString()),
             null,
             null,
             null
         )
-        return if (cursor.moveToFirst()) {
-            val tarjetaUsuario = TarjetaUsuario(
-                cursor.getString(cursor.getColumnIndex("num_tarjeta")),
-                cursor.getInt(cursor.getColumnIndex("num_movil_usuario")),
-                cursor.getString(cursor.getColumnIndex("fecha_vencimiento")),
-                cursor.getString(cursor.getColumnIndex("codigo_csv"))
-            )
-            cursor.close()
-            tarjetaUsuario
-        } else {
-            cursor.close()
-            null
+        if (cursor.moveToFirst()) {
+            do {
+                val tarjetaUsuario = TarjetaUsuario(
+                    cursor.getString(cursor.getColumnIndex("num_tarjeta")),
+                    cursor.getInt(cursor.getColumnIndex("num_movil")),
+                    cursor.getString(cursor.getColumnIndex("fecha_vencimiento")),
+                    cursor.getString(cursor.getColumnIndex("codigo_csv"))
+                )
+                tarjetasUsuario.add(tarjetaUsuario)
+            } while (cursor.moveToNext())
         }
+        cursor.close()
+        return tarjetasUsuario
     }
 
     fun eliminarTarjetaUsuario(numTarjeta: String): Int {

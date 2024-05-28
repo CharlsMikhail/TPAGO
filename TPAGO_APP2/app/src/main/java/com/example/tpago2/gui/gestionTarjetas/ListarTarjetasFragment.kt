@@ -3,6 +3,8 @@ package com.example.tpago2.gui.gestionTarjetas
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -24,8 +26,9 @@ import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
 import com.example.tpago2.service.KEY_USUARIO_DESTINO
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class VerTarjetasFragment : Fragment(R.layout.fragment_ver_tarjetas) {
+class ListarTarjetasFragment : Fragment(R.layout.fragment_listar_tarjetas) {
 
     private lateinit var targetAdapter: TarjetaAdapter
 
@@ -42,14 +45,28 @@ class VerTarjetasFragment : Fragment(R.layout.fragment_ver_tarjetas) {
         }
 
         initRecycleView(view)
+        eventos(view)
+
+    }
+
+    private fun eventos(view: View) {
+        val btnAdd = view.findViewById<FloatingActionButton>(R.id.btnAddTarjeta)
+        val delivery = Bundle()
+        delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
+        delivery.putSerializable(KEY_USUARIO, usuarioActual)
+        delivery.putSerializable(KEY_PERSONA, personaActual)
+
+        btnAdd.setOnClickListener{
+            view.findNavController().navigate(R.id.action_listarTarjetasFragment_to_agregarTarjetaFragment, delivery)
+        }
     }
 
     private fun initRecycleView(view: View) {
         val targetDAO = TarjetaUsuarioDAO(view.context)
         val manager = LinearLayoutManager(context)
-        targetAdapter = TarjetaAdapter(targetDAO.obtenerTarjetasUsuarioPorNumeroMovil(cuentaActual.num_movil), R.layout.item_tarjeta) { user -> onItemSelected(user)} //ojito
+        targetAdapter = TarjetaAdapter(targetDAO.obtenerTarjetasUsuarioPorNumeroMovil(cuentaActual.num_movil), R.layout.item_tarjeta_x) { user -> onItemSelected(user)} //ojito
         val decoration = DividerItemDecoration(context, manager.orientation)
-        val usersRecyler = view.findViewById<RecyclerView>(R.id.ver_tarjetas)
+        val usersRecyler = view.findViewById<RecyclerView>(R.id.lista_tarjetas_x)
         usersRecyler.layoutManager = manager
         usersRecyler.adapter = targetAdapter
         usersRecyler.addItemDecoration(decoration)
@@ -57,5 +74,6 @@ class VerTarjetasFragment : Fragment(R.layout.fragment_ver_tarjetas) {
 
     private fun onItemSelected(user: TarjetaUsuario) {
         Toast.makeText(context, "Vence en " + user.fecha_vencimiento, Toast.LENGTH_SHORT).show()
+
     }
 }

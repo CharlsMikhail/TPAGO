@@ -54,26 +54,28 @@
             app:layout_constraintVertical_bias="0.446" />
 
         <EditText
-            android:id="@+id/editTextDate"
+            android:id="@+id/et_fecha"
             android:layout_width="79dp"
             android:layout_height="47dp"
             android:layout_marginTop="4dp"
             android:ems="10"
             android:hint="01/2028"
-            android:inputType="date"
+            android:maxLength="10"
+            android:inputType="datetime"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.066"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
         <EditText
-            android:id="@+id/editTextNumber3"
+            android:id="@+id/et_csv"
             android:layout_width="44dp"
             android:layout_height="49dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="144dp"
             android:ems="10"
             android:hint="123"
+            android:maxLength="3"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -118,12 +120,13 @@
             app:layout_constraintVertical_bias="0.51" />
 
         <EditText
-            android:id="@+id/editTextNumber"
+            android:id="@+id/et_numTarjeta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="28dp"
             android:ems="10"
             android:hint="1111 2222 3333 4444"
+            android:maxLength="16"
             android:inputType="number"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_noti"
@@ -210,7 +213,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/btn_continuar_recarga"
+        android:id="@+id/btn_confirmar_agregar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="128dp"

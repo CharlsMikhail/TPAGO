@@ -90,7 +90,7 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
 
         val btnTarjetas = view.findViewById<LinearLayout>(R.id.ll_tarjetas)
         btnTarjetas.setOnClickListener() {
-            view.findNavController().navigate(R.id.action_menuFragment_to_verTarjetasFragment, delivery)
+            view.findNavController().navigate(R.id.action_menuFragment_to_listarTarjetasFragment, delivery)
         }
 
         val btnRecargar = view.findViewById<LinearLayout>(R.id.ll_recargar)

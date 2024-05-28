@@ -20,11 +20,11 @@
             android:id="@+id/action_menuFragment_to_nfcFragment"
             app:destination="@id/nfcFragment" />
         <action
-            android:id="@+id/action_menuFragment_to_verTarjetasFragment"
-            app:destination="@id/verTarjetasFragment" />
-        <action
             android:id="@+id/action_menuFragment_to_recargarFragment"
             app:destination="@id/recargarFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_listarTarjetasFragment"
+            app:destination="@id/listarTarjetasFragment" />
     </fragment>
     <fragment
         android:id="@+id/listarContactosFragment"
@@ -58,9 +58,6 @@
         android:name="com.example.tpago2.gui.gestionTarjetas.VerTarjetasFragment"
         android:label="fragment_ver_tarjetas"
         tools:layout="@layout/fragment_ver_tarjetas" >
-        <action
-            android:id="@+id/action_verTarjetasFragment_to_agregarTarjetaFragment"
-            app:destination="@id/agregarTarjetaFragment" />
         <action
             android:id="@+id/action_verTarjetasFragment_to_confirmarPagoFragment"
             app:destination="@id/confirmarPagoFragment" />
@@ -136,4 +133,13 @@
         android:name="com.example.tpago2.gui.recargarSaldo.DetallePagoEfectivoFragment"
         android:label="fragment_detalle_pago_efectivo"
         tools:layout="@layout/fragment_detalle_pago_efectivo" />
+    <fragment
+        android:id="@+id/listarTarjetasFragment"
+        android:name="com.example.tpago2.gui.gestionTarjetas.ListarTarjetasFragment"
+        android:label="fragment_listar_tarjetas"
+        tools:layout="@layout/fragment_listar_tarjetas" >
+        <action
+            android:id="@+id/action_listarTarjetasFragment_to_agregarTarjetaFragment"
+            app:destination="@id/agregarTarjetaFragment" />
+    </fragment>
 </navigation>
