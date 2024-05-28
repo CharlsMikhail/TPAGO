@@ -47,8 +47,6 @@ class QrFragment : Fragment(R.layout.fragment_qr) {
             val cuentaRamdom = listaUsuariosDestino.random()
             val cuentaDestino = daoCueUsu.obtenerUsuarioDestinoPorNumMovil(cuentaRamdom.num_movil)
 
-            Log.d("QR", "NO puede ser")
-
             val delivery = Bundle()
             delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
             delivery.putSerializable(KEY_USUARIO, usuarioActual)

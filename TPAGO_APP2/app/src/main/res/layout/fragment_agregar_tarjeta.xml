@@ -197,7 +197,7 @@
             app:layout_constraintVertical_bias="0.478" />
 
         <ImageView
-            android:id="@+id/imageView55"
+            android:id="@+id/nfc_imgbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/tarjeta"
@@ -210,7 +210,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_continuar_recarga"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="128dp"

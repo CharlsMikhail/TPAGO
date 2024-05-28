@@ -10,20 +10,21 @@
 
     <TableRow
         android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
         android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/btn_atras"
+            android:id="@+id/btn_atras_recargar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="120dp"
-            android:contentDescription="TODO"
+            android:layout_marginEnd="80dp"
             android:src="@drawable/atras"
             android:background="#00FFFFFF"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="@string/txt_ingresar_monto" />
 
     </TableRow>
@@ -42,11 +43,10 @@
             android:text="@string/txt_soles" />
 
         <EditText
-            android:id="@+id/txt_monto"
+            android:id="@+id/txt_monto_recargar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:autofillHints="phone"
-            android:inputType="phone"
+            android:inputType="number"
             android:textSize="40sp"
             android:hint="@string/txt_pagar_0"
             tools:text="28"
@@ -58,7 +58,7 @@
     <Button
         android:id="@+id/btn_recargar"
         android:gravity="center"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="35dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"

@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_verTarjetasFragment_to_agregarTarjetaFragment"
             app:destination="@id/agregarTarjetaFragment" />
+        <action
+            android:id="@+id/action_verTarjetasFragment_to_confirmarPagoFragment"
+            app:destination="@id/confirmarPagoFragment" />
     </fragment>
     <fragment
         android:id="@+id/agregarTarjetaFragment"
@@ -99,11 +102,11 @@
         android:label="fragment_metodo_recarga"
         tools:layout="@layout/fragment_metodo_recarga" >
         <action
-            android:id="@+id/action_metodoRecargaFragment_to_confirmarPagoFragment"
-            app:destination="@id/confirmarPagoFragment" />
-        <action
             android:id="@+id/action_metodoRecargaFragment_to_verTarjetasFragment"
             app:destination="@id/verTarjetasFragment" />
+        <action
+            android:id="@+id/action_metodoRecargaFragment_to_detallePagoEfectivoFragment"
+            app:destination="@id/detallePagoEfectivoFragment" />
     </fragment>
     <fragment
         android:id="@+id/detalleRecargaFragment"
@@ -128,4 +131,9 @@
             android:id="@+id/action_ingresarSesionFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/detallePagoEfectivoFragment"
+        android:name="com.example.tpago2.gui.recargarSaldo.DetallePagoEfectivoFragment"
+        android:label="fragment_detalle_pago_efectivo"
+        tools:layout="@layout/fragment_detalle_pago_efectivo" />
 </navigation>
