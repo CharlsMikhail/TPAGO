@@ -68,8 +68,7 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
         val txtSaldo = view.findViewById<TextView>(R.id.txt_saldo22)
         txtMostrarSaldo.setOnClickListener {
             val cuentaDao = CuentaUsuarioDAO(requireContext())
-            //cuentaActual.saldo = cuentaDao.obtenerSaldo(cuentaActual.num_movil)
-            cuentaActual.saldo = 5
+            cuentaActual.saldo = cuentaDao.obtenerSaldo(cuentaActual.num_movil)
             if (txtMostrarSaldo.text != "Ocultar Saldo") {
                 txtSaldo.text = "S/" + cuentaActual.saldo
                 txtMostrarSaldo.text = "Ocultar Saldo"
