@@ -4,7 +4,7 @@
 
     <string name="txt_pagar_a">Pagar a</string>
     <string name="txt_soles">"S/. "</string>
-    <string name="txt_limite_pago">Límite por pago S/500, límite total por día S/2000</string>
+    <string name="txt_limite_pago">Límite máximo por operación S/500</string>
     <string name="btn_pagar">Pagar</string>
     <string name="txt_pagar_0">0</string>
     <string name="txt_detalles_operacion">Detalles de operación</string>

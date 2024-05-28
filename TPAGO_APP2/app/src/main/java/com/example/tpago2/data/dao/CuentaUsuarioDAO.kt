@@ -104,9 +104,17 @@ class CuentaUsuarioDAO(context: Context) {
     }
 
     @SuppressLint("Range")
-    fun obtenerTodasLasCuentasUsuario(): List<CuentaUsuario> {
+    fun obtenerTodasLasCuentasUsuarioExcepto(numMovilExcluir: Int): List<CuentaUsuario> {
         val cuentasUsuario: MutableList<CuentaUsuario> = ArrayList()
-        val cursor: Cursor = db.query("cuenta_usuario", null, null, null, null, null, null)
+        val cursor: Cursor = db.query(
+            "cuenta_usuario",
+            null,
+            "num_movil != ?",
+            arrayOf(numMovilExcluir.toString()),
+            null,
+            null,
+            null
+        )
         if (cursor.moveToFirst()) {
             do {
                 val cuentaUsuario = CuentaUsuario(
@@ -125,6 +133,7 @@ class CuentaUsuarioDAO(context: Context) {
         cursor.close()
         return cuentasUsuario
     }
+
 
     fun actualizarSaldo(numMovil: Int, monto: Int, incrementar: Boolean): Int {
         // Obtener el saldo actual del usuario
