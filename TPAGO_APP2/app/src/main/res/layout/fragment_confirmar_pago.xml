@@ -31,7 +31,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/txt_monto_recarga_confirmacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="S/.50.00"
@@ -135,7 +135,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/textView56"
+            android:id="@+id/txt_tarjeta_confirmacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="**************4534"

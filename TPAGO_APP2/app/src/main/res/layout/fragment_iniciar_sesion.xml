@@ -51,6 +51,7 @@
             android:id="@+id/editTextDNI"
             android:layout_width="match_parent"
             android:layout_height="52dp"
+            android:maxLength="8"
             android:ems="10"
             android:inputType="number" />
     </LinearLayout>
@@ -76,6 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:ems="10"
+            android:maxLength="9"
             android:inputType="number" />
     </LinearLayout>
 
@@ -100,7 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:inputType="numberPassword" />
     </LinearLayout>
 
     <!-- Login Button -->

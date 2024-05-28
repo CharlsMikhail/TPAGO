@@ -44,23 +44,25 @@
             tools:ignore="DuplicateIds"
             tools:text="Hola, Leandro!" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_noti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
             app:layout_constraintBottom_toBottomOf="@+id/txt_user_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.859"
             app:layout_constraintStart_toEndOf="@+id/txt_user_name"
             app:srcCompat="@drawable/notificacion" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_salir_sesion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
             app:layout_constraintBottom_toBottomOf="@+id/txt_user_name"
             app:layout_constraintEnd_toStartOf="@+id/txt_user_name"
-            app:layout_constraintHorizontal_bias="0.15"
+            app:layout_constraintHorizontal_bias="0.215"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/power" />
 

@@ -74,6 +74,5 @@ class ListarTarjetasFragment : Fragment(R.layout.fragment_listar_tarjetas) {
 
     private fun onItemSelected(user: TarjetaUsuario) {
         Toast.makeText(context, "Vence en " + user.fecha_vencimiento, Toast.LENGTH_SHORT).show()
-
     }
 }

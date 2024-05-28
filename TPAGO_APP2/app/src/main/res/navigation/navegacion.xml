@@ -142,4 +142,13 @@
             android:id="@+id/action_listarTarjetasFragment_to_agregarTarjetaFragment"
             app:destination="@id/agregarTarjetaFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/iniciarSesionFragment"
+        android:name="com.example.tpago2.gui.aperturarCuenta.IniciarSesionFragment"
+        android:label="fragment_iniciar_sesion"
+        tools:layout="@layout/fragment_iniciar_sesion" >
+        <action
+            android:id="@+id/action_iniciarSesionFragment_to_ingresarSesionFragment"
+            app:destination="@id/ingresarSesionFragment" />
+    </fragment>
 </navigation>

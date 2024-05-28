@@ -21,7 +21,7 @@ class TarjetaUsuarioDAO(context: Context) {
     ): Long {
         val contentValues = ContentValues().apply {
             put("num_tarjeta", numTarjeta)
-            put("num_movil_usuario", numMovilUsuario)
+            put("num_movil", numMovilUsuario)
             put("fecha_vencimiento", fechaVencimiento)
             put("codigo_csv", codigoCsv)
         }

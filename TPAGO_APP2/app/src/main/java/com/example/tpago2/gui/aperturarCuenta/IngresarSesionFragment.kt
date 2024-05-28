@@ -2,6 +2,7 @@ package com.example.tpago2.gui.aperturarCuenta
 
 import android.content.Context
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -11,22 +12,42 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.tpago2.R
+import com.example.tpago2.data.dao.CuentaUsuarioDAO
+import com.example.tpago2.data.dao.PersonaDAO
+import com.example.tpago2.data.dao.UsuarioDAO
 import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.Usuario
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
+import com.example.tpago2.service.LoginManager
 import kotlin.system.exitProcess
 
 class IngresarSesionFragment : Fragment(R.layout.fragment_ingresar_sesion) {
     // Estos datos se supone que ya los tengo...
-    private val personaActual = Persona(72866150,"Carlos","Leandro","Vilca","Estrada")
-    private val usuarioActual = Usuario(72866150,"2023-06-03","La fe")
-    private val cuentaActual = CuentaUsuario(986579487,72866150,3000,"181.64.192.10,123224",123224,500,"pepito.juarez@gmail.com",1)
+    private var personaActual: Persona? = null
+    private var usuarioActual: Usuario? = null
+    private var cuentaActual: CuentaUsuario? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val lm = LoginManager(requireContext())
+        val numMovilGuardado = lm.obtenerNumMovil()
+        val dniPersonaGuardado = lm.obtenerDniPersona()
+        if (numMovilGuardado != 0 &&  dniPersonaGuardado != 0) {
+            val daoPersona = PersonaDAO(requireContext())
+            val daoUsuario = UsuarioDAO(requireContext())
+            val daoCuentaUsuario = CuentaUsuarioDAO(requireContext())
+            personaActual = daoPersona.obtenerPersonaPorDni(dniPersonaGuardado)
+            usuarioActual = daoUsuario.obtenerUsuarioPorDni(dniPersonaGuardado)
+            cuentaActual = daoCuentaUsuario.obtenerCuentaUsuarioPorNumMovil(numMovilGuardado)
+        }
+        else {
+            view.findNavController().popBackStack()
+            view.findNavController().navigate(R.id.iniciarSesionFragment)
+        }
         eventos(view)
     }
 
@@ -55,9 +76,7 @@ class IngresarSesionFragment : Fragment(R.layout.fragment_ingresar_sesion) {
     }
 
     private fun validarDatos(key: Int): Boolean {
-        return this.cuentaActual.contrasenia == key
+        return this.cuentaActual!!.contrasenia == key
     }
-
-
 
 }

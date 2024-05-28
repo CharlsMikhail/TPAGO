@@ -2,14 +2,19 @@ package com.example.tpago2.gui.menuPrincipal
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,9 +40,6 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
     private lateinit var usuarioActual: Usuario
     private lateinit var personaActual: Persona
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -96,6 +98,30 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
         val btnRecargar = view.findViewById<LinearLayout>(R.id.ll_recargar)
         btnRecargar.setOnClickListener() {
             view.findNavController().navigate(R.id.action_menuFragment_to_recargarFragment, delivery)
+        }
+
+        val btnSalir = view.findViewById<ImageButton>(R.id.btn_salir_sesion)
+
+        btnSalir.setOnClickListener {
+            AlertDialog.Builder(view.context)
+                .setTitle("Confirmación")
+                .setMessage("¿Estás seguro de que deseas salir?")
+                .setPositiveButton("Sí") { dialog, which ->
+                    view.findNavController().popBackStack()
+                    view.findNavController().popBackStack()
+                    view.findNavController().navigate(R.id.iniciarSesionFragment)
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    dialog.dismiss()
+                }
+                .create()
+                .show()
+        }
+
+        val btnNotificacion = view.findViewById<ImageButton>(R.id.btn_noti)
+
+        btnNotificacion.setOnClickListener {
+            Toast.makeText(view.context, "Funcion aun no disponible", Toast.LENGTH_SHORT).show()
         }
 
     }

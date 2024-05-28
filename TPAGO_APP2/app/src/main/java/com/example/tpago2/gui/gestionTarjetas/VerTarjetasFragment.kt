@@ -21,7 +21,9 @@ import com.example.tpago2.data.entidades.TarjetaUsuario
 import com.example.tpago2.data.entidades.Usuario
 import com.example.tpago2.service.ContactoProvider
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
+import com.example.tpago2.service.KEY_MONTO_RECARGA
 import com.example.tpago2.service.KEY_PERSONA
+import com.example.tpago2.service.KEY_TARJETA
 import com.example.tpago2.service.KEY_USUARIO
 import com.example.tpago2.service.KEY_USUARIO_DESTINO
 
@@ -32,6 +34,7 @@ class VerTarjetasFragment : Fragment(R.layout.fragment_ver_tarjetas) {
     private lateinit var cuentaActual: CuentaUsuario
     private lateinit var usuarioActual: Usuario
     private lateinit var personaActual: Persona
+    private lateinit var montoRecarga: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,6 +42,7 @@ class VerTarjetasFragment : Fragment(R.layout.fragment_ver_tarjetas) {
             cuentaActual = it.getSerializable(KEY_CUENTA_USUARIO) as CuentaUsuario
             usuarioActual = it.getSerializable(KEY_USUARIO) as Usuario
             personaActual = it.getSerializable(KEY_PERSONA) as Persona
+            montoRecarga = it.getString(KEY_MONTO_RECARGA) as String
         }
 
         initRecycleView(view)
@@ -56,6 +60,12 @@ class VerTarjetasFragment : Fragment(R.layout.fragment_ver_tarjetas) {
     }
 
     private fun onItemSelected(user: TarjetaUsuario) {
-        Toast.makeText(context, "Vence en " + user.fecha_vencimiento, Toast.LENGTH_SHORT).show()
+        val delivery = Bundle()
+        delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
+        delivery.putSerializable(KEY_USUARIO, usuarioActual)
+        delivery.putSerializable(KEY_PERSONA, personaActual)
+        delivery.putString(KEY_MONTO_RECARGA, montoRecarga)
+        delivery.putSerializable(KEY_TARJETA, user)
+        requireView().findNavController().navigate(R.id.action_verTarjetasFragment_to_confirmarPagoFragment, delivery)
     }
 }
