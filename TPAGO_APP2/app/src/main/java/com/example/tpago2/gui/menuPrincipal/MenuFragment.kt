@@ -118,10 +118,22 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
         }
 
         val btnNotificacion = view.findViewById<ImageButton>(R.id.btn_noti)
+        val btnAccesos = view.findViewById<LinearLayout>(R.id.ll_accesos)
+        val btnChamba= view.findViewById<LinearLayout>(R.id.ll_chamba)
 
         btnNotificacion.setOnClickListener {
             Toast.makeText(view.context, "Funcion aun no disponible", Toast.LENGTH_SHORT).show()
         }
+
+        btnAccesos.setOnClickListener {
+            Toast.makeText(view.context, "Funcion aun no disponible", Toast.LENGTH_SHORT).show()
+        }
+
+        btnChamba.setOnClickListener {
+            Toast.makeText(view.context, "Funcion aun no disponible", Toast.LENGTH_SHORT).show()
+        }
+
+
 
     }
 

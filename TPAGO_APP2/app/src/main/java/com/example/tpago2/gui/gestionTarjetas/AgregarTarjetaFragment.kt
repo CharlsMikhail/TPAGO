@@ -102,8 +102,6 @@ class AgregarTarjetaFragment : Fragment(R.layout.fragment_agregar_tarjeta) {
                 Toast.makeText(view.context, "Fecha tarjeta invalida", Toast.LENGTH_SHORT).show()
             }
 
-            ediFecha.text = fechaSeleccionada
-
         }, year, month, dayOfMonth)
 
         datePickerDialog.show()

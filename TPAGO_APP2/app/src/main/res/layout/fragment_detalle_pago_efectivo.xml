@@ -13,8 +13,8 @@
         android:layout_height="70dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
         android:background="#FFC107"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout1">
@@ -87,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
-            android:text="Recargar Saldo"
+            android:text="Detalle Recarga"
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -95,17 +95,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/btn_salir_sesion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/atras"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView0"
-            app:layout_constraintHorizontal_bias="0.306"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.513" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -151,16 +140,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout88"
-        android:layout_width="350dp"
+        android:layout_width="340dp"
         android:layout_height="84dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="30dp"
         android:background="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
         <TextView
             android:id="@+id/textView366"
