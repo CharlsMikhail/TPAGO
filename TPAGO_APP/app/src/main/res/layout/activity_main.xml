@@ -6,21 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    tools:context=".MainActivity">
-    <!--
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:text="@string/app_name" />
-    -->
+    tools:context=".gui.menuPrincipal.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmen_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.example.tpago.realizarOperacion.PayFragment"
-        />
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:navGraph="@navigation/navegacion"
+        app:defaultNavHost="true" />
 
+<!--
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmen_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:name="com.example.tpago2.bd.TestFragment"
+        />
+-->
 </LinearLayout>
