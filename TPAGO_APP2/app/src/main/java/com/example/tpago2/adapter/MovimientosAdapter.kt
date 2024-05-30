@@ -12,7 +12,6 @@ class MovimientosAdapter(val items: MutableList<Movimiento>, val onItemSelected:
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovimientosViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_movimiento,parent, false)
         return MovimientosViewHolder(itemView)
-
     }
 
     override fun getItemCount(): Int = items.size

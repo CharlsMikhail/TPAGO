@@ -21,6 +21,7 @@ import com.example.tpago2.data.entidades.CuentaDestino
 import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.Usuario
+import com.example.tpago2.gui.utilitarios.mostrarErrorDeConexion
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_DATE_OPER
 import com.example.tpago2.service.KEY_MONTO_PAGO
@@ -128,17 +129,6 @@ class PagarFragment : Fragment(R.layout.fragment_pagar) {
                 saldoIsuiciente()
             }
         }
-    }
-
-    fun mostrarErrorDeConexion(context: Context) {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle("Error de Conexión")
-        builder.setMessage("No se pudo realizar la operación. Por favor, verifica tu conexión a Internet e inténtalo de nuevo.")
-        builder.setPositiveButton("Aceptar") { dialog, _ ->
-            exitProcess(1)
-        }
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
     }
 
     private fun realizarOperacion(monto: Int) {

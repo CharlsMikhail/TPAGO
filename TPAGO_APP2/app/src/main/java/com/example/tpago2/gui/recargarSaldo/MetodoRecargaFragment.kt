@@ -14,11 +14,13 @@ import com.example.tpago2.data.dao.RecargaDAO
 import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.Usuario
+import com.example.tpago2.gui.utilitarios.mostrarErrorDeConexion
 import com.example.tpago2.service.KEY_CODIGO_PE
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_MONTO_RECARGA
 import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
+import com.example.tpago2.service.falla
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.random.Random
@@ -66,6 +68,11 @@ class MetodoRecargaFragment : Fragment(R.layout.fragment_metodo_recarga) {
                 view.findNavController().navigate(R.id.action_metodoRecargaFragment_to_verTarjetasFragment, delivery)
 
             } else if (rbPagoEfectivo.isChecked) {
+
+                if (falla) {
+                    mostrarErrorDeConexion(requireContext())
+                    return@setOnClickListener
+                }
 
                 eventoPagoEfectivo()
 

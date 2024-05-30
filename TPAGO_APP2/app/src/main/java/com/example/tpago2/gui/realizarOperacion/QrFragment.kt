@@ -13,10 +13,12 @@ import com.example.tpago2.data.entidades.CuentaDestino
 import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.Usuario
+import com.example.tpago2.gui.utilitarios.mostrarErrorDeConexion
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
 import com.example.tpago2.service.KEY_USUARIO_DESTINO
+import com.example.tpago2.service.falla
 import kotlin.random.Random
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -50,6 +52,11 @@ class QrFragment : Fragment(R.layout.fragment_qr) {
         }
 
         btnQR.setOnClickListener {
+            if (falla) {
+                mostrarErrorDeConexion(requireContext())
+                return@setOnClickListener
+            }
+
             val cuentaRamdom = listaUsuariosDestino.random()
             val cuentaDestino = daoCueUsu.obtenerUsuarioDestinoPorNumMovil(cuentaRamdom.num_movil)
 

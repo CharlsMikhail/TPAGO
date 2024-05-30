@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tpago2.R
 import com.example.tpago2.data.dao.TarjetaUsuarioDAO
 import com.example.tpago2.data.entidades.TarjetaUsuario
+import com.example.tpago2.gui.utilitarios.mostrarErrorDeConexion
+import com.example.tpago2.service.falla
 
 class TarjetaAdapter(private val items: MutableList<TarjetaUsuario>, private val idLayout: Int, val onItemSelected: (TarjetaUsuario) -> Unit): RecyclerView.Adapter<TarjetaViewHolder>() {
 
@@ -35,6 +37,10 @@ class TarjetaAdapter(private val items: MutableList<TarjetaUsuario>, private val
     }
 
     private fun deleteTarjeta(index: Int, item: TarjetaUsuario) {
+        if (falla) {
+            mostrarErrorDeConexion(context2)
+            return
+        }
         val builder = AlertDialog.Builder(context2)
         builder.setTitle("Confirmación")
         builder.setMessage("¿Estás seguro de que deseas eliminar esta tarjeta: ${item.num_tarjeta}?")
