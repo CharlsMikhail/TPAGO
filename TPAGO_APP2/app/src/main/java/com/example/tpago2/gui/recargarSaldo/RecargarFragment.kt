@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.example.tpago2.R
@@ -43,6 +44,12 @@ class RecargarFragment : Fragment(R.layout.fragment_recargar) {
     private fun eventos(view: View) {
         val btnRecargar = view.findViewById<Button>(R.id.btn_recargar)
         val txtMonto = view.findViewById<EditText>(R.id.txt_monto_recargar)
+        val btnBack = view.findViewById<ImageButton>(R.id.btn_atras_recargar)
+
+        btnBack.setOnClickListener() {
+            view.findNavController().popBackStack()
+        }
+
 
         //Mascarita
         txtMonto.addTextChangedListener(object : TextWatcher {

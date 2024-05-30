@@ -37,6 +37,13 @@ class NfcFragment : Fragment(R.layout.fragment_nfc) {
         val daoCueUsu = CuentaUsuarioDAO(requireContext())
         val listaUsuariosDestino = daoCueUsu.obtenerTodasLasCuentasUsuarioExcepto(cuentaActual.num_movil)
 
+        val btnBack = view.findViewById<ImageButton>(R.id.btn_atras_nfc)
+
+        btnBack.setOnClickListener() {
+            view.findNavController().popBackStack()
+        }
+
+
         btnNFC.setOnClickListener {
             val cuentaRamdom = listaUsuariosDestino.random()
             val cuentaDestino = daoCueUsu.obtenerUsuarioDestinoPorNumMovil(cuentaRamdom.num_movil)

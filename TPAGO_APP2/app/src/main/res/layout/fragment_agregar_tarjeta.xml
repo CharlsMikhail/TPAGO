@@ -24,7 +24,7 @@
             android:id="@+id/textView38"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CCV"
+            android:text="CVV"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,11 +63,11 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:gravity="center_vertical"
-            android:hint="2025-05-01"
-            android:textSize="16sp"
+            android:hint="AAAA-MM"
             android:keyboardNavigationCluster="false"
             android:maxLength="10"
             android:paddingStart="7dp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/et_csv"
             app:layout_constraintHorizontal_bias="0.36"
@@ -153,11 +153,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView3"
+        <ImageButton
+            android:id="@+id/ibtn_atras_agregar_tarjeta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/atras"
+            android:background="#EFF0FC"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView0"
             app:layout_constraintHorizontal_bias="0.275"
@@ -186,7 +187,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="96dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -230,8 +231,9 @@
         android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
-        app:layout_constraintVertical_bias="0.271" />
+        app:layout_constraintVertical_bias="0.292" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

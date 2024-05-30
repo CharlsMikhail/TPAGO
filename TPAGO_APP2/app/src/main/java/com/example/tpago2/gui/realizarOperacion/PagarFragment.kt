@@ -91,6 +91,9 @@ class PagarFragment : Fragment(R.layout.fragment_pagar) {
 
                 realizarOperacion(monto)
 
+                cuentaDestino.nombres = cuentaDestino.nombres.trim().split(" ").dropLast(1).joinToString(" ")
+
+
                 val delivery = Bundle()
                 delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
                 delivery.putSerializable(KEY_USUARIO, usuarioActual)
@@ -122,7 +125,7 @@ class PagarFragment : Fragment(R.layout.fragment_pagar) {
         cuentaDao.actualizarSaldo(cuentaDestino.numMovil, monto, true)
 
         // INSERTAR OPERACION
-        val formatterHora = DateTimeFormatter.ofPattern("HH:mm")
+        val formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss")
         val horaMinutoString = currentDateTime.format(formatterHora)
 
         date = currentDateTime.toLocalDate().toString()

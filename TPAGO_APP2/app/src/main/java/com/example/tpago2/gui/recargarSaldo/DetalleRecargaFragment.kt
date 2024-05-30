@@ -1,8 +1,13 @@
 package com.example.tpago2.gui.recargarSaldo
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
+import androidx.navigation.findNavController
 import com.example.tpago2.R
 import com.example.tpago2.data.entidades.CuentaDestino
 import com.example.tpago2.data.entidades.CuentaUsuario
@@ -50,10 +55,38 @@ class DetalleRecargaFragment : Fragment(R.layout.fragment_detalle_recarga) {
     }
 
     private fun eventos(view: View) {
-
+        val btnBack  = view.findViewById<Button>(R.id.btn_inicio_recarga)
+        btnBack.setOnClickListener {
+            view.findNavController().popBackStack(R.id.menuFragment,false)
+        }
     }
-
     private fun actualizarInterfaz(view: View) {
+        val txtNumTarjeta = view.findViewById<TextView>(R.id.txt_num_origen)
+        val txtNumDestino = view.findViewById<TextView>(R.id.txt_num_destino)
+        val txtNumRecarga = view.findViewById<TextView>(R.id.txt_num_operacion)
+        val txtDateOper = view.findViewById<TextView>(R.id.txt_fecha)
+        val txtHourOper = view.findViewById<TextView>(R.id.txt_hora)
+        val txtMontoOpe = view.findViewById<TextView>(R.id.txt_monto_ope)
+        val txtMontoPago = view.findViewById<TextView>(R.id.txt_monto_pago)
 
+        txtNumTarjeta.text = tarjetaRecarga.num_tarjeta
+        txtNumDestino.text = cuentaActual.num_movil.toString()
+        txtNumRecarga.text = numRecarga
+        txtDateOper.text = date
+        txtHourOper.text = hour
+        txtMontoOpe.text = montoRecarga
+        txtMontoPago.text = montoRecarga
     }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callBack = object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                requireView().findNavController().popBackStack(R.id.menuFragment,false)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callBack)
+    }
+
+
 }

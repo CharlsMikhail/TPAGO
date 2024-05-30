@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
@@ -20,6 +21,7 @@ import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.time.LocalDateTime
 import java.util.Locale
 
 class AgregarTarjetaFragment : Fragment(R.layout.fragment_agregar_tarjeta) {
@@ -35,9 +37,7 @@ class AgregarTarjetaFragment : Fragment(R.layout.fragment_agregar_tarjeta) {
             usuarioActual = it.getSerializable(KEY_USUARIO) as Usuario
             personaActual = it.getSerializable(KEY_PERSONA) as Persona
         }
-
         eventos(view)
-
     }
 
     private fun eventos(view: View) {
@@ -45,9 +45,14 @@ class AgregarTarjetaFragment : Fragment(R.layout.fragment_agregar_tarjeta) {
         val ediNumTarjeta = view.findViewById<EditText>(R.id.et_numTarjeta)
         val ediFecha = view.findViewById<TextView>(R.id.et_fecha)
         val ediCSV = view.findViewById<EditText>(R.id.et_csv)
+        val btnBack = view.findViewById<ImageButton>(R.id.ibtn_atras_agregar_tarjeta)
+
+        btnBack.setOnClickListener() {
+            view.findNavController().popBackStack()
+        }
 
         ediFecha.setOnClickListener {
-            mostrarDatePicker(ediFecha)
+            mostrarDatePicker(ediFecha, view)
         }
 
         btnAdd.setOnClickListener {
@@ -55,32 +60,50 @@ class AgregarTarjetaFragment : Fragment(R.layout.fragment_agregar_tarjeta) {
             val fecha = ediFecha.text.toString()
             val csv = ediCSV.text.toString()
 
-            if (numTarjeta.isEmpty() || fecha.isEmpty() || csv.isEmpty()) {
+            if (numTarjeta.length != 16 || fecha.isEmpty() || csv.length != 3) {
                 Toast.makeText(requireContext(), "Datos incompletos, intente de nuevo", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val daoTarjeta = TarjetaUsuarioDAO(view.context)
-            daoTarjeta.insertarTarjetaUsuario(numTarjeta, cuentaActual.num_movil,fecha, csv )
+
+            // Validar que no este vinculada anigun usuario a en la base de datos
+            if (daoTarjeta.tarjetaExiste(numTarjeta)) {
+                Toast.makeText(requireContext(), "La tarjeta ya esta vinculada con una cuenta TPAGO", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+
+
+            daoTarjeta.insertarTarjetaUsuario(numTarjeta, cuentaActual.num_movil,fecha, csv)
             Toast.makeText(view.context, "Se agrego la tarjeta correctamente!", Toast.LENGTH_LONG).show()
             view.findNavController().popBackStack()
         }
     }
 
-    private fun mostrarDatePicker(ediFecha: TextView) {
+    private fun mostrarDatePicker(ediFecha: TextView, view: View) {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+        val currentDateTime = LocalDateTime.now()
 
         val datePickerDialog = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { _, selectedYear, selectedMonth, selectedDay ->
             // Formatear la fecha seleccionada al formato deseado
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             calendar.set(selectedYear, selectedMonth, selectedDay)
             val fechaSeleccionada = dateFormat.format(calendar.time)
+            val date = currentDateTime.toLocalDate().toString()
 
-            // Establecer la fecha formateada en el TextView
+            if (fechaSeleccionada >= date) {
+                // Establecer la fecha formateada en el TextView
+                ediFecha.text = fechaSeleccionada
+            } else {
+                Toast.makeText(view.context, "Fecha tarjeta invalida", Toast.LENGTH_SHORT).show()
+            }
+
             ediFecha.text = fechaSeleccionada
+
         }, year, month, dayOfMonth)
 
         datePickerDialog.show()

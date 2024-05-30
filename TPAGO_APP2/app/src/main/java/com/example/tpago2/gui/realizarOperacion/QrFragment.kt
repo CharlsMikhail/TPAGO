@@ -43,6 +43,12 @@ class QrFragment : Fragment(R.layout.fragment_qr) {
         val daoCueUsu = CuentaUsuarioDAO(requireContext())
         val listaUsuariosDestino = daoCueUsu.obtenerTodasLasCuentasUsuarioExcepto(cuentaActual.num_movil)
 
+        val btnBack = view.findViewById<ImageButton>(R.id.btn_atras_qr)
+
+        btnBack.setOnClickListener() {
+            view.findNavController().popBackStack()
+        }
+
         btnQR.setOnClickListener {
             val cuentaRamdom = listaUsuariosDestino.random()
             val cuentaDestino = daoCueUsu.obtenerUsuarioDestinoPorNumMovil(cuentaRamdom.num_movil)

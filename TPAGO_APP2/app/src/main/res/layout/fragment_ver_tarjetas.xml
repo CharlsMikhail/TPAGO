@@ -28,11 +28,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView3"
+        <ImageButton
+            android:id="@+id/btn_atras_ver_tarjeta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/atras"
+            android:background="#EFF0FC"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView0"
             app:layout_constraintHorizontal_bias="0.294"

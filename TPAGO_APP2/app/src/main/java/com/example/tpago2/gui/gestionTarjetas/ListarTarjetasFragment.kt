@@ -15,6 +15,7 @@ import com.example.tpago2.adapter.ContactoAdapter
 import com.example.tpago2.adapter.TarjetaAdapter
 import com.example.tpago2.data.dao.CuentaUsuarioDAO
 import com.example.tpago2.data.dao.TarjetaUsuarioDAO
+import com.example.tpago2.data.dao.UsuarioDAO
 import com.example.tpago2.data.entidades.Contacto
 import com.example.tpago2.data.entidades.CuentaDestino
 import com.example.tpago2.data.entidades.CuentaUsuario
@@ -51,12 +52,25 @@ class ListarTarjetasFragment : Fragment(R.layout.fragment_listar_tarjetas) {
 
     private fun eventos(view: View) {
         val btnAdd = view.findViewById<FloatingActionButton>(R.id.btnAddTarjeta)
+        val btnBack = view.findViewById<ImageButton>(R.id.btn_back_listar_tarjetas)
+
+        btnBack.setOnClickListener() {
+            view.findNavController().popBackStack()
+        }
+
+
         val delivery = Bundle()
         delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
         delivery.putSerializable(KEY_USUARIO, usuarioActual)
         delivery.putSerializable(KEY_PERSONA, personaActual)
 
         btnAdd.setOnClickListener{
+            val daoTarjeta = TarjetaUsuarioDAO(requireContext())
+            if (daoTarjeta.obtenerTotalTarjetasPorUsuario(cuentaActual.num_movil) >= 4) {
+                Toast.makeText(requireContext(), "Límite de tarjetas superado", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             view.findNavController().navigate(R.id.action_listarTarjetasFragment_to_agregarTarjetaFragment, delivery)
         }
     }

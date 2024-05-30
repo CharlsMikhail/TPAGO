@@ -54,8 +54,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="a"
-            android:layout_marginStart="2dp"
-            android:layout_marginEnd="2dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
             android:textAlignment="center"
             android:textSize="15sp" />
 
@@ -63,7 +63,7 @@
             android:id="@+id/txt_nom_ape_destino"
             android:layout_width="wrap_content"
             android:layout_height="26dp"
-            android:layout_marginEnd="2dp"
+            android:layout_marginEnd="4dp"
             android:text="Mateo Gonzales"
             android:textColor="#000000"
             android:textSize="18sp"
@@ -248,14 +248,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center">
-
+<!--
         <Button
             android:id="@+id/btn_compartir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="25dp"
             android:text="Compartir" />
-
+-->
         <Button
             android:id="@+id/btn_inicio"
             android:layout_width="wrap_content"

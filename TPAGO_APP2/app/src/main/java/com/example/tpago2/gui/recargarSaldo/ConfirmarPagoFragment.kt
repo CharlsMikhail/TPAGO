@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.example.tpago2.R
 import com.example.tpago2.data.dao.CuentaUsuarioDAO
 import com.example.tpago2.data.dao.RecargaDAO
@@ -16,18 +16,13 @@ import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.TarjetaUsuario
 import com.example.tpago2.data.entidades.Usuario
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
-import com.example.tpago2.service.KEY_DATE_OPER
 import com.example.tpago2.service.KEY_DATE_RECARGA
-import com.example.tpago2.service.KEY_MONTO_PAGO
 import com.example.tpago2.service.KEY_MONTO_RECARGA
-import com.example.tpago2.service.KEY_NUM_OPER
 import com.example.tpago2.service.KEY_NUM_RECARGA
 import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_TARJETA
-import com.example.tpago2.service.KEY_TIME_OPER
 import com.example.tpago2.service.KEY_TIME_RECARGA
 import com.example.tpago2.service.KEY_USUARIO
-import com.example.tpago2.service.KEY_USUARIO_DESTINO
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -53,12 +48,20 @@ class ConfirmarPagoFragment : Fragment(R.layout.fragment_confirmar_pago) {
     }
 
     private fun eventos(view: View) {
-        val btnContinuarRecarga = view.findViewById<Button>(R.id.btn_continuar_recarga)
+        val btnContinuarRecarga = view.findViewById<Button>(R.id.volver_menu_pe)
         val txtTarjeta = view.findViewById<TextView>(R.id.txt_tarjeta_confirmacion)
-        val txtMonto = view.findViewById<TextView>(R.id.txt_monto_recarga_confirmacion)
+        val txtMonto = view.findViewById<TextView>(R.id.monto_pe)
+        val btnBack = view.findViewById<ImageButton>(R.id.btn_confirmar_atras)
+
+        btnBack.setOnClickListener() {
+            view.findNavController().popBackStack()
+        }
+
+
+
 
         txtTarjeta.text = tarjetaRecarga.num_tarjeta
-        txtMonto.text = montoRecarga
+        txtMonto.text = "S/" + montoRecarga
 
         btnContinuarRecarga.setOnClickListener {
             val cuentaDao = CuentaUsuarioDAO(this.requireContext()) //ojo
@@ -66,7 +69,7 @@ class ConfirmarPagoFragment : Fragment(R.layout.fragment_confirmar_pago) {
             val currentDateTime = LocalDateTime.now()
 
             //INSERTAR SALDO
-            cuentaDao.actualizarSaldo(cuentaActual.num_movil, montoRecarga.toString().toInt(), true)
+            cuentaDao.actualizarSaldo(cuentaActual.num_movil, montoRecarga.toInt(), true)
 
             // INSERTAR RECARGA
             val formatterHora = DateTimeFormatter.ofPattern("HH:mm")

@@ -95,7 +95,7 @@ class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
                     Toast.makeText(requireContext(), "No puede trasferirse a si mismo", Toast.LENGTH_SHORT).show()
                 }
                 else {
-                    Toast.makeText(requireContext(), "El número ${inputNumber.toInt()} no pertence aa TPAGO", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "El número ${inputNumber.toInt()} no pertence a TPAGO", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -142,7 +142,7 @@ class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
             Toast.makeText(requireContext(), "No puede trasferirse a si mismo", Toast.LENGTH_SHORT).show()
         }
         else {
-            Toast.makeText(requireContext(), "El contacto ${user.nombres} no pertence aa TPAGO", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "El contacto ${user.nombres} no pertence a TPAGO", Toast.LENGTH_SHORT).show()
         }
     }
 }

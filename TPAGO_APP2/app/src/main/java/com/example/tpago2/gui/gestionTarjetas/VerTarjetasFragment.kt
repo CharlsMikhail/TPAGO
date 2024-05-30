@@ -3,6 +3,7 @@ package com.example.tpago2.gui.gestionTarjetas
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -26,6 +27,7 @@ import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_TARJETA
 import com.example.tpago2.service.KEY_USUARIO
 import com.example.tpago2.service.KEY_USUARIO_DESTINO
+import java.time.LocalDateTime
 
 class VerTarjetasFragment : Fragment(R.layout.fragment_ver_tarjetas) {
 
@@ -45,6 +47,12 @@ class VerTarjetasFragment : Fragment(R.layout.fragment_ver_tarjetas) {
             montoRecarga = it.getString(KEY_MONTO_RECARGA) as String
         }
 
+        val btnBack = view.findViewById<ImageButton>(R.id.btn_atras_ver_tarjeta)
+
+        btnBack.setOnClickListener() {
+            view.findNavController().popBackStack()
+        }
+
         initRecycleView(view)
     }
 
@@ -59,13 +67,23 @@ class VerTarjetasFragment : Fragment(R.layout.fragment_ver_tarjetas) {
         usersRecyler.addItemDecoration(decoration)
     }
 
-    private fun onItemSelected(user: TarjetaUsuario) {
+    private fun onItemSelected(tarjeta: TarjetaUsuario) {
+
+        val currentDateTime = LocalDateTime.now()
+        val date = currentDateTime.toLocalDate().toString()
+
+        if (tarjeta.fecha_vencimiento < date) {
+            Toast.makeText(requireContext(), "Fecha tarjeta expirada", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
         val delivery = Bundle()
         delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
         delivery.putSerializable(KEY_USUARIO, usuarioActual)
         delivery.putSerializable(KEY_PERSONA, personaActual)
         delivery.putString(KEY_MONTO_RECARGA, montoRecarga)
-        delivery.putSerializable(KEY_TARJETA, user)
+        delivery.putSerializable(KEY_TARJETA, tarjeta)
         requireView().findNavController().navigate(R.id.action_verTarjetasFragment_to_confirmarPagoFragment, delivery)
     }
 }

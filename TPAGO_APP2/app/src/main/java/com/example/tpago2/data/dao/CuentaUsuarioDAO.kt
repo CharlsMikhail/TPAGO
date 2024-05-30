@@ -31,7 +31,7 @@ class CuentaUsuarioDAO(context: Context) {
 
     fun obtenerUsuarioDestinoPorNumMovil(numMovil: Int): CuentaDestino? {
         val query = """
-            SELECT p.primer_nombre || ' ' || p.ape_paterno AS nombres, cu.num_movil
+            SELECT p.primer_nombre || ' ' || p.ape_paterno || ' ' || p.ape_materno AS nombres, cu.num_movil
             FROM cuenta_usuario cu
             INNER JOIN persona p ON cu.dni_persona = p.dni_persona
             WHERE cu.num_movil = ?

@@ -72,15 +72,15 @@ class DetalleOperacionFragment : Fragment(R.layout.fragment_detalle_operacion) {
 
     private fun eventos(view: View) {
         val btnInicio = view.findViewById<Button>(R.id.btn_inicio)
-        val btnCompartir = view.findViewById<Button>(R.id.btn_compartir)
+        /*val btnCompartir = view.findViewById<Button>(R.id.btn_compartir)*/
 
         btnInicio.setOnClickListener {
             view.findNavController().popBackStack(R.id.menuFragment,false)
         }
-
+        /*
         btnCompartir.setOnClickListener {
             Toast.makeText(view.context, "Función en desarrollo por TPAGO, disculpe", Toast.LENGTH_SHORT).show()
-        }
+        }*/
 
     }
 
@@ -88,6 +88,7 @@ class DetalleOperacionFragment : Fragment(R.layout.fragment_detalle_operacion) {
         super.onAttach(context)
         val callBack = object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
+                requireView().findNavController().popBackStack(R.id.menuFragment,false)
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callBack)

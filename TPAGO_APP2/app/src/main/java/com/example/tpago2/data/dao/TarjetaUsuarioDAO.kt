@@ -28,6 +28,21 @@ class TarjetaUsuarioDAO(context: Context) {
         return db.insert("tarjeta_usuario", null, contentValues)
     }
 
+    fun tarjetaExiste(numTarjeta: String): Boolean {
+        val cursor: Cursor = db.query(
+            "tarjeta_usuario",
+            arrayOf("num_tarjeta"),
+            "num_tarjeta = ?",
+            arrayOf(numTarjeta),
+            null,
+            null,
+            null
+        )
+        val exists = cursor.moveToFirst()
+        cursor.close()
+        return exists
+    }
+
     @SuppressLint("Range")
     fun obtenerTarjetasUsuarioPorNumeroMovil(numMovilUsuario: Int): MutableList<TarjetaUsuario> {
         val tarjetasUsuario: MutableList<TarjetaUsuario> = ArrayList()
@@ -73,7 +88,7 @@ class TarjetaUsuarioDAO(context: Context) {
 
     fun obtenerTotalTarjetasPorUsuario(numMovilUsuario: Int): Int {
         val cursor: Cursor = db.rawQuery(
-            "SELECT COUNT(*) FROM tarjeta_usuario WHERE num_movil_usuario = ?",
+            "SELECT COUNT(*) FROM tarjeta_usuario WHERE num_movil = ?",
             arrayOf(numMovilUsuario.toString())
         )
         return if (cursor.moveToFirst()) {

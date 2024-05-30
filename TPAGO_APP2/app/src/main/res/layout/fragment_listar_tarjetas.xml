@@ -5,18 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#EFF0FC"
     android:padding="30dp"
     tools:context=".gui.gestionTarjetas.ListarTarjetasFragment">
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
+        android:layout_width="313dp"
+        android:layout_height="32dp"
         android:text="Lista de Tarjetas"
+        android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="30dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <!--
     <SearchView
         android:id="@+id/sv_contactos"
@@ -27,11 +28,16 @@
         android:queryHint="@string/sv_contactos"/>
         -->
 
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/atras" />
+    <ImageButton
+        android:id="@+id/btn_back_listar_tarjetas"
+        android:layout_width="37dp"
+        android:layout_height="33dp"
+        android:background="#EFF0FC"
+        android:src="@drawable/atras"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lista_tarjetas_x"

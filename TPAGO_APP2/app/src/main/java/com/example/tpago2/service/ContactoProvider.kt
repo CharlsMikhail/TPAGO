@@ -6,16 +6,16 @@ import com.example.tpago2.data.entidades.Usuario2
 class ContactoProvider {
     companion object {
         val listaContactos = arrayListOf<Contacto>(
-            Contacto("carlos bustamante", 929016170),
-            Contacto("alicia juarez", 123456789),
-            Contacto("pedro mamani", 987654321),
-            Contacto("pepe del castillo", 135792468),
-            Contacto("juan quispe", 246813579),
-            Contacto("patricio parodi", 197900995),
-            Contacto("yony vilca", 797979070),
-            Contacto("erika gonzales", 986986869),
-            Contacto("wos perez", 574905279),
-            Contacto("abel aragon", 589328494),
+            Contacto("Maria Bustamante", 986574214),
+            Contacto("Alicia Juarez", 998765432),
+            Contacto("Pedro Mamani", 965432109),
+            Contacto("Juan Del Castillo", 987654321),
+            Contacto("Juan Quispe", 946813579),
+            Contacto("Patricio Gonzales", 197900995),
+            Contacto("Yony Vilca", 997979070),
+            Contacto("Erika Gonzales", 986986869),
+            Contacto("Wos Perez", 974905279),
+            Contacto("Laura Aragon", 932109876),
         )
     }
 }
