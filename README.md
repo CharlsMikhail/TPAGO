@@ -1,4 +1,4 @@
-# T'PAGO
+# T'PAGO(LA APP ESTA EN: APP_TPAGO2)
 
 ## Visión
 
