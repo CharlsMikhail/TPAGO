@@ -143,7 +143,7 @@
 
 - **Estándares y Requisitos de Plataforma**:
   - Cumplimiento con PCI-DSS.
-  - Operar en versiones posteriores a Android 10.
+  - Operar en versiones posteriores a Android 11.
   - Integración con tecnología NFC.
 
 - **Requisitos de Rendimiento**:
