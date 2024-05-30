@@ -91,6 +91,7 @@ class OperacionDAO(context: Context) {
             INNER JOIN persona p2 ON cu2.dni_persona = p2.dni_persona
             WHERE o.num_cuenta_origen = ? OR o.num_cuenta_destino = ?
             ORDER BY o.fecha_operacion DESC, o.hora_operacion DESC
+            LIMIT 10
         """
         val cursor: Cursor = db.rawQuery(query, arrayOf(numCuenta.toString(), numCuenta.toString()))
         if (cursor.moveToFirst()) {

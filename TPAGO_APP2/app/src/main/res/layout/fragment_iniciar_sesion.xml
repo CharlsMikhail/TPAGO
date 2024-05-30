@@ -101,6 +101,7 @@
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="52dp"
+            android:maxLength="6"
             android:ems="10"
             android:inputType="numberPassword" />
     </LinearLayout>

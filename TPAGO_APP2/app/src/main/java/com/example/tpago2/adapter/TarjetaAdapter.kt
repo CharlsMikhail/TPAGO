@@ -37,7 +37,7 @@ class TarjetaAdapter(private val items: MutableList<TarjetaUsuario>, private val
     private fun deleteTarjeta(index: Int, item: TarjetaUsuario) {
         val builder = AlertDialog.Builder(context2)
         builder.setTitle("Confirmación")
-        builder.setMessage("¿Estás seguro de que deseas eliminar esta tarjeta?")
+        builder.setMessage("¿Estás seguro de que deseas eliminar esta tarjeta: ${item.num_tarjeta}?")
         builder.setPositiveButton("Sí") { _, _ ->
             // Acción a realizar si el usuario confirma la eliminación
             val daoTarjeta = TarjetaUsuarioDAO(context2)

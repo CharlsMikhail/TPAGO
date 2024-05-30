@@ -334,8 +334,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lista_movimientos"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:padding="30dp"
+        android:layout_height="340dp"
+        android:paddingTop="15dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

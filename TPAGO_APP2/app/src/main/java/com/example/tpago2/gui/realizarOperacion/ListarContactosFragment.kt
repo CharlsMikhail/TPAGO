@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -53,6 +54,12 @@ class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
     }
 
     private fun eventos(view: View) {
+        val btnBack = view.findViewById<ImageButton>(R.id.btn_atras)
+
+        btnBack.setOnClickListener() {
+            view.findNavController().popBackStack()
+        }
+
         val btnNumber = view.findViewById<FloatingActionButton>(R.id.btnNumber)
         btnNumber.setOnClickListener{
             showDialogNumber(view)

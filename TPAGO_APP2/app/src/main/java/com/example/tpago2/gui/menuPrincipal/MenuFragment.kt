@@ -31,7 +31,6 @@ import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlin.system.exitProcess
-
 class MenuFragment : Fragment(R.layout.fragment_menu) {
 
     private lateinit var moviAdapter: MovimientosAdapter
@@ -48,6 +47,11 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
             usuarioActual = it.getSerializable(KEY_USUARIO) as Usuario
             personaActual = it.getSerializable(KEY_PERSONA) as Persona
         }
+
+        // X
+        val cuentaDao = CuentaUsuarioDAO(requireContext())
+        cuentaActual.saldo = cuentaDao.obtenerSaldo(cuentaActual.num_movil)
+
         initRecycleView(view)
         actualizarInterfaz(view)
         eventos(view)
@@ -154,7 +158,7 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
     }
 
     private fun onItemSelected(user:Movimiento) {
-        Toast.makeText(requireActivity(), user.nombre, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(requireActivity(), user.nombre, Toast.LENGTH_SHORT)
     }
 
     override fun onAttach(context: Context) {

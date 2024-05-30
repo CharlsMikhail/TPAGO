@@ -100,7 +100,7 @@ class MetodoRecargaFragment : Fragment(R.layout.fragment_metodo_recarga) {
         codigoGenerado = Random.nextInt(0, 1_000_000_000).toString()
 
         val daoRecarga = RecargaDAO(requireContext())
-        val numRecarga = daoRecarga.insertarRecarga(
+        daoRecarga.insertarRecarga(
             "tarjeta",
             null,
             codigoGenerado,

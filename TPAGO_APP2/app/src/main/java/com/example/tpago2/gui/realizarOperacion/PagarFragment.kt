@@ -1,5 +1,6 @@
 package com.example.tpago2.gui.realizarOperacion
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import java.time.LocalDateTime
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -27,7 +29,9 @@ import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_TIME_OPER
 import com.example.tpago2.service.KEY_USUARIO
 import com.example.tpago2.service.KEY_USUARIO_DESTINO
+import com.example.tpago2.service.falla
 import java.time.format.DateTimeFormatter
+import kotlin.system.exitProcess
 
 class PagarFragment : Fragment(R.layout.fragment_pagar) {
 
@@ -60,6 +64,13 @@ class PagarFragment : Fragment(R.layout.fragment_pagar) {
         val btnPagar = view.findViewById<Button>(R.id.btn_pagar)
         val txtMonto = view.findViewById<EditText>(R.id.txt_monto)
 
+        val btnBack = view.findViewById<ImageButton>(R.id.btn_atras)
+
+        btnBack.setOnClickListener() {
+            view.findNavController().popBackStack()
+        }
+
+
         //Mascarita
         txtMonto.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -82,6 +93,10 @@ class PagarFragment : Fragment(R.layout.fragment_pagar) {
 
 
         btnPagar.setOnClickListener{
+            if (falla) {
+                mostrarErrorDeConexion(requireContext())
+                return@setOnClickListener
+            }
             if (txtMonto.text.isEmpty()) {
                 Toast.makeText(requireContext(), "Escriba un monto, mínimo 1 sol", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
@@ -107,12 +122,23 @@ class PagarFragment : Fragment(R.layout.fragment_pagar) {
                     .navigate(R.id.action_pagarFragment_to_detalleOperacionFragment, delivery)
             }
             else if (monto > 500) {
-               Toast.makeText(requireContext(), "Supero el monto límite por transaccion, intente con un monto interior", Toast.LENGTH_LONG).show()
+               Toast.makeText(requireContext(), "Límite de monto superado", Toast.LENGTH_LONG).show()
             }
             else if (monto > cuentaActual.saldo) {
                 saldoIsuiciente()
             }
         }
+    }
+
+    fun mostrarErrorDeConexion(context: Context) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Error de Conexión")
+        builder.setMessage("No se pudo realizar la operación. Por favor, verifica tu conexión a Internet e inténtalo de nuevo.")
+        builder.setPositiveButton("Aceptar") { dialog, _ ->
+            exitProcess(1)
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
     private fun realizarOperacion(monto: Int) {
@@ -142,10 +168,18 @@ class PagarFragment : Fragment(R.layout.fragment_pagar) {
         dialog.setMessage("¿Desea realizar una recarga?")
         dialog.setPositiveButton("Recargar") { dialog, which ->
             Toast.makeText(requireContext(), "Recargar" , Toast.LENGTH_SHORT).show()
-            // me manda a la otra actividad.
+            val delivery = Bundle()
+            delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
+            delivery.putSerializable(KEY_USUARIO, usuarioActual)
+            delivery.putSerializable(KEY_PERSONA, personaActual)
+            requireView().findNavController().popBackStack()
+            requireView().findNavController().popBackStack()
+            requireView().findNavController().navigate(R.id.recargarFragment, delivery)
         }
-        dialog.setNegativeButton("Cancelar") { dialog, which ->
-            Toast.makeText(requireContext(), "Cancelar", Toast.LENGTH_SHORT).show()
+        dialog.setNegativeButton("Volver al menú") { dialog, which ->
+            requireView().findNavController().popBackStack()
+            requireView().findNavController().popBackStack()
+            Toast.makeText(requireContext(), "Operación cancelada", Toast.LENGTH_SHORT).show()
         }
         dialog.show()
     }
