@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navegacion"
+    app:startDestination="@id/ingresarSesionFragment">
+
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.example.tpago2.gui.menuPrincipal.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_listarContactosFragment"
+            app:destination="@id/listarContactosFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_qrFragment"
+            app:destination="@id/qrFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_nfcFragment"
+            app:destination="@id/nfcFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_recargarFragment"
+            app:destination="@id/recargarFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_listarTarjetasFragment"
+            app:destination="@id/listarTarjetasFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listarContactosFragment"
+        android:name="com.example.tpago2.gui.realizarOperacion.ListarContactosFragment"
+        android:label="fragment_listar_contactos"
+        tools:layout="@layout/fragment_listar_contactos" >
+        <action
+            android:id="@+id/action_listarContactosFragment_to_pagarFragment"
+            app:destination="@id/pagarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/qrFragment"
+        android:name="com.example.tpago2.gui.realizarOperacion.QrFragment"
+        android:label="fragment_qr"
+        tools:layout="@layout/fragment_qr" >
+        <action
+            android:id="@+id/action_qrFragment_to_pagarFragment"
+            app:destination="@id/pagarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nfcFragment"
+        android:name="com.example.tpago2.gui.realizarOperacion.NfcFragment"
+        android:label="fragment_nfc"
+        tools:layout="@layout/fragment_nfc" >
+        <action
+            android:id="@+id/action_nfcFragment_to_pagarFragment"
+            app:destination="@id/pagarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/verTarjetasFragment"
+        android:name="com.example.tpago2.gui.gestionTarjetas.VerTarjetasFragment"
+        android:label="fragment_ver_tarjetas"
+        tools:layout="@layout/fragment_ver_tarjetas" >
+        <action
+            android:id="@+id/action_verTarjetasFragment_to_confirmarPagoFragment"
+            app:destination="@id/confirmarPagoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/agregarTarjetaFragment"
+        android:name="com.example.tpago2.gui.gestionTarjetas.AgregarTarjetaFragment"
+        android:label="fragment_agregar_tarjeta"
+        tools:layout="@layout/fragment_agregar_tarjeta" />
+    <fragment
+        android:id="@+id/pagarFragment"
+        android:name="com.example.tpago2.gui.realizarOperacion.PagarFragment"
+        android:label="fragment_pagar"
+        tools:layout="@layout/fragment_pagar" >
+        <action
+            android:id="@+id/action_pagarFragment_to_detalleOperacionFragment"
+            app:destination="@id/detalleOperacionFragment" />
+        <action
+            android:id="@+id/action_pagarFragment_to_recargarFragment"
+            app:destination="@id/recargarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalleOperacionFragment"
+        android:name="com.example.tpago2.gui.realizarOperacion.DetalleOperacionFragment"
+        android:label="fragment_detalle_operacion"
+        tools:layout="@layout/fragment_detalle_operacion" />
+    <fragment
+        android:id="@+id/recargarFragment"
+        android:name="com.example.tpago2.gui.recargarSaldo.RecargarFragment"
+        android:label="fragment_recargar"
+        tools:layout="@layout/fragment_recargar" >
+        <action
+            android:id="@+id/action_recargarFragment_to_metodoRecargaFragment"
+            app:destination="@id/metodoRecargaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/metodoRecargaFragment"
+        android:name="com.example.tpago2.gui.recargarSaldo.MetodoRecargaFragment"
+        android:label="fragment_metodo_recarga"
+        tools:layout="@layout/fragment_metodo_recarga" >
+        <action
+            android:id="@+id/action_metodoRecargaFragment_to_verTarjetasFragment"
+            app:destination="@id/verTarjetasFragment" />
+        <action
+            android:id="@+id/action_metodoRecargaFragment_to_detallePagoEfectivoFragment"
+            app:destination="@id/detallePagoEfectivoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalleRecargaFragment"
+        android:name="com.example.tpago2.gui.recargarSaldo.DetalleRecargaFragment"
+        android:label="fragment_detalle_recarga"
+        tools:layout="@layout/fragment_detalle_recarga" />
+    <fragment
+        android:id="@+id/confirmarPagoFragment"
+        android:name="com.example.tpago2.gui.recargarSaldo.ConfirmarPagoFragment"
+        android:label="fragment_confirmar_pago"
+        tools:layout="@layout/fragment_confirmar_pago" >
+        <action
+            android:id="@+id/action_confirmarPagoFragment_to_detalleRecargaFragment"
+            app:destination="@id/detalleRecargaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ingresarSesionFragment"
+        android:name="com.example.tpago2.gui.aperturarCuenta.IngresarSesionFragment"
+        android:label="fragment_ingresar_sesion"
+        tools:layout="@layout/fragment_ingresar_sesion" >
+        <action
+            android:id="@+id/action_ingresarSesionFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detallePagoEfectivoFragment"
+        android:name="com.example.tpago2.gui.recargarSaldo.DetallePagoEfectivoFragment"
+        android:label="fragment_detalle_pago_efectivo"
+        tools:layout="@layout/fragment_detalle_pago_efectivo" />
+    <fragment
+        android:id="@+id/listarTarjetasFragment"
+        android:name="com.example.tpago2.gui.gestionTarjetas.ListarTarjetasFragment"
+        android:label="fragment_listar_tarjetas"
+        tools:layout="@layout/fragment_listar_tarjetas" >
+        <action
+            android:id="@+id/action_listarTarjetasFragment_to_agregarTarjetaFragment"
+            app:destination="@id/agregarTarjetaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/iniciarSesionFragment"
+        android:name="com.example.tpago2.gui.aperturarCuenta.IniciarSesionFragment"
+        android:label="fragment_iniciar_sesion"
+        tools:layout="@layout/fragment_iniciar_sesion" >
+        <action
+            android:id="@+id/action_iniciarSesionFragment_to_ingresarSesionFragment"
+            app:destination="@id/ingresarSesionFragment" />
+    </fragment>
+</navigation>
