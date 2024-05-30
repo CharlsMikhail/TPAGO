@@ -22,11 +22,13 @@ import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.TarjetaUsuario
 import com.example.tpago2.data.entidades.Usuario
+import com.example.tpago2.gui.utilitarios.mostrarErrorDeConexion
 import com.example.tpago2.service.ContactoProvider
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
 import com.example.tpago2.service.KEY_USUARIO_DESTINO
+import com.example.tpago2.service.falla
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListarTarjetasFragment : Fragment(R.layout.fragment_listar_tarjetas) {
@@ -65,6 +67,10 @@ class ListarTarjetasFragment : Fragment(R.layout.fragment_listar_tarjetas) {
         delivery.putSerializable(KEY_PERSONA, personaActual)
 
         btnAdd.setOnClickListener{
+            if (falla) {
+                mostrarErrorDeConexion(requireContext())
+                return@setOnClickListener
+            }
             val daoTarjeta = TarjetaUsuarioDAO(requireContext())
             if (daoTarjeta.obtenerTotalTarjetasPorUsuario(cuentaActual.num_movil) >= 4) {
                 Toast.makeText(requireContext(), "Límite de tarjetas superado", Toast.LENGTH_SHORT).show()

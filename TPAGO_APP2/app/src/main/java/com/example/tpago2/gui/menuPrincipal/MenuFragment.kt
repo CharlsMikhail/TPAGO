@@ -1,6 +1,7 @@
 package com.example.tpago2.gui.menuPrincipal
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -26,9 +27,11 @@ import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Movimiento
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.Usuario
+import com.example.tpago2.gui.utilitarios.mostrarErrorDeConexion
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
+import com.example.tpago2.service.falla
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlin.system.exitProcess
 class MenuFragment : Fragment(R.layout.fragment_menu) {
@@ -71,6 +74,11 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
         val txtMostrarSaldo = view.findViewById<TextView>(R.id.btn_mostrar_saldo)
         val txtSaldo = view.findViewById<TextView>(R.id.txt_saldo22)
         txtMostrarSaldo.setOnClickListener {
+            if (falla) {
+                mostrarErrorDeConexion(requireContext())
+                return@setOnClickListener
+            }
+
             val cuentaDao = CuentaUsuarioDAO(requireContext())
             cuentaActual.saldo = cuentaDao.obtenerSaldo(cuentaActual.num_movil)
             if (txtMostrarSaldo.text != "Ocultar Saldo") {
@@ -149,7 +157,13 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
     private fun initRecycleView(view: View) {
         val operDAO = OperacionDAO(view.context)
         val manager = LinearLayoutManager(context)
-        moviAdapter = MovimientosAdapter(operDAO.obtenerMovimientosPorCuenta(cuentaActual.num_movil)) { user -> onItemSelected(user) } //ojito
+        val lista_movimientos = operDAO.obtenerMovimientosPorCuenta(cuentaActual.num_movil)
+        if (lista_movimientos.isEmpty()) {
+            val txtMovimientos = view.findViewById<TextView>(R.id.txt_mostrar_movimientos)
+            txtMovimientos.text = "Sin Movimientos"
+            txtMovimientos.setTextColor(Color.RED)
+        }
+        moviAdapter = MovimientosAdapter(lista_movimientos) { user -> onItemSelected(user) } //ojito
         val decoration = DividerItemDecoration(context, manager.orientation)
         val usersRecyler = view.findViewById<RecyclerView>(R.id.lista_movimientos)
         usersRecyler.layoutManager = manager

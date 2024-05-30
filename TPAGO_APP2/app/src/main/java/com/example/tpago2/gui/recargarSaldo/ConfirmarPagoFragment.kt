@@ -15,6 +15,7 @@ import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.TarjetaUsuario
 import com.example.tpago2.data.entidades.Usuario
+import com.example.tpago2.gui.utilitarios.mostrarErrorDeConexion
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_DATE_RECARGA
 import com.example.tpago2.service.KEY_MONTO_RECARGA
@@ -23,6 +24,7 @@ import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_TARJETA
 import com.example.tpago2.service.KEY_TIME_RECARGA
 import com.example.tpago2.service.KEY_USUARIO
+import com.example.tpago2.service.falla
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -57,15 +59,16 @@ class ConfirmarPagoFragment : Fragment(R.layout.fragment_confirmar_pago) {
             view.findNavController().popBackStack()
         }
 
-
-
-
         txtTarjeta.text = tarjetaRecarga.num_tarjeta
         txtMonto.text = "S/" + montoRecarga
 
         btnContinuarRecarga.setOnClickListener {
-            val cuentaDao = CuentaUsuarioDAO(this.requireContext()) //ojo
+            if (falla) {
+                mostrarErrorDeConexion(requireContext())
+                return@setOnClickListener
+            }
 
+            val cuentaDao = CuentaUsuarioDAO(this.requireContext()) //ojo
             val currentDateTime = LocalDateTime.now()
 
             //INSERTAR SALDO
