@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import com.example.tpago2.R
 
-class BienvenidaTPAGOFragment : Fragment(R.layout.fragment_bienvenida_t_p_a_g_o) {
+class DniValidadoFragment : Fragment(R.layout.fragment_dni_validado) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

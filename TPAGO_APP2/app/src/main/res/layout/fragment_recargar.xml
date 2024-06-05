@@ -49,7 +49,7 @@
             android:inputType="number"
             android:textSize="40sp"
             android:hint="@string/txt_pagar_0"
-            android:maxLength="3"
+            android:maxLength="4"
             tools:text="28"
             tools:textSize="40sp"
             tools:textStyle="bold"/>

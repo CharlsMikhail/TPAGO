@@ -73,9 +73,13 @@ class RecargarFragment : Fragment(R.layout.fragment_recargar) {
 
         btnRecargar.setOnClickListener{
             if (txtMonto.text.isEmpty()) {
-                Toast.makeText(requireContext(), "Escriba un monto, mínimo 1 sol", Toast.LENGTH_LONG).show()
+                txtMonto.error = "Escriba un monto, mínimo 1 sol"
+                return@setOnClickListener
+            } else if (txtMonto.text.toString().toInt() > 1000) {
+                txtMonto.error = "El monto no puede ser mayor a 1000 soles"
                 return@setOnClickListener
             }
+
             val monto = txtMonto.text.toString().toInt()
             val delivery = Bundle()
             delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
