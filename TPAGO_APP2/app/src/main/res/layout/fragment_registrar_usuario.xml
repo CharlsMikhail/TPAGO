@@ -1,14 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#EFF0FC"
+    android:paddingStart="30dp"
+    android:paddingEnd="30dp"
     tools:context=".gui.registrarUsuario.RegistrarUsuarioFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="52dp"
+        android:src="@drawable/logo" />
 
-</FrameLayout>
+    <!-- Title -->
+    <TextView
+        android:id="@+id/txPrincipal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="16dp"
+        android:text="INGRESA TUS DATOS"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- DNI Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txDNI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DNI"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="normal|bold" />
+
+        <EditText
+            android:id="@+id/EtxDNI"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:maxLength="8"
+            android:ems="10"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <!-- Correo Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txCorreo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CORREO"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="normal|bold" />
+
+        <EditText
+            android:id="@+id/etxcorreo"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:ems="10"
+            android:maxLength="9"
+            android:inputType="number" />
+    </LinearLayout>
+    <!-- Password Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txTelefono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TELEFONO"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="normal|bold" />
+
+        <EditText
+            android:id="@+id/etxTelefono"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:maxLength="6"
+            android:ems="10"
+            android:inputType="number" />
+    </LinearLayout>
+    <!-- Password Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONTRASEÑA"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="normal|bold" />
+
+        <EditText
+            android:id="@+id/etxPassword"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:maxLength="6"
+            android:ems="10"
+            android:inputType="numberPassword" />
+    </LinearLayout>
+
+
+    <!-- Login Button -->
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Registar Cuenta"
+        android:textSize="30dp"/>
+</LinearLayout>

@@ -151,4 +151,57 @@
             android:id="@+id/action_iniciarSesionFragment_to_ingresarSesionFragment"
             app:destination="@id/ingresarSesionFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/bienvenidaFragment"
+        android:name="com.example.tpago2.gui.registrarUsuario.BienvenidaFragment"
+        android:label="fragment_bienvenida"
+        tools:layout="@layout/fragment_bienvenida" >
+        <action
+            android:id="@+id/action_bienvenidaFragment_to_iniciarSesionFragment"
+            app:destination="@id/iniciarSesionFragment" />
+        <action
+            android:id="@+id/action_bienvenidaFragment_to_registrarUsuarioFragment"
+            app:destination="@id/registrarUsuarioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/iniciarValidarDniFragment"
+        android:name="com.example.tpago2.gui.registrarUsuario.IniciarValidarDniFragment"
+        android:label="fragment_iniciar_validar_dni"
+        tools:layout="@layout/fragment_iniciar_validar_dni" >
+        <action
+            android:id="@+id/action_iniciarValidarDniFragment_to_validarDniFragment"
+            app:destination="@id/validarDniFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bienvenidaTPAGOFragment"
+        android:name="com.example.tpago2.gui.registrarUsuario.BienvenidaTPAGOFragment"
+        android:label="fragment_bienvenida_t_p_a_g_o"
+        tools:layout="@layout/fragment_bienvenida_t_p_a_g_o" />
+    <fragment
+        android:id="@+id/dniValidadoFragment"
+        android:name="com.example.tpago2.gui.registrarUsuario.DniValidadoFragment"
+        android:label="fragment_dni_validado"
+        tools:layout="@layout/fragment_dni_validado" >
+        <action
+            android:id="@+id/action_dniValidadoFragment_to_bienvenidaTPAGOFragment"
+            app:destination="@id/bienvenidaTPAGOFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrarUsuarioFragment"
+        android:name="com.example.tpago2.gui.registrarUsuario.RegistrarUsuarioFragment"
+        android:label="fragment_registrar_usuario"
+        tools:layout="@layout/fragment_registrar_usuario" >
+        <action
+            android:id="@+id/action_registrarUsuarioFragment_to_iniciarValidarDniFragment"
+            app:destination="@id/iniciarValidarDniFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/validarDniFragment"
+        android:name="com.example.tpago2.gui.registrarUsuario.ValidarDniFragment"
+        android:label="fragment_validar_dni"
+        tools:layout="@layout/fragment_validar_dni" >
+        <action
+            android:id="@+id/action_validarDniFragment_to_dniValidadoFragment"
+            app:destination="@id/dniValidadoFragment" />
+    </fragment>
 </navigation>

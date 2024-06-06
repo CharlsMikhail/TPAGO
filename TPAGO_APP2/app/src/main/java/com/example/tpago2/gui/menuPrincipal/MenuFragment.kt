@@ -120,7 +120,7 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
                 .setPositiveButton("Sí") { dialog, which ->
                     view.findNavController().popBackStack()
                     view.findNavController().popBackStack()
-                    view.findNavController().navigate(R.id.iniciarSesionFragment)
+                    view.findNavController().navigate(R.id.bienvenidaFragment)
                 }
                 .setNegativeButton("No") { dialog, which ->
                     dialog.dismiss()

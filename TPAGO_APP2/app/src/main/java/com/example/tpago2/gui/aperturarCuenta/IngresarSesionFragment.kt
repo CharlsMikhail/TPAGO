@@ -46,7 +46,7 @@ class IngresarSesionFragment : Fragment(R.layout.fragment_ingresar_sesion) {
         }
         else {
             view.findNavController().popBackStack()
-            view.findNavController().navigate(R.id.iniciarSesionFragment)
+            view.findNavController().navigate(R.id.bienvenidaFragment)
         }
         eventos(view)
     }
