@@ -27,7 +27,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
         android:text="Iniciar Sesión"
-        android:textSize="30dp"/>
+        android:textSize="30sp"/>
 
     <Button
         android:id="@+id/btnRegistrar"
@@ -36,7 +36,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="36dp"
         android:text="Registrate"
-        android:textSize="30dp"/>
+        android:textSize="30sp"/>
 
     <TextView
         android:id="@+id/txPrincipal"

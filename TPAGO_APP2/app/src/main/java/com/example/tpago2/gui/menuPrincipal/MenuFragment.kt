@@ -31,6 +31,7 @@ import com.example.tpago2.gui.utilitarios.mostrarErrorDeConexion
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
+import com.example.tpago2.service.LoginManager
 import com.example.tpago2.service.falla
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlin.system.exitProcess
@@ -118,6 +119,13 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
                 .setTitle("Confirmación")
                 .setMessage("¿Estás seguro de que deseas salir?")
                 .setPositiveButton("Sí") { dialog, which ->
+
+                    // Guardar información en SharedPreferences
+                    val lm = LoginManager(requireContext())
+
+                    lm.guardarNumMovil(0)
+                    lm.guardarDniPersona(0)
+
                     view.findNavController().popBackStack()
                     view.findNavController().popBackStack()
                     view.findNavController().navigate(R.id.bienvenidaFragment)

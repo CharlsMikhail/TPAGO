@@ -22,5 +22,8 @@
     <string name="btn_iniciar2">GO</string>
     <string name="txt_key">INGRESA TU CLAVE</string>
     <string name="ingresarNumero">Ingresar número</string>
+    <string name="dni_adelante">DNI POR ADELANTE</string>
+    <string name="dni_atras">DNI POR ATRAS</string>
+
 
 </resources>

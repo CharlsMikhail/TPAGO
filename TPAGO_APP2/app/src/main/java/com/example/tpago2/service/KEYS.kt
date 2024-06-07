@@ -17,3 +17,5 @@ const val KEY_CODIGO_PE = "cod_generado"
 
 
 const val falla = false
+
+var validarDNI = false

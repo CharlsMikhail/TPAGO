@@ -78,7 +78,7 @@
         android:layout_width="288dp"
         android:layout_height="27dp"
         android:layout_marginTop="120dp"
-        android:text="DNI POR ADELANTE"
+        android:text="@string/dni_adelante"
         android:textAlignment="center"
         android:textColor="#8F8F8F"
         android:textSize="18dp"

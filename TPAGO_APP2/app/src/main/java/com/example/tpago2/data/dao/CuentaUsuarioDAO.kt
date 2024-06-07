@@ -15,13 +15,13 @@ class CuentaUsuarioDAO(context: Context) {
     private val dbHelper: DataBaseHelper = DataBaseHelper.getInstance(context)
     private val db: SQLiteDatabase = dbHelper.writableDatabase
 
-    fun insertarCuentaUsuario(numMovil: String, dniPersona: Int, saldo: Int, ipCuentaUsuario: String, contraseña: String, limitePorTransaccion: Int, email: String?, estadoActividad: Int): Long {
+    fun insertarCuentaUsuario(numMovil: Int, dniPersona: Int, saldo: Int, ipCuentaUsuario: String, contrasenia: Int, limitePorTransaccion: Int, email: String?, estadoActividad: Int): Long {
         val contentValues = ContentValues().apply {
             put("num_movil", numMovil)
             put("dni_persona", dniPersona)
             put("saldo", saldo)
             put("ip_cuenta_usuario", ipCuentaUsuario)
-            put("contrasenia", contraseña)
+            put("contrasenia", contrasenia)
             put("limite_por_transaccion", limitePorTransaccion)
             put("email", email)
             put("estado_de_actividad", estadoActividad)
@@ -81,23 +81,6 @@ class CuentaUsuarioDAO(context: Context) {
         }
     }
 
-    fun actualizarCuentaUsuario(numMovil: String, nuevoDniPersona: Int, nuevoSaldo: Int, nuevaIpCuentaUsuario: String, nuevaContraseña: String, nuevoLimitePorTransaccion: Int, nuevoEmail: String?, nuevoEstadoActividad: Int): Int {
-        val contentValues = ContentValues().apply {
-            put("dni_persona", nuevoDniPersona)
-            put("saldo", nuevoSaldo)
-            put("ip_cuenta_usuario", nuevaIpCuentaUsuario)
-            put("contrasenia", nuevaContraseña)
-            put("limite_por_transaccion", nuevoLimitePorTransaccion)
-            put("email", nuevoEmail)
-            put("estado_de_actividad", nuevoEstadoActividad)
-        }
-        return db.update(
-            "cuenta_usuario",
-            contentValues,
-            "num_movil = ?",
-            arrayOf(numMovil)
-        )
-    }
 
     fun eliminarCuentaUsuario(numMovil: String): Int {
         return db.delete("cuenta_usuario", "num_movil = ?", arrayOf(numMovil))
