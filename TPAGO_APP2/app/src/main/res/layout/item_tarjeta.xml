@@ -1,42 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:orientation="vertical"
-    android:padding="25dp"
-    xmlns:tools="http://schemas.android.com/tools">
-    <ImageButton
-        android:id="@+id/btn_eliminar_item_tarjeta"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="invisible"
-        android:background="#51E1B7B7"
-        android:src="@drawable/equis" />
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
     <LinearLayout
-        android:layout_width="371dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="16dp">
 
         <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:src="@drawable/tarjeta" />
+            android:id="@+id/img_usuario"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/tarjeta_credito" />
 
-        <TextView
-            android:id="@+id/txt_numero_tarjeta"
-            android:layout_width="269dp"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="8dp"
-            android:textSize="17sp"
-            android:textColor="#000000"
-            tools:text="1234 1234 1234 1234" />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/txt_numero_tarjeta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1234 5678 9012 3456"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txt_fecha_ven_tarjeta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12/24"
+                android:textSize="14sp"
+                android:textColor="#757575" />
+
+        </LinearLayout>
+        <ImageButton
+            android:id="@+id/btn_eliminar_item_tarjeta"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:visibility="gone"
+            android:src="@drawable/equis" />
     </LinearLayout>
-
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

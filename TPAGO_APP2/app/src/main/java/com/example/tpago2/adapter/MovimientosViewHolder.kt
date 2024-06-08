@@ -14,9 +14,9 @@ import com.example.tpago2.data.entidades.Operacion
 
 class MovimientosViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private val viewNombre = itemView.findViewById<TextView>(R.id.txt_nombre2)
-    private val viewFecha = itemView.findViewById<TextView>(R.id.txt_fecha_y_hora2)
-    private val viewMonto = itemView.findViewById<TextView>(R.id.txt_monto2)
+    private val viewNombre = itemView.findViewById<TextView>(R.id.txt_name_user)
+    private val viewFecha = itemView.findViewById<TextView>(R.id.date_and_hour)
+    private val viewMonto = itemView.findViewById<TextView>(R.id.monto_transferencia)
     @SuppressLint("SetTextI18n")
     fun render(item: Movimiento, onClickListener:(Movimiento) -> Unit) {
         viewNombre.text = item.nombre + " " +  item.apePaterno

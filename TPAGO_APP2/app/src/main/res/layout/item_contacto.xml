@@ -1,35 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal">
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
 
-    <TextView
-        android:id="@+id/txt_nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:drawablePadding="20dp"
-        android:textAlignment="gravity"
-        android:textColor="#000000"
-        android:textSize="22sp"
-        app:drawableStartCompat="@drawable/user"
-        tools:text="miguel" />
-
-    <!--
-    <TextView
-        android:id="@+id/txt_numero"
-        android:textAlignment="center"
-        tools:text="12"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"/>
--->
+        android:orientation="horizontal"
+        android:padding="16dp">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/img_usuario"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/user" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_name_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre del Usuario"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txt_movil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="986654321"
+                android:textSize="14sp"
+                android:textColor="#757575" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

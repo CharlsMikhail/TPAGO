@@ -10,9 +10,11 @@ import com.example.tpago2.data.entidades.Contacto
 
 class ContactoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private val viewNombre = itemView.findViewById<TextView>(R.id.txt_nombre)
+    private val viewNombre = itemView.findViewById<TextView>(R.id.txt_name_user)
+    private val viewCelular = itemView.findViewById<TextView>(R.id.txt_movil)
 
     fun render(item: Contacto, onClickListener:(Contacto) -> Unit) {
+        viewCelular.text = item.numMovil.toString()
         viewNombre.text = item.nombres
         itemView.setOnClickListener {
             onClickListener(item)

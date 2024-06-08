@@ -146,14 +146,12 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
         }
 
         btnAccesos.setOnClickListener {
-            Toast.makeText(view.context, "Funcion aun no disponible", Toast.LENGTH_SHORT).show()
+            view.findNavController().navigate(R.id.action_menuFragment_to_listaAccesosFragment, delivery)
         }
 
         btnChamba.setOnClickListener {
-            Toast.makeText(view.context, "Funcion aun no disponible", Toast.LENGTH_SHORT).show()
+            view.findNavController().navigate(R.id.action_menuFragment_to_listaChambasFragment, delivery)
         }
-
-
 
     }
 

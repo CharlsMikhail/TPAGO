@@ -1,4 +1,4 @@
-package com.example.tpago2.gui.gestionAccesos
+package com.example.tpago2.gui.gestionChamba
 
 import android.os.Bundle
 import android.view.View

@@ -25,6 +25,12 @@
         <action
             android:id="@+id/action_menuFragment_to_listarTarjetasFragment"
             app:destination="@id/listarTarjetasFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_listaAccesosFragment"
+            app:destination="@id/listaAccesosFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_listaChambasFragment"
+            app:destination="@id/listaChambasFragment" />
     </fragment>
     <fragment
         android:id="@+id/listarContactosFragment"
@@ -204,4 +210,30 @@
             android:id="@+id/action_validarDniFragment_to_dniValidadoFragment"
             app:destination="@id/dniValidadoFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/listaAccesosFragment"
+        android:name="com.example.tpago2.gui.gestionAccesos.ListaAccesosFragment"
+        android:label="fragment_lista_accesos"
+        tools:layout="@layout/fragment_lista_accesos" >
+        <action
+            android:id="@+id/action_listaAccesosFragment_to_listaAgregarAccesoFragment"
+            app:destination="@id/listaAgregarAccesoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listaAgregarAccesoFragment"
+        android:name="com.example.tpago2.gui.gestionAccesos.ListaAgregarAccesoFragment"
+        android:label="fragment_lista_agregar_acceso"
+        tools:layout="@layout/fragment_lista_agregar_acceso" />
+    <fragment
+        android:id="@+id/listaChambasFragment"
+        android:name="com.example.tpago2.gui.gestionAccesos.ListaChambasFragment"
+        android:label="ListaChambasFragment" >
+        <action
+            android:id="@+id/action_listaChambasFragment_to_movimientosChambaFragment"
+            app:destination="@id/movimientosChambaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movimientosChambaFragment"
+        android:name="com.example.tpago2.gui.gestionAccesos.MovimientosChambaFragment"
+        android:label="MovimientosChambaFragment" />
 </navigation>
