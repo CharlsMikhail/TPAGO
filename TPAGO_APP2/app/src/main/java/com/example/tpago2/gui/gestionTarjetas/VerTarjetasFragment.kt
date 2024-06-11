@@ -3,9 +3,11 @@ package com.example.tpago2.gui.gestionTarjetas
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -47,13 +49,29 @@ class VerTarjetasFragment : Fragment(R.layout.fragment_ver_tarjetas) {
             montoRecarga = it.getString(KEY_MONTO_RECARGA) as String
         }
 
+        eventos(view)
+
+
+        initRecycleView(view)
+    }
+
+    private fun eventos(view: View) {
         val btnBack = view.findViewById<ImageButton>(R.id.btn_atras_ver_tarjeta)
 
         btnBack.setOnClickListener() {
             view.findNavController().popBackStack()
         }
 
-        initRecycleView(view)
+        val btnAgregarTarjet = view.findViewById<Button>(R.id.button2)
+
+        btnAgregarTarjet.setOnClickListener{
+            val delivery = Bundle()
+            delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
+            delivery.putSerializable(KEY_USUARIO, usuarioActual)
+            delivery.putSerializable(KEY_PERSONA, personaActual)
+            view.findNavController().navigate(R.id.action_verTarjetasFragment_to_agregarTarjetaFragment, delivery)
+        }
+
     }
 
     private fun initRecycleView(view: View) {

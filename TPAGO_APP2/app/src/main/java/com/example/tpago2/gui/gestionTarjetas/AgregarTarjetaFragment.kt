@@ -67,12 +67,13 @@ class AgregarTarjetaFragment : Fragment(R.layout.fragment_agregar_tarjeta) {
 
             val daoTarjeta = TarjetaUsuarioDAO(view.context)
 
-            // Validar que no este vinculada anigun usuario a en la base de datos
+            // Validar que no este vinculada a nigun usuario a en la base de datos
             if (daoTarjeta.tarjetaExiste(numTarjeta)) {
                 Toast.makeText(requireContext(), "La tarjeta ya esta vinculada con una cuenta TPAGO", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
+            // Valida que pertenezca a VISA:
 
 
             daoTarjeta.insertarTarjetaUsuario(numTarjeta, cuentaActual.num_movil,fecha, csv)

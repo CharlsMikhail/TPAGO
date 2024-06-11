@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_verTarjetasFragment_to_confirmarPagoFragment"
             app:destination="@id/confirmarPagoFragment" />
+        <action
+            android:id="@+id/action_verTarjetasFragment_to_agregarTarjetaFragment"
+            app:destination="@id/agregarTarjetaFragment" />
     </fragment>
     <fragment
         android:id="@+id/agregarTarjetaFragment"
