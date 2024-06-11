@@ -42,6 +42,7 @@ class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registrar_usuario) {
 
             if (dni.length != 8 || dni.isEmpty()) {
                 etDNI.error = "DNI debe contener 8 dígitos."
+                return@setOnClickListener
             }
 
             // Testear
@@ -51,13 +52,16 @@ class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registrar_usuario) {
 
             if (key.length < 8 || key.isEmpty()) {
                 etKey.error = "Contraseña debe contener al menos 8 dígitos."
+                return@setOnClickListener
             }
 
             if (email.isEmpty()) { // El correo electronico se puede repetir.
                 etEmail.error = "Correo electrónico es obligatorio."
+                return@setOnClickListener
             }
             if (!isValidEmail(email) || email.isEmpty()) {
                 etEmail.error = "Formato de correo electrónico inválido."
+                return@setOnClickListener
             }
 
             // Validación en cuestion de FONDO.
