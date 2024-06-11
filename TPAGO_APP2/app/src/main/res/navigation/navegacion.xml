@@ -185,7 +185,11 @@
         android:id="@+id/bienvenidaTPAGOFragment"
         android:name="com.example.tpago2.gui.registrarUsuario.BienvenidaTPAGOFragment"
         android:label="fragment_bienvenida_t_p_a_g_o"
-        tools:layout="@layout/fragment_bienvenida_t_p_a_g_o" />
+        tools:layout="@layout/fragment_bienvenida_t_p_a_g_o" >
+        <action
+            android:id="@+id/action_bienvenidaTPAGOFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
     <fragment
         android:id="@+id/dniValidadoFragment"
         android:name="com.example.tpago2.gui.registrarUsuario.DniValidadoFragment"

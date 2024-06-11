@@ -76,7 +76,6 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:ems="10"
-            android:maxLength="9"
             android:inputType="textEmailAddress" />
     </LinearLayout>
     <!-- Password Section -->
@@ -99,7 +98,7 @@
             android:id="@+id/etxTelefono"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:maxLength="6"
+            android:maxLength="9"
             android:ems="10"
             android:inputType="number" />
     </LinearLayout>

@@ -72,6 +72,14 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
             view.findNavController().navigate(R.id.action_menuFragment_to_listarContactosFragment, delivery)
         }
 
+        val btnMostrarNumero = view.findViewById<TextView>(R.id.txt_user_name)
+
+        btnMostrarNumero.setOnClickListener{
+            Toast.makeText(view.context, "Su número es: ${cuentaActual.num_movil}", Toast.LENGTH_LONG).show()
+        }
+
+
+
         val txtMostrarSaldo = view.findViewById<TextView>(R.id.btn_mostrar_saldo)
         val txtSaldo = view.findViewById<TextView>(R.id.txt_saldo22)
         txtMostrarSaldo.setOnClickListener {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.navigation.findNavController
 import com.example.tpago2.R
 import com.example.tpago2.data.dao.CuentaUsuarioDAO
@@ -52,7 +53,10 @@ class DniValidadoFragment : Fragment(R.layout.fragment_dni_validado) {
     }
 
     private fun actualizarInterfaz(view: View) {
-
+        if (validarDNI) {
+            val imgDNI = view.findViewById<ImageButton>(R.id.nfc_imgbtn)
+            imgDNI.setImageResource(R.drawable.reverse)
+        }
     }
 
 }

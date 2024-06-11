@@ -4,12 +4,17 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
+import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.navigation.findNavController
 import com.example.tpago2.R
+import com.example.tpago2.data.dao.UsuarioDAO
 import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
+import com.example.tpago2.service.KEY_USUARIO
+import com.example.tpago2.service.validarDNI
 
 class IniciarValidarDniFragment : Fragment(R.layout.fragment_iniciar_validar_dni) {
 

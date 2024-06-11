@@ -47,10 +47,11 @@ class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registrar_usuario) {
 
             // Testear
             if (!isValidPhoneNumber(celular) || celular.isEmpty()) {
-                etCelular.error = "Celular debe contener 9 dígitos."
+                etCelular.error = "Celular debe contener 9 dígitos y comenzar con el '9'."
+                return@setOnClickListener
             }
 
-            if (key.length < 8 || key.isEmpty()) {
+            if (key.length < 6 || key.isEmpty()) {
                 etKey.error = "Contraseña debe contener al menos 8 dígitos."
                 return@setOnClickListener
             }
@@ -104,8 +105,7 @@ class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registrar_usuario) {
     }
 
     private fun isValidPhoneNumber(phoneNumber: String): Boolean {
-        // Este es un ejemplo simple, se puede mejorar según las necesidades
-        val phoneNumberPattern = "^\\d{9}$"
+        val phoneNumberPattern = "^9\\d{8}$"
         return phoneNumber.matches(phoneNumberPattern.toRegex())
     }
 

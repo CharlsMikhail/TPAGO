@@ -79,46 +79,50 @@ class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
 
         dialog.setView(dialogView)
 
-        dialog.setPositiveButton("Buscar") { _, _ ->
-            val inputNumber = input.text.toString()
-
-            // Validar el número de teléfono ingresado
-            if (inputNumber.isBlank()) {
-                Toast.makeText(requireContext(), "Por favor, ingrese un número.", Toast.LENGTH_SHORT).show()
-            } else if (!isValidPhoneNumber(inputNumber)) {
-                Toast.makeText(requireContext(), "Número de teléfono inválido.", Toast.LENGTH_SHORT).show()
-            } else {
-                val daoCueUsu = CuentaUsuarioDAO(requireContext())
-                val cuentaDestino = daoCueUsu.obtenerUsuarioDestinoPorNumMovil(inputNumber.toInt())
-                if (cuentaDestino != null && inputNumber.toInt() != cuentaActual.num_movil) {
-                    val delivery = Bundle()
-                    delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
-                    delivery.putSerializable(KEY_USUARIO, usuarioActual)
-                    delivery.putSerializable(KEY_PERSONA, personaActual)
-                    delivery.putSerializable(KEY_USUARIO_DESTINO, cuentaDestino)
-                    view.findNavController().navigate(R.id.action_listarContactosFragment_to_pagarFragment, delivery)
-                }
-                else if (inputNumber.toInt() == cuentaActual.num_movil) {
-                    Toast.makeText(requireContext(), "No puede trasferirse a si mismo", Toast.LENGTH_SHORT).show()
-                }
-                else {
-                    Toast.makeText(requireContext(), "El número ${inputNumber.toInt()} no pertence a TPAGO", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
+        // Configuramos el botón positivo sin comportamiento inicial para evitar que el diálogo se cierre automáticamente
+        dialog.setPositiveButton("Buscar", null)
 
         dialog.setNegativeButton("Cancelar") { dialog, _ ->
             dialog.dismiss()
             Toast.makeText(requireContext(), "Cancelado", Toast.LENGTH_SHORT).show()
         }
 
-        dialog.show()
+        val alertDialog = dialog.create()
+        alertDialog.show()
+
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val inputNumber = input.text.toString()
+
+            // Validar el número de teléfono ingresado
+            if (inputNumber.isBlank()) {
+                input.error = "Por favor, ingrese un número."
+            } else if (!isValidPhoneNumber(inputNumber)) {
+                input.error = "Celular debe contener 9 dígitos y comenzar con el '9'."
+            } else {
+                val daoCueUsu = CuentaUsuarioDAO(requireContext())
+                val cuentaDestino = daoCueUsu.obtenerUsuarioDestinoPorNumMovil(inputNumber.toInt())
+                if (cuentaDestino != null && inputNumber.toInt() != cuentaActual.num_movil) {
+                    val delivery = Bundle().apply {
+                        putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
+                        putSerializable(KEY_USUARIO, usuarioActual)
+                        putSerializable(KEY_PERSONA, personaActual)
+                        putSerializable(KEY_USUARIO_DESTINO, cuentaDestino)
+                    }
+                    view.findNavController().navigate(R.id.action_listarContactosFragment_to_pagarFragment, delivery)
+                    alertDialog.dismiss() // Cerrar el diálogo si la operación es exitosa
+                } else if (inputNumber.toInt() == cuentaActual.num_movil) {
+                    Toast.makeText(requireContext(), "No puede transferirse a sí mismo.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), "El número ${inputNumber.toInt()} no pertenece a TPAGO.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
+
 
     // Función para validar el número de teléfono (simple ejemplo)
     private fun isValidPhoneNumber(phoneNumber: String): Boolean {
-        // Este es un ejemplo simple, se puede mejorar según las necesidades
-        val phoneNumberPattern = "^\\d{9}$"
+        val phoneNumberPattern = "^9\\d{8}$"
         return phoneNumber.matches(phoneNumberPattern.toRegex())
     }
 
