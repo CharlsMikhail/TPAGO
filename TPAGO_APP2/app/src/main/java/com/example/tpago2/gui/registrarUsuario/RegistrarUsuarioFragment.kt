@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.navigation.findNavController
 import com.example.tpago2.R
+import com.example.tpago2.data.dao.CuentaUsuarioDAO
 import com.example.tpago2.data.dao.PersonaDAO
 import com.example.tpago2.data.dao.UsuarioDAO
 import com.example.tpago2.data.entidades.CuentaUsuario
@@ -19,10 +20,8 @@ import java.time.LocalDateTime
 class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registrar_usuario) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         actualizarInterfaz(view)
         eventos(view)
-
     }
 
     private fun eventos(view: View) {
@@ -45,6 +44,32 @@ class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registrar_usuario) {
                 return@setOnClickListener
             }
 
+            if (email.isEmpty()) { // El correo electronico se puede repetir.
+                etEmail.error = "Correo electrónico es obligatorio."
+                return@setOnClickListener
+            }
+
+            if (hasSpaceBetweenCharacters(email)) {
+                etEmail.error = "No puede contener espacios."
+                return@setOnClickListener
+            }
+
+
+            if (!hasValidLength(email)) {
+                etEmail.error = "El nombre de usuario debe contener entre 6 y 30 caracteres y tambien '@'."
+                return@setOnClickListener
+            }
+
+            if (!hasValidOrganization(email)) {
+                etEmail.error = "La organización solo puede ser: gmail, yahoo, outlook, hotmail o ulasalle.\n (no puede estar vacio)"
+                return@setOnClickListener
+            }
+
+            if (!hasValidDomainType(email)) {
+                etEmail.error = "El dominio solo puede ser: .com, .net o .org.\n (no puede estar vacio)"
+                return@setOnClickListener
+            }
+
             // Testear
             if (!isValidPhoneNumber(celular) || celular.isEmpty()) {
                 etCelular.error = "Celular debe contener 9 dígitos y comenzar con el '9'."
@@ -56,20 +81,22 @@ class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registrar_usuario) {
                 return@setOnClickListener
             }
 
-            if (email.isEmpty()) { // El correo electronico se puede repetir.
-                etEmail.error = "Correo electrónico es obligatorio."
-                return@setOnClickListener
-            }
-            if (!isValidEmail(email) || email.isEmpty()) {
-                etEmail.error = "Formato de correo electrónico inválido."
-                return@setOnClickListener
-            }
 
-            // Validación en cuestion de FONDO.
+            // Validación en cuestion de FONDO del DNI.
 
             // El dni tiene que existir en la base de datos de RENIEC.
             val persona = ReniecProvider.getPersonaByDni(dni.toInt())
             if (persona != null){
+
+                // Validación en cuestion de FONDO de celular.
+                val daoCuentaUsuario = CuentaUsuarioDAO(requireContext())
+                if (daoCuentaUsuario.obtenerCuentaUsuarioPorNumMovil(celular.toInt()) != null) {
+                    etCelular.error = "Celular ya registrado."
+                    return@setOnClickListener
+                }
+
+
+
                 // Insertamos a la persona en la base de datos, si es que no existe.
                 val daoPersona = PersonaDAO(requireContext())
                 val daoUsuario = UsuarioDAO(requireContext())
@@ -89,7 +116,9 @@ class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registrar_usuario) {
 
             } else {
                 etDNI.error = "DNI no pertence a la RENIEC."
+                return@setOnClickListener
             }
+
         }
     }
 
@@ -98,10 +127,25 @@ class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registrar_usuario) {
 
     }
 
-    fun isValidEmail(email: String): Boolean {
-        // Expresión regular para validar el formato del correo electrónico
-        val emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$"
-        return email.matches(emailRegex.toRegex())
+    private fun hasSpaceBetweenCharacters(input: String): Boolean {
+        val spaceRegex = ".*\\s+.*"
+        return input.matches(spaceRegex.toRegex())
+    }
+
+
+    private fun hasValidLength(email: String): Boolean {
+        val usernameRegex = "[A-Za-z0-9+_.-]{6,30}"
+        return email.matches("$usernameRegex@.*".toRegex())
+    }
+
+    private fun hasValidOrganization(email: String): Boolean {
+        val organizationRegex = "(gmail|yahoo|outlook|hotmail|ulasalle)"
+        return email.matches(".*$organizationRegex.*".toRegex())
+    }
+
+    private fun hasValidDomainType(email: String): Boolean {
+        val domainTypeRegex = "(.com|.net|.org)"
+        return email.matches(".*$domainTypeRegex".toRegex())
     }
 
     private fun isValidPhoneNumber(phoneNumber: String): Boolean {
