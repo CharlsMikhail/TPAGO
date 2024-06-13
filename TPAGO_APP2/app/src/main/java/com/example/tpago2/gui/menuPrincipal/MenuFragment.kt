@@ -171,13 +171,13 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
     private fun initRecycleView(view: View) {
         val operDAO = OperacionDAO(view.context)
         val manager = LinearLayoutManager(context)
-        val lista_movimientos = operDAO.obtenerMovimientosPorCuenta(cuentaActual.num_movil)
-        if (lista_movimientos.isEmpty()) {
+        val listaMovimientos = operDAO.obtenerMovimientosPorCuenta(cuentaActual.num_movil)
+        if (listaMovimientos.isEmpty()) {
             val txtMovimientos = view.findViewById<TextView>(R.id.txt_mostrar_movimientos)
             txtMovimientos.text = "Sin Movimientos"
             txtMovimientos.setTextColor(Color.RED)
         }
-        moviAdapter = MovimientosAdapter(lista_movimientos) { user -> onItemSelected(user) } //ojito
+        moviAdapter = MovimientosAdapter(listaMovimientos) { user -> onItemSelected(user) } //ojito
         val decoration = DividerItemDecoration(context, manager.orientation)
         val usersRecyler = view.findViewById<RecyclerView>(R.id.lista_movimientos)
         usersRecyler.layoutManager = manager

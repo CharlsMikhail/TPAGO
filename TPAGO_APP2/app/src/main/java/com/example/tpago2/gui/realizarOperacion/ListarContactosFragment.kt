@@ -129,7 +129,7 @@ class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
 
     private fun initRecycleView(view: View) {
         val manager = LinearLayoutManager(context)
-        userAdapter = ContactoAdapter(ContactoProvider.listaContactos) {user -> onItemSelected(user)} //ojito
+        userAdapter = ContactoAdapter(false, ContactoProvider.listaContactos) {user -> onItemSelected(user)} //ojito
         val decoration = DividerItemDecoration(context, manager.orientation)
         val usersRecyler = view.findViewById<RecyclerView>(R.id.lista_usuarios)
         usersRecyler.layoutManager = manager

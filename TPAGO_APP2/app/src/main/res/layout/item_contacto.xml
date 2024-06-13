@@ -43,5 +43,13 @@
 
         </LinearLayout>
 
+        <ImageButton
+            android:id="@+id/agregar_acceso"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/agregar_gris"
+            android:visibility="gone"
+            />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
