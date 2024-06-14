@@ -2,18 +2,15 @@ package com.example.tpago2.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tpago2.R
 import com.example.tpago2.data.entidades.Contacto
 
-class ContactoAdapter(private val isVisible: Boolean, private val items: MutableList<Contacto>, val onItemSelected: (Contacto) -> Unit): RecyclerView.Adapter<ContactoViewHolder>() {
-
-    val contador = 0
+class ContactoAdapter(private val userNumMovil: Int?, private val items: MutableList<Contacto>, val onItemSelected: (Contacto) -> Unit): RecyclerView.Adapter<ContactoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactoViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_contacto,parent, false)
-        return ContactoViewHolder(isVisible, itemView)
+        return ContactoViewHolder(userNumMovil, itemView)
 
     }
 

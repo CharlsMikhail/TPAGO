@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="30dp"
-    tools:context=".gui.gestionAccesos.ListaAccesosFragment">
+    android:padding="20dp"
+    tools:context=".gui.gestionAccesos.ListaAgregarAccesoFragment">
 
     <ImageButton
         android:id="@+id/btn_atras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
+        android:layout_marginEnd="20dp"
         android:background="#00FFFFFF"
         android:contentDescription="TODO"
         android:src="@drawable/atras"
@@ -35,7 +35,7 @@
         android:id="@+id/textView2"
         android:layout_width="260dp"
         android:layout_height="32dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginEnd="56dp"
         android:gravity="center"
         android:text="Empleados"
         android:textSize="24sp"
@@ -44,23 +44,39 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lista_usuarios"
-        android:layout_width="match_parent"
-        android:layout_height="629dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="344dp"
+        android:layout_height="589dp"
+        app:layout_constraintBottom_toTopOf="@+id/add_button_accesos"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnNumber"
+        android:id="@+id/btn_Add_Acceso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/agregar"
-        android:layout_margin="20dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="36dp"
+        android:src="@drawable/numero"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/add_button_accesos"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="345dp"
+        android:layout_height="66dp"
+        android:backgroundTint="#E6E2F8"
+        android:drawableLeft="@drawable/agregar_gris"
+        android:text="Agregar Tarjeta"
+        android:textColor="#3938EA"
+        android:textSize="20sp"
+        app:iconGravity="start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

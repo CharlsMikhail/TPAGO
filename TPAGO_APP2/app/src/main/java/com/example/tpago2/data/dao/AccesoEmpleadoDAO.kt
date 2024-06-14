@@ -125,4 +125,39 @@ class AccesoEmpleadoDAO(context: Context) {
         cursor.close()
         return existe
     }
+
+    @SuppressLint("Range")
+    fun obtenerCantidadEmpleadosVinculados(numMovilEmpleador: Int): Int {
+        val query = """
+        SELECT COUNT(*) as total
+        FROM acceso_empleado
+        WHERE num_movil_empleador = ?
+    """
+        val cursor: Cursor = db.rawQuery(query, arrayOf(numMovilEmpleador.toString()))
+        var total = 0
+        if (cursor.moveToFirst()) {
+            total = cursor.getInt(cursor.getColumnIndex("total"))
+        }
+        cursor.close()
+        return total
+    }
+
+    @SuppressLint("Range")
+    fun verificarEmpleadoDelEmpleador(numMovilEmpleador: Int, numMovilEmpleado: Int): Boolean {
+        val query = """
+        SELECT COUNT(*) as total
+        FROM acceso_empleado
+        WHERE num_movil_empleador = ? AND num_movil_empleado = ?
+    """
+        val cursor: Cursor = db.rawQuery(query, arrayOf(numMovilEmpleador.toString(), numMovilEmpleado.toString()))
+        var total = 0
+        if (cursor.moveToFirst()) {
+            total = cursor.getInt(cursor.getColumnIndex("total"))
+        }
+        cursor.close()
+        return total > 0
+    }
+
+
+
 }

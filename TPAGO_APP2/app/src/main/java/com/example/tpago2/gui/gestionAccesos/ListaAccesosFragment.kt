@@ -25,6 +25,7 @@ import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
 import com.example.tpago2.service.KEY_USUARIO_DESTINO
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlin.properties.Delegates
 
 class ListaAccesosFragment : Fragment(R.layout.fragment_lista_accesos) {
 
@@ -33,6 +34,7 @@ class ListaAccesosFragment : Fragment(R.layout.fragment_lista_accesos) {
     private lateinit var cuentaActual: CuentaUsuario
     private lateinit var usuarioActual: Usuario
     private lateinit var personaActual: Persona
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,7 +59,11 @@ class ListaAccesosFragment : Fragment(R.layout.fragment_lista_accesos) {
 
         val btnNumber = view.findViewById<FloatingActionButton>(R.id.btnNumber)
         btnNumber.setOnClickListener{
-            view.findNavController().navigate(R.id.action_listaAccesosFragment_to_listaAgregarAccesoFragment)
+            val delivery = Bundle()
+            delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
+            delivery.putSerializable(KEY_USUARIO, usuarioActual)
+            delivery.putSerializable(KEY_PERSONA, personaActual)
+            view.findNavController().navigate(R.id.action_listaAccesosFragment_to_listaAgregarAccesoFragment, delivery)
         }
     }
 
@@ -71,7 +77,7 @@ class ListaAccesosFragment : Fragment(R.layout.fragment_lista_accesos) {
         val listaAccesos = daoAccesos.obtenerAccesosPorEmpleador(cuentaActual.num_movil)
         userAdapter = AccesoAdapter(
             listaAccesos,
-            R.layout.item_tarjeta
+            R.layout.item_tarjeta_x
         ) { user -> onItemSelected(user) } //ojito
         val decoration = DividerItemDecoration(context, manager.orientation)
         val usersRecyler = view.findViewById<RecyclerView>(R.id.lista_usuarios)

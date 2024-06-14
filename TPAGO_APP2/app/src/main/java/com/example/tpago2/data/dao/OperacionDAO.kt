@@ -82,8 +82,8 @@ class OperacionDAO(context: Context) {
         val movimientos: MutableList<Movimiento> = ArrayList()
         val query = """
             SELECT o.monto_operacion, o.fecha_operacion, o.hora_operacion, 
-                   p1.primer_nombre AS nombre_origen, p1.ape_paterno AS apellido_origen, cu1.num_movil AS movil_origen,
-                   p2.primer_nombre AS nombre_destino, p2.ape_paterno AS apellido_destino, cu2.num_movil AS movil_destino
+                   p1.primer_nombre AS nombre_origen, p1.ape_paterno AS apellido_origen, p1.ape_materno AS apellido_origen2, cu1.num_movil AS movil_origen,
+                   p2.primer_nombre AS nombre_destino, p2.ape_paterno AS apellido_destino,p2.ape_materno AS apellido_destino2, cu2.num_movil AS movil_destino
             FROM operacion o
             INNER JOIN cuenta_usuario cu1 ON o.num_cuenta_origen = cu1.num_movil
             INNER JOIN persona p1 ON cu1.dni_persona = p1.dni_persona
@@ -102,6 +102,7 @@ class OperacionDAO(context: Context) {
 
                 val nombre: String
                 val apellido: String
+                val apellido2: String
                 val movil: Int
                 val tipo: String
 
@@ -109,12 +110,14 @@ class OperacionDAO(context: Context) {
                     // La cuenta de origen es la cuenta proporcionada
                     nombre = cursor.getString(cursor.getColumnIndex("nombre_destino"))
                     apellido = cursor.getString(cursor.getColumnIndex("apellido_destino"))
+                    apellido2 = cursor.getString(cursor.getColumnIndex("apellido_destino2"))
                     movil = cursor.getInt(cursor.getColumnIndex("movil_destino"))
                     tipo = "resta"
                 } else {
                     // La cuenta de destino es la cuenta proporcionada
                     nombre = cursor.getString(cursor.getColumnIndex("nombre_origen"))
                     apellido = cursor.getString(cursor.getColumnIndex("apellido_origen"))
+                    apellido2 = cursor.getString(cursor.getColumnIndex("apellido_origen2"))
                     movil = cursor.getInt(cursor.getColumnIndex("movil_origen"))
                     tipo = "suma"
                 }
@@ -122,6 +125,7 @@ class OperacionDAO(context: Context) {
                 val movimiento = Movimiento(
                     nombre = nombre,
                     apePaterno = apellido,
+                    apeMaterno = apellido2,
                     movil = movil,
                     monto = montoOperacion,
                     fecha = fechaOperacion,

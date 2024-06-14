@@ -1,13 +1,10 @@
 package com.example.tpago2.gui.realizarOperacion
 
 import android.os.Bundle
-import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.findNavController
@@ -27,7 +24,6 @@ import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
 import com.example.tpago2.service.KEY_USUARIO_DESTINO
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.navigation.NavigationBarView.OnItemSelectedListener
 
 class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
 
@@ -129,7 +125,7 @@ class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
 
     private fun initRecycleView(view: View) {
         val manager = LinearLayoutManager(context)
-        userAdapter = ContactoAdapter(false, ContactoProvider.listaContactos) {user -> onItemSelected(user)} //ojito
+        userAdapter = ContactoAdapter(null, ContactoProvider.listaContactos) {user -> onItemSelected(user)} //ojito
         val decoration = DividerItemDecoration(context, manager.orientation)
         val usersRecyler = view.findViewById<RecyclerView>(R.id.lista_usuarios)
         usersRecyler.layoutManager = manager

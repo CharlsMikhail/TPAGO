@@ -19,7 +19,7 @@ class MovimientosViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     private val viewMonto = itemView.findViewById<TextView>(R.id.monto_transferencia)
     @SuppressLint("SetTextI18n")
     fun render(item: Movimiento, onClickListener:(Movimiento) -> Unit) {
-        viewNombre.text = item.nombre + " " +  item.apePaterno
+        viewNombre.text = item.nombre + " " +  item.apePaterno + " " + item.apeMaterno
         viewFecha.text = item.fecha +  ", " + item.hora
         if (item.tipo == "suma") {
             viewMonto.text = "+ S/" + item.monto
