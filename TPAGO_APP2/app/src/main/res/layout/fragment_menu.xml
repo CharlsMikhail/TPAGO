@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="350dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -329,24 +329,27 @@
         android:id="@+id/txt_mostrar_movimientos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Movimientos:"
         android:paddingStart="30dp"
+        android:text="Movimientos:"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/lista_movimientos"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lista_movimientos"
-        android:layout_width="match_parent"
-        android:layout_height="340dp"
-        android:paddingTop="15dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lista_movimientos"
+        android:layout_width="match_parent"
+        android:layout_height="480dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingVertical="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_mostrar_movimientos"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fl_pagar"
