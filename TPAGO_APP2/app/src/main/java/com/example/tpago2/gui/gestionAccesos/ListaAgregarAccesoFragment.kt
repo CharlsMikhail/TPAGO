@@ -64,7 +64,12 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
 
         val btnAddAccess = view.findViewById<FloatingActionButton>(R.id.btn_Add_Acceso)
         btnAddAccess.setOnClickListener{
-            showDialogNumber(view)
+            if (restanteAccesos > 0) {
+                showDialogNumber(view)
+            } else {
+                Toast.makeText(context, "No hay más accesos disponibles", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         val agregarAccesos = view.findViewById<Button>(R.id.add_button_accesos)
@@ -108,10 +113,10 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
 
     private fun onItemSelected(user: Contacto) {
         if (isAdd) {
-            Toast.makeText(requireContext(), "Usuario agregado ${user.nombres}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(requireContext(), "Usuario agregado ${user.nombres}", Toast.LENGTH_SHORT).show()
             listaAcceso.add(user)
         } else {
-            Toast.makeText(requireContext(), "Usuario descartado", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(requireContext(), "Usuario descartado", Toast.LENGTH_SHORT).show()
             listaAcceso.remove(user)
         }
     }
@@ -130,7 +135,7 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
         dialog.setView(dialogView)
 
         // Configuramos el botón positivo sin comportamiento inicial para evitar que el diálogo se cierre automáticamente
-        dialog.setPositiveButton("Buscar", null)
+        dialog.setPositiveButton("Agregar a lista", null)
 
         dialog.setNegativeButton("Cancelar") { dialog, _ ->
             dialog.dismiss()
@@ -151,9 +156,15 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
             } else {
                 val daoCueUsu = CuentaUsuarioDAO(requireContext())
                 val cuentaDestino = daoCueUsu.obtenerUsuarioDestinoPorNumMovil(inputNumber.toInt())
-                if (cuentaDestino != null && inputNumber.toInt() != cuentaActual.num_movil) {
+
+                if (cuentaDestino != null && inputNumber.toInt() != cuentaActual.num_movil && daoAccesosEmpleado.verificarEmpleadoDelEmpleador(cuentaActual.num_movil, cuentaDestino.numMovil)) {
                     // LLENAR
+                    listaAcceso.add(Contacto(cuentaDestino.nombres, cuentaDestino.numMovil))
+                    restanteAccesos--
+                    Toast.makeText(requireContext(), "Restante: $restanteAccesos", Toast.LENGTH_SHORT).show()
                     alertDialog.dismiss() // Cerrar el diálogo si la operación es exitosa
+                } else if(daoAccesosEmpleado.verificarEmpleadoDelEmpleador(cuentaActual.num_movil, cuentaDestino!!.numMovil)) {
+                    Toast.makeText(requireContext(), "Este numero ya forma parte de sus empleados.", Toast.LENGTH_SHORT).show()
                 } else if (inputNumber.toInt() == cuentaActual.num_movil) {
                     Toast.makeText(requireContext(), "No puede darse acceso a sí mismo.", Toast.LENGTH_SHORT).show()
                 } else {
