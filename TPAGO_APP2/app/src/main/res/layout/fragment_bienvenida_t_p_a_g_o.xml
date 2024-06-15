@@ -13,10 +13,9 @@
         android:layout_height="749dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imageView2"
@@ -31,29 +30,30 @@
 
         <TextView
             android:id="@+id/welcome"
-            android:layout_width="97dp"
-            android:layout_height="23dp"
+            android:layout_width="134dp"
+            android:layout_height="37dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="160dp"
-            android:text="Bienvenido"
+            android:layout_marginTop="164dp"
+            android:text="Bienvenido!"
             android:textColor="#000000"
-            android:textSize="18dp"
-            android:textStyle="bold"
+            android:textSize="25dp"
+            android:textStyle="normal"
             app:layout_constraintEnd_toStartOf="@+id/nombre"
+            app:layout_constraintHorizontal_bias="0.227"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <TextView
             android:id="@+id/nombre"
-            android:layout_width="125dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="160dp"
+            android:layout_width="178dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="164dp"
             android:text="Leandro"
-            android:textColor="#000000"
-            android:textSize="18dp"
+            android:textColor="#3C3450"
+            android:textSize="25dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintHorizontal_bias="0.745"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="104dp"
             android:text="Comenzar"
-            android:textSize="24dp"
+            android:textSize="28dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nombre" />

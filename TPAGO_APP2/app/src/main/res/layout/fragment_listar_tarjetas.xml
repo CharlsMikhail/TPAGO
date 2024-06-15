@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#EFF0FC"
-    android:padding="30dp"
+    android:padding="20dp"
     tools:context=".gui.gestionTarjetas.ListarTarjetasFragment">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="313dp"
         android:layout_height="32dp"
+        android:layout_marginTop="10dp"
         android:text="Lista de Tarjetas"
         android:textAlignment="center"
         android:textSize="24sp"
@@ -32,6 +33,7 @@
         android:id="@+id/btn_back_listar_tarjetas"
         android:layout_width="37dp"
         android:layout_height="33dp"
+        android:layout_marginTop="10dp"
         android:background="#EFF0FC"
         android:src="@drawable/atras"
         app:layout_constraintEnd_toStartOf="@+id/textView2"

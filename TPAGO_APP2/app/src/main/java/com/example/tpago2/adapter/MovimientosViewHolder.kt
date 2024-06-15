@@ -21,12 +21,22 @@ class MovimientosViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     fun render(item: Movimiento, onClickListener:(Movimiento) -> Unit) {
         viewNombre.text = item.nombre + " " +  item.apePaterno + " " + item.apeMaterno
         viewFecha.text = item.fecha +  ", " + item.hora
-        if (item.tipo == "suma") {
-            viewMonto.text = "+ S/" + item.monto
-            viewMonto.setTextColor(Color.GREEN)
-        } else {
+        if (item.tipo != "suma") {
             viewMonto.text = "- S/" + item.monto
-            viewMonto.setTextColor(Color.RED)
+            val hsv = floatArrayOf(0f, 0.7f, 0.8f) // Tonos más oscuros tienen menor valor de S y V
+
+            val colorRojoOscuro = Color.HSVToColor(hsv)
+            viewMonto.setTextColor(colorRojoOscuro)
+        } else {
+            viewMonto.text = "+ S/" + item.monto
+            val hsv = floatArrayOf(140f, 0.6f, 0.8f) // Morado verdoso con saturación y valor moderados
+
+            val colorMoradoVerdoso = Color.HSVToColor(hsv)
+            viewMonto.setTextColor(colorMoradoVerdoso)
+        }
+
+        if (viewNombre.text.toString().length >= 20) {
+            viewNombre.textSize = 18f
         }
 
         itemView.setOnClickListener() {

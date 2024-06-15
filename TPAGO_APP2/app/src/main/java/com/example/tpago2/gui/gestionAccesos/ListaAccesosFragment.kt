@@ -87,7 +87,7 @@ class ListaAccesosFragment : Fragment(R.layout.fragment_lista_accesos) {
         val listaAccesos = daoAccesos.obtenerAccesosPorEmpleador(cuentaActual.num_movil)
         userAdapter = AccesoAdapter(
             listaAccesos,
-            R.layout.item_tarjeta_x
+            R.layout.item_acceso
         ) { user -> onItemSelected(user) } //ojito
         val decoration = DividerItemDecoration(context, manager.orientation)
         val usersRecyler = view.findViewById<RecyclerView>(R.id.lista_usuarios)

@@ -1,6 +1,10 @@
 package com.example.tpago2.gui.gestionTarjetas
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
@@ -65,15 +69,21 @@ class ListarTarjetasFragment : Fragment(R.layout.fragment_listar_tarjetas) {
         delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
         delivery.putSerializable(KEY_USUARIO, usuarioActual)
         delivery.putSerializable(KEY_PERSONA, personaActual)
-
         btnAdd.setOnClickListener{
             if (falla) {
                 mostrarErrorDeConexion(requireContext())
                 return@setOnClickListener
             }
             val daoTarjeta = TarjetaUsuarioDAO(requireContext())
+
             if (daoTarjeta.obtenerTotalTarjetasPorUsuario(cuentaActual.num_movil) >= 4) {
                 Toast.makeText(requireContext(), "Límite de tarjetas superado", Toast.LENGTH_SHORT).show()
+                // Cambiar el color del botón a rojo para indicar un error
+                btnAdd.isEnabled = false
+                // Volver a cambiar el color a su color original después de 2 segundos
+                Handler(Looper.getMainLooper()).postDelayed({
+                    btnAdd.isEnabled = true
+                }, 2000)
                 return@setOnClickListener
             }
 

@@ -59,7 +59,11 @@ class ConfirmarPagoFragment : Fragment(R.layout.fragment_confirmar_pago) {
             view.findNavController().popBackStack()
         }
 
-        txtTarjeta.text = tarjetaRecarga.num_tarjeta
+        val numTarjeta = tarjetaRecarga.num_tarjeta
+        val maskedNumTarjeta = numTarjeta.takeLast(4).padStart(numTarjeta.length, '*')
+        val formattedMaskedNumTarjeta = maskedNumTarjeta.chunked(4).joinToString(" ")
+        txtTarjeta.text = formattedMaskedNumTarjeta
+
         txtMonto.text = "S/" + montoRecarga
 
         btnContinuarRecarga.setOnClickListener {

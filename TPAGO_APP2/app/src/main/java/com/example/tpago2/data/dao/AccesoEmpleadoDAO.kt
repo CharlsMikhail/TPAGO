@@ -83,6 +83,7 @@ class AccesoEmpleadoDAO(context: Context) {
         return accesos
     }
 
+
     // Actualizar un acceso de empleado
     fun actualizarAccesoEmpleado(
         idAcceso: Int,

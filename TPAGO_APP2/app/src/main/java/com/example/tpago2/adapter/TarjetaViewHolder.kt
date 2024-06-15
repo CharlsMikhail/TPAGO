@@ -16,7 +16,10 @@ class TarjetaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val btnEliminar = itemView.findViewById<ImageButton>(R.id.btn_eliminar_item_tarjeta)
 
     fun render(item: TarjetaUsuario, onClickListener: (TarjetaUsuario) -> Unit, l: OnClickListener) {
-        viewNumTarjeta.text = item.num_tarjeta
+        val numTarjeta = item.num_tarjeta
+        val maskedNumTarjeta = numTarjeta.takeLast(4).padStart(numTarjeta.length, '*')
+        val formattedMaskedNumTarjeta = maskedNumTarjeta.chunked(4).joinToString(" ")
+        viewNumTarjeta.text = formattedMaskedNumTarjeta
         viewFechVenTarjeta.text = item.fecha_vencimiento
         btnEliminar.setOnClickListener(l)
         itemView.setOnClickListener {

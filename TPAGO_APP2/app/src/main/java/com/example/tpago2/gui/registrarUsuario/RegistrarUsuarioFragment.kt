@@ -91,11 +91,9 @@ class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registrar_usuario) {
                 // Validación en cuestion de FONDO de celular.
                 val daoCuentaUsuario = CuentaUsuarioDAO(requireContext())
                 if (daoCuentaUsuario.obtenerCuentaUsuarioPorNumMovil(celular.toInt()) != null) {
-                    etCelular.error = "Celular ya registrado."
+                    etCelular.error = "Cuenta TPAGO ya existente."
                     return@setOnClickListener
                 }
-
-
 
                 // Insertamos a la persona en la base de datos, si es que no existe.
                 val daoPersona = PersonaDAO(requireContext())

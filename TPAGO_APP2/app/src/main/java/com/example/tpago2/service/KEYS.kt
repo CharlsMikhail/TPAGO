@@ -14,7 +14,7 @@ const val KEY_NUM_OPER = "num_operacion"
 const val KEY_TARJETA = "tarjeta_user"
 const val KEY_NUM_RECARGA = "num_recarga"
 const val KEY_CODIGO_PE = "cod_generado"
-
+const val KEY_ACCESO = "acceso"
 
 const val falla = false
 

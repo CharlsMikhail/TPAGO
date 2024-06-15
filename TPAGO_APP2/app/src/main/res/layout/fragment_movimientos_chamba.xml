@@ -1,14 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp"
     tools:context=".gui.gestionChamba.MovimientosChambaFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageButton
+        android:id="@+id/btn_atras"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="28dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="TODO"
+        android:src="@drawable/atras"
+        app:layout_constraintEnd_toStartOf="@+id/user_acceso"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <!--
+    <SearchView
+        android:id="@+id/sv_contactos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:inputType="phone"
+        android:queryHint="@string/sv_contactos"/>
+        -->
+
+    <TextView
+        android:id="@+id/user_acceso"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="28dp"
+        android:gravity="center"
+        android:text="Carlos Mamani Anccasi"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lista_mov_chamba"
+        android:layout_width="match_parent"
+        android:layout_height="580dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/acceso_number"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/acceso_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="986579487"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/lista_mov_chamba"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_acceso" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

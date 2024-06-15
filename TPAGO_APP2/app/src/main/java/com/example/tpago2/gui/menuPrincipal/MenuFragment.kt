@@ -72,17 +72,12 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
             view.findNavController().navigate(R.id.action_menuFragment_to_listarContactosFragment, delivery)
         }
 
-        val btnMostrarNumero = view.findViewById<TextView>(R.id.txt_user_name)
-
-        btnMostrarNumero.setOnClickListener{
-            Toast.makeText(view.context, "Su número es: ${cuentaActual.num_movil}", Toast.LENGTH_LONG).show()
-        }
-
-
-
         val txtMostrarSaldo = view.findViewById<TextView>(R.id.btn_mostrar_saldo)
+
+        txtMostrarSaldo.text = "${cuentaActual.num_movil}"
+
         val txtSaldo = view.findViewById<TextView>(R.id.txt_saldo22)
-        txtMostrarSaldo.setOnClickListener {
+        txtSaldo.setOnClickListener {
             if (falla) {
                 mostrarErrorDeConexion(requireContext())
                 return@setOnClickListener
@@ -90,14 +85,7 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
 
             val cuentaDao = CuentaUsuarioDAO(requireContext())
             cuentaActual.saldo = cuentaDao.obtenerSaldo(cuentaActual.num_movil)
-            if (txtMostrarSaldo.text != "Ocultar Saldo") {
-                txtSaldo.text = "S/" + cuentaActual.saldo
-                txtMostrarSaldo.text = "Ocultar Saldo"
-            }
-            else {
-                txtMostrarSaldo.text = "Mostrar Saldo"
-                txtSaldo.text = "S/*******"
-            }
+            if (txtSaldo.text == "S/*******") txtSaldo.text = "S/" + cuentaActual.saldo else txtSaldo.text = "S/*******"
         }
 
         val btnPagarQR = view.findViewById<LinearLayout>(R.id.ll_qr)
@@ -158,8 +146,7 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
         }
 
         btnChamba.setOnClickListener {
-            Toast.makeText(context, "Funcion aun no disponible", Toast.LENGTH_SHORT).show()
-            //view.findNavController().navigate(R.id.action_menuFragment_to_listaChambasFragment, delivery)
+            view.findNavController().navigate(R.id.action_menuFragment_to_listaChambasFragment2, delivery)
         }
 
     }

@@ -68,8 +68,13 @@ class DetalleRecargaFragment : Fragment(R.layout.fragment_detalle_recarga) {
         val txtHourOper = view.findViewById<TextView>(R.id.txt_hora)
         val txtMontoOpe = view.findViewById<TextView>(R.id.txt_monto_ope)
         val txtMontoPago = view.findViewById<TextView>(R.id.txt_monto_pago)
+        
 
-        txtNumTarjeta.text = tarjetaRecarga.num_tarjeta
+        val numTarjeta = tarjetaRecarga.num_tarjeta
+        val maskedNumTarjeta = numTarjeta.takeLast(4).padStart(numTarjeta.length, '*')
+        val formattedMaskedNumTarjeta = maskedNumTarjeta.chunked(4).joinToString(" ")
+        txtNumTarjeta.text = formattedMaskedNumTarjeta
+
         txtNumDestino.text = cuentaActual.num_movil.toString()
         txtNumRecarga.text = numRecarga
         txtDateOper.text = date

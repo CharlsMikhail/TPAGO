@@ -31,14 +31,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1234 5678 9012 3456"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txt_fecha_ven_tarjeta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="12/24"
-                android:textSize="14sp"
+                android:textSize="17sp"
                 android:textColor="#757575" />
 
         </LinearLayout>

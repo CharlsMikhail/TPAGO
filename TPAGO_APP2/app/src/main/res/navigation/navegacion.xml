@@ -29,8 +29,8 @@
             android:id="@+id/action_menuFragment_to_listaAccesosFragment"
             app:destination="@id/listaAccesosFragment" />
         <action
-            android:id="@+id/action_menuFragment_to_listaChambasFragment"
-            app:destination="@id/listaChambasFragment" />
+            android:id="@+id/action_menuFragment_to_listaChambasFragment2"
+            app:destination="@id/listaChambasFragment2" />
     </fragment>
     <fragment
         android:id="@+id/listarContactosFragment"
@@ -232,15 +232,17 @@
         android:label="fragment_lista_agregar_acceso"
         tools:layout="@layout/fragment_lista_agregar_acceso" />
     <fragment
-        android:id="@+id/listaChambasFragment"
-        android:name="com.example.tpago2.gui.gestionAccesos.ListaChambasFragment"
-        android:label="ListaChambasFragment" >
+        android:id="@+id/listaChambasFragment2"
+        android:name="com.example.tpago2.gui.gestionChamba.ListaChambasFragment"
+        android:label="fragment_lista_chambas"
+        tools:layout="@layout/fragment_lista_chambas" >
         <action
-            android:id="@+id/action_listaChambasFragment_to_movimientosChambaFragment"
+            android:id="@+id/action_listaChambasFragment2_to_movimientosChambaFragment"
             app:destination="@id/movimientosChambaFragment" />
     </fragment>
     <fragment
         android:id="@+id/movimientosChambaFragment"
-        android:name="com.example.tpago2.gui.gestionAccesos.MovimientosChambaFragment"
-        android:label="MovimientosChambaFragment" />
+        android:name="com.example.tpago2.gui.gestionChamba.MovimientosChambaFragment"
+        android:label="fragment_movimientos_chamba"
+        tools:layout="@layout/fragment_movimientos_chamba" />
 </navigation>

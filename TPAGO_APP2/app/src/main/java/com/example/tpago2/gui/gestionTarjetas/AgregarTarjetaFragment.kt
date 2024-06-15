@@ -60,10 +60,21 @@ class AgregarTarjetaFragment : Fragment(R.layout.fragment_agregar_tarjeta) {
             val fecha = ediFecha.text.toString()
             val csv = ediCSV.text.toString()
 
-            if (numTarjeta.length != 16 || fecha.isEmpty() || csv.length != 3) {
-                Toast.makeText(requireContext(), "Datos incompletos, intente de nuevo", Toast.LENGTH_SHORT).show()
+            if (numTarjeta.length != 16) {
+                ediNumTarjeta.error = "El número de tarjeta debe tener 16 dígitos"
                 return@setOnClickListener
             }
+
+            if (fecha.isEmpty()) {
+                ediFecha.error = "La fecha no puede estar vacía"
+                return@setOnClickListener
+            }
+
+            if (csv.length != 3) {
+                ediCSV.error = "El código CSV debe tener 3 dígitos"
+                return@setOnClickListener
+            }
+
 
             val daoTarjeta = TarjetaUsuarioDAO(view.context)
 
@@ -98,9 +109,10 @@ class AgregarTarjetaFragment : Fragment(R.layout.fragment_agregar_tarjeta) {
 
             if (fechaSeleccionada >= date) {
                 // Establecer la fecha formateada en el TextView
+                ediFecha.error = null
                 ediFecha.text = fechaSeleccionada
             } else {
-                Toast.makeText(view.context, "Fecha tarjeta invalida", Toast.LENGTH_SHORT).show()
+                ediFecha.error = "Fecha expirada"
                 ediFecha.text = ""
             }
 

@@ -16,7 +16,7 @@
         android:layout_marginTop="16dp"
         android:text="Detalle de Operación"
         android:textAlignment="center"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <ImageView
@@ -247,7 +247,7 @@
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="23dp"
         android:gravity="center">
 <!--
         <Button
@@ -261,9 +261,9 @@
             android:id="@+id/btn_inicio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ir a inicio" />
+            android:textSize="22sp"
+            android:textAlignment="center"
+            android:text="I al Menu" />
     </TableRow>
-
-
 
 </LinearLayout>

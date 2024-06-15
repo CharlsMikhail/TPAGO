@@ -15,10 +15,10 @@
 
         <ImageView
             android:id="@+id/img_usuario"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/tarjeta_credito" />
+            android:src="@drawable/verified_user" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -30,15 +30,15 @@
                 android:id="@+id/txt_numero_tarjeta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1234 5678 9012 3456"
-                android:textSize="20sp" />
+                android:text="Juan Carlos Boza"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/txt_fecha_ven_tarjeta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12/22/23"
-                android:textSize="16sp"
+                android:text="986579487"
+                android:textSize="20sp"
                 android:textColor="#757575" />
 
         </LinearLayout>
