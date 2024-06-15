@@ -1,5 +1,6 @@
 package com.example.tpago2.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,14 +12,15 @@ class ContactoAdapter(private val userNumMovil: Int?, private val items: Mutable
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactoViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_contacto,parent, false)
         return ContactoViewHolder(userNumMovil, itemView)
-
     }
 
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ContactoViewHolder, position: Int) {
+        Log.d("Position", "Ojo: $position")
         val item = items[position]
         holder.render(item, onItemSelected)
+        //notifyDataSetChanged()
     }
 
     fun addUser(usuario: Contacto) {
@@ -31,6 +33,11 @@ class ContactoAdapter(private val userNumMovil: Int?, private val items: Mutable
         notifyItemRemoved(index)
         notifyItemRangeChanged(index, items.size)
     }
+
+    private fun addViewListener() {
+
+        }
+
 
     fun editUser(index: Int, usuario: Contacto) {
         items.removeAt(index)

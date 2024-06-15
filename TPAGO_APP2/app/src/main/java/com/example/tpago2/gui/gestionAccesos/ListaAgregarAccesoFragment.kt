@@ -1,10 +1,13 @@
 package com.example.tpago2.gui.gestionAccesos
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -50,7 +53,7 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
 
         // Obtener  el limite de restante de accesos
         daoAccesosEmpleado = AccesoEmpleadoDAO(requireContext())
-        restanteAccesos = 3 - daoAccesosEmpleado.obtenerCantidadEmpleadosVinculados(cuentaActual.num_movil)
+        restanteAccesos = 10 - daoAccesosEmpleado.obtenerCantidadEmpleadosVinculados(cuentaActual.num_movil)
 
         initRecycleView(view)
         actualizarInterfaz(view)
@@ -61,6 +64,14 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
     }
 
     private fun eventos(view: View) {
+
+        val btnBack = view.findViewById<ImageButton>(R.id.btn_atras)
+        btnBack.setOnClickListener() {
+            listaAcceso.forEach { contacto ->
+                contacto.isAdd = false
+            }
+            view.findNavController().popBackStack()
+        }
 
         val btnAddAccess = view.findViewById<FloatingActionButton>(R.id.btn_Add_Acceso)
         btnAddAccess.setOnClickListener{
@@ -78,6 +89,7 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
             if (listaAcceso.isNotEmpty()) {
                 val currentDateTime = LocalDateTime.now()
                 listaAcceso.forEach {contacto ->
+                    contacto.isAdd = false
                     val numMovilEmpleador = cuentaActual.num_movil // Obtén el número de móvil del empleador de algún lugar
                     val numMovilEmpleado = contacto.numMovil
                     val estadoAcceso = 1// Define el estado del acceso según lo necesites
@@ -94,6 +106,9 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
             view.findNavController().popBackStack()
 
         }
+
+
+
     }
 
     private fun actualizarInterfaz(view: View) {
@@ -112,7 +127,7 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
     }
 
     private fun onItemSelected(user: Contacto) {
-        if (isAdd) {
+        if (user.isAdd) {
             //Toast.makeText(requireContext(), "Usuario agregado ${user.nombres}", Toast.LENGTH_SHORT).show()
             listaAcceso.add(user)
         } else {
@@ -135,7 +150,7 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
         dialog.setView(dialogView)
 
         // Configuramos el botón positivo sin comportamiento inicial para evitar que el diálogo se cierre automáticamente
-        dialog.setPositiveButton("Agregar a lista", null)
+        dialog.setPositiveButton("Agregar acceso", null)
 
         dialog.setNegativeButton("Cancelar") { dialog, _ ->
             dialog.dismiss()
@@ -153,21 +168,36 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
                 input.error = "Por favor, ingrese un número."
             } else if (!isValidPhoneNumber(inputNumber)) {
                 input.error = "Celular debe contener 9 dígitos y comenzar con el '9'."
+            } else if (listaAcceso.any { it.numMovil == inputNumber.toInt() }) {
+                // Caso: El número ya está en la lista
+                Toast.makeText(requireContext(), "El número ${inputNumber.toInt()} esta en la lista de espera.", Toast.LENGTH_SHORT).show()
             } else {
                 val daoCueUsu = CuentaUsuarioDAO(requireContext())
                 val cuentaDestino = daoCueUsu.obtenerUsuarioDestinoPorNumMovil(inputNumber.toInt())
 
-                if (cuentaDestino != null && inputNumber.toInt() != cuentaActual.num_movil && daoAccesosEmpleado.verificarEmpleadoDelEmpleador(cuentaActual.num_movil, cuentaDestino.numMovil)) {
-                    // LLENAR
-                    listaAcceso.add(Contacto(cuentaDestino.nombres, cuentaDestino.numMovil))
-                    restanteAccesos--
-                    Toast.makeText(requireContext(), "Restante: $restanteAccesos", Toast.LENGTH_SHORT).show()
-                    alertDialog.dismiss() // Cerrar el diálogo si la operación es exitosa
-                } else if(daoAccesosEmpleado.verificarEmpleadoDelEmpleador(cuentaActual.num_movil, cuentaDestino!!.numMovil)) {
-                    Toast.makeText(requireContext(), "Este numero ya forma parte de sus empleados.", Toast.LENGTH_SHORT).show()
-                } else if (inputNumber.toInt() == cuentaActual.num_movil) {
-                    Toast.makeText(requireContext(), "No puede darse acceso a sí mismo.", Toast.LENGTH_SHORT).show()
+                // Verificar si cuentaDestino no es nulo y cumplir con las condiciones requeridas
+                if (cuentaDestino != null) {
+                    val numMovilDestino = cuentaDestino.numMovil
+
+                    if (inputNumber.toInt() == cuentaActual.num_movil) {
+                        // Caso: No puede darse acceso a sí mismo
+                        Toast.makeText(requireContext(), "No puede darse acceso a sí mismo.", Toast.LENGTH_SHORT).show()
+                    } else if (daoAccesosEmpleado.verificarEmpleadoDelEmpleador(cuentaActual.num_movil, numMovilDestino)) {
+                        // Caso: El número ya es empleado
+                        Toast.makeText(requireContext(), "Este número ya forma parte de sus empleados.", Toast.LENGTH_SHORT).show()
+                    } else if (!daoAccesosEmpleado.verificarEmpleadoDelEmpleador(cuentaActual.num_movil, numMovilDestino)) {
+                        // Caso: Insertar acceso empleado
+                        val currentDateTime = LocalDateTime.now()
+                        val fechaAcceso = currentDateTime.toLocalDate().toString()
+
+                        daoAccesosEmpleado.insertarAccesoEmpleado(cuentaActual.num_movil, numMovilDestino, 1, fechaAcceso)
+                        restanteAccesos--
+                        Toast.makeText(requireContext(), "Restante: $restanteAccesos", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Agregado exitosamente", Toast.LENGTH_SHORT).show()
+                        alertDialog.dismiss() // Cerrar el diálogo si la operación es exitosa
+                    }
                 } else {
+                    // Caso: El número no pertenece a TPAGO
                     Toast.makeText(requireContext(), "El número ${inputNumber.toInt()} no pertenece a TPAGO.", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -177,6 +207,19 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
     private fun isValidPhoneNumber(phoneNumber: String): Boolean {
         val phoneNumberPattern = "^9\\d{8}$"
         return phoneNumber.matches(phoneNumberPattern.toRegex())
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callBack = object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                listaAcceso.forEach { contacto ->
+                    contacto.isAdd = false
+                }
+                requireView().findNavController().popBackStack()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callBack)
     }
 
 

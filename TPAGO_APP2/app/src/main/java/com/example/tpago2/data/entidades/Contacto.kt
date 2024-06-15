@@ -4,5 +4,6 @@ import java.io.Serializable
 
 data class Contacto(
     val nombres: String,
-    val numMovil: Int
+    val numMovil: Int,
+    var isAdd: Boolean = false
 ): Serializable

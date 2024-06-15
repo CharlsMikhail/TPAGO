@@ -1,6 +1,8 @@
 package com.example.tpago2.gui.gestionAccesos
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
@@ -59,11 +61,19 @@ class ListaAccesosFragment : Fragment(R.layout.fragment_lista_accesos) {
 
         val btnNumber = view.findViewById<FloatingActionButton>(R.id.btnNumber)
         btnNumber.setOnClickListener{
+
+            //Toast.makeText(requireContext(), "Cargando...", Toast.LENGTH_SHORT).show()
             val delivery = Bundle()
             delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
             delivery.putSerializable(KEY_USUARIO, usuarioActual)
             delivery.putSerializable(KEY_PERSONA, personaActual)
             view.findNavController().navigate(R.id.action_listaAccesosFragment_to_listaAgregarAccesoFragment, delivery)
+            val toast = Toast.makeText(requireContext(), "Cargando...", Toast.LENGTH_SHORT)
+            toast.show()
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                toast.cancel()
+            }, 1000)
         }
     }
 
