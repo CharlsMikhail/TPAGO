@@ -26,7 +26,6 @@ import com.example.tpago2.service.ContactoProvider
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
-import com.example.tpago2.service.isAdd
 import com.example.tpago2.service.restanteAccesos
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.time.LocalDateTime
@@ -170,7 +169,8 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
                 input.error = "Celular debe contener 9 dígitos y comenzar con el '9'."
             } else if (listaAcceso.any { it.numMovil == inputNumber.toInt() }) {
                 // Caso: El número ya está en la lista
-                Toast.makeText(requireContext(), "El número ${inputNumber.toInt()} esta en la lista de espera.", Toast.LENGTH_SHORT).show()
+               // Toast.makeText(requireContext(), "El número ${inputNumber.toInt()} esta en la lista de espera.", Toast.LENGTH_SHORT).show()
+                input.error = "El número ${inputNumber.toInt()} esta en la lista de espera."
             } else {
                 val daoCueUsu = CuentaUsuarioDAO(requireContext())
                 val cuentaDestino = daoCueUsu.obtenerUsuarioDestinoPorNumMovil(inputNumber.toInt())
@@ -181,10 +181,12 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
 
                     if (inputNumber.toInt() == cuentaActual.num_movil) {
                         // Caso: No puede darse acceso a sí mismo
-                        Toast.makeText(requireContext(), "No puede darse acceso a sí mismo.", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(requireContext(), "No puede darse acceso a sí mismo.", Toast.LENGTH_SHORT).show()
+                        input.error = "No puede darse acceso a sí mismo."
                     } else if (daoAccesosEmpleado.verificarEmpleadoDelEmpleador(cuentaActual.num_movil, numMovilDestino)) {
                         // Caso: El número ya es empleado
-                        Toast.makeText(requireContext(), "Este número ya forma parte de sus empleados.", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(requireContext(), "Este número ya forma parte de sus empleados.", Toast.LENGTH_SHORT).show()
+                        input.error = "Esta cuenta ya tiene acceso a su historial"
                     } else if (!daoAccesosEmpleado.verificarEmpleadoDelEmpleador(cuentaActual.num_movil, numMovilDestino)) {
                         // Caso: Insertar acceso empleado
                         val currentDateTime = LocalDateTime.now()
@@ -198,7 +200,8 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
                     }
                 } else {
                     // Caso: El número no pertenece a TPAGO
-                    Toast.makeText(requireContext(), "El número ${inputNumber.toInt()} no pertenece a TPAGO.", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(requireContext(), "El número ${inputNumber.toInt()} no pertenece a TPAGO.", Toast.LENGTH_SHORT).show()
+                    input.error = "El número ${inputNumber.toInt()} no pertenece a TPAGO."
                 }
             }
         }

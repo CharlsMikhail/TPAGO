@@ -17,8 +17,8 @@ const val KEY_CODIGO_PE = "cod_generado"
 const val KEY_ACCESO = "acceso"
 
 const val falla = false
+var errorDniFrontal = false
 
 var validarDNI = false
 
-var isAdd = false
 var restanteAccesos = 0

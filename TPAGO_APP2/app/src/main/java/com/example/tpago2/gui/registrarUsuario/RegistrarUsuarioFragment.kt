@@ -54,9 +54,8 @@ class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registrar_usuario) {
                 return@setOnClickListener
             }
 
-
             if (!hasValidLength(email)) {
-                etEmail.error = "El nombre de usuario debe contener entre 6 y 30 caracteres y tambien '@'."
+                etEmail.error = "El nombre de usuario debe contener entre 6 y 30 caracteres seguido del @."
                 return@setOnClickListener
             }
 
@@ -87,9 +86,16 @@ class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registrar_usuario) {
             // El dni tiene que existir en la base de datos de RENIEC.
             val persona = ReniecProvider.getPersonaByDni(dni.toInt())
             if (persona != null){
+                val daoCuentaUsuario = CuentaUsuarioDAO(requireContext())
+                //Validacion de numero de cuentas máximo por dni
+
+               if (!daoCuentaUsuario.verificarNumeroCuentasPorDNI(dni.toInt())) {
+                   etDNI.error = "El usuario ya tiene el máximo de cuentas(4)."
+                       return@setOnClickListener
+               }
 
                 // Validación en cuestion de FONDO de celular.
-                val daoCuentaUsuario = CuentaUsuarioDAO(requireContext())
+
                 if (daoCuentaUsuario.obtenerCuentaUsuarioPorNumMovil(celular.toInt()) != null) {
                     etCelular.error = "Cuenta TPAGO ya existente."
                     return@setOnClickListener

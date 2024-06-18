@@ -90,7 +90,7 @@ class MetodoRecargaFragment : Fragment(R.layout.fragment_metodo_recarga) {
         }
     }
 
-    fun eventoPagoEfectivo() {
+    private fun eventoPagoEfectivo() {
         val cuentaDao = CuentaUsuarioDAO(this.requireContext()) //ojo
 
         val currentDateTime = LocalDateTime.now()

@@ -1,9 +1,11 @@
 package com.example.tpago2.gui.registrarUsuario
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.findNavController
 import com.example.tpago2.R
 import com.example.tpago2.data.dao.UsuarioDAO
@@ -13,6 +15,7 @@ import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
 import com.example.tpago2.service.LoginManager
+import kotlin.system.exitProcess
 
 class BienvenidaTPAGOFragment : Fragment(R.layout.fragment_bienvenida_t_p_a_g_o) {
     private lateinit var personaRegistroActual: Persona
@@ -52,6 +55,16 @@ class BienvenidaTPAGOFragment : Fragment(R.layout.fragment_bienvenida_t_p_a_g_o)
     private fun actualizarInterfaz(view: View) {
         val txtNombre = view.findViewById<TextView>(R.id.nombre)
         txtNombre.text = personaRegistroActual.primer_nombre
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callBack = object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                exitProcess(1)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callBack)
     }
 
 }

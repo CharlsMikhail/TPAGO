@@ -178,4 +178,18 @@ class CuentaUsuarioDAO(context: Context) {
             0
         }
     }
+
+    fun verificarNumeroCuentasPorDNI(dni: Int): Boolean {
+        val query = "SELECT COUNT(*) FROM cuenta_usuario WHERE dni_persona = ?"
+        val cursor: Cursor = db.rawQuery(query, arrayOf(dni.toString()))
+
+        var numeroDeCuentas = 0
+        if (cursor.moveToFirst()) {
+            numeroDeCuentas = cursor.getInt(0)
+        }
+        cursor.close()
+
+        return numeroDeCuentas < 4
+    }
+
 }

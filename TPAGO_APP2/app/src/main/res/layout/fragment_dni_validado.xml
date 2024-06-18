@@ -16,20 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/btn_atras_nfc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#EFF0FC"
-            android:src="@drawable/atras"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView0"
-            app:layout_constraintHorizontal_bias="0.12"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.513"
-            tools:ignore="NotSibling" />
-
         <TextView
             android:id="@+id/textView0"
             android:layout_width="wrap_content"
@@ -43,6 +29,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageButton
+            android:id="@+id/btn_atras_nfc"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#EFF0FC"
+            android:src="@drawable/atras"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView0"
+            app:layout_constraintHorizontal_bias="0.319"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.567"
+            tools:ignore="NotSibling" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -52,7 +52,7 @@
         android:id="@+id/nfc_imgbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="188dp"
+        android:layout_marginTop="212dp"
         android:background="#EFF0FC"
         android:src="@drawable/delante"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,5 +72,15 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nfc_imgbtn" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="137dp"
+        android:layout_height="140dp"
+        android:src="@drawable/check"
+        app:layout_constraintBottom_toTopOf="@+id/nfc_imgbtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

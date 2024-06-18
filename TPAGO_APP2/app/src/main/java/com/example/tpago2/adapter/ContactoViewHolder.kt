@@ -10,7 +10,6 @@ import com.example.tpago2.R
 import com.example.tpago2.data.dao.AccesoEmpleadoDAO
 import com.example.tpago2.data.dao.CuentaUsuarioDAO
 import com.example.tpago2.data.entidades.Contacto
-import com.example.tpago2.service.isAdd
 import com.example.tpago2.service.restanteAccesos
 
 class ContactoViewHolder(private val userNumMovil: Int?, itemView: View) : RecyclerView.ViewHolder(itemView) {

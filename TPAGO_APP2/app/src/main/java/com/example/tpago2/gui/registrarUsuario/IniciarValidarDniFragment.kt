@@ -1,10 +1,12 @@
 package com.example.tpago2.gui.registrarUsuario
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Switch
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.navigation.findNavController
 import com.example.tpago2.R
@@ -14,6 +16,7 @@ import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
+import com.example.tpago2.service.errorDniFrontal
 import com.example.tpago2.service.validarDNI
 
 class IniciarValidarDniFragment : Fragment(R.layout.fragment_iniciar_validar_dni) {
@@ -34,7 +37,22 @@ class IniciarValidarDniFragment : Fragment(R.layout.fragment_iniciar_validar_dni
 
     }
 
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private fun eventos(view: View) {
+
+        val btnBack = view.findViewById<ImageButton>(R.id.btn_atras_nfc)
+
+        btnBack.setOnClickListener() {
+            view.findNavController().popBackStack()
+        }
+
+        val switchError = view.findViewById<Switch>(R.id.switch_error)
+
+        switchError.setOnCheckedChangeListener { _, isChecked ->
+            errorDniFrontal = isChecked
+        }
+
+
         val btnContinuar = view.findViewById<Button>(R.id.buttonLogin)
 
         btnContinuar.setOnClickListener {

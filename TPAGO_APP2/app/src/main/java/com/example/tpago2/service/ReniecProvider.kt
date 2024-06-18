@@ -53,7 +53,17 @@ class ReniecProvider {
             Persona(70809001, "Olga", "Patricia", "Cornejo", "Rivas"),
             Persona(80901011, "Matías", "Leonardo", "Chavez", "Espinoza"),
             Persona(91011121, "Rosa", "Marina", "Alarcón", "Salinas"),
-            Persona(11213141, "Javier", "Carlos", "Montero", "Escobar")
+            Persona(11213141, "Javier", "Carlos", "Montero", "Escobar"),
+            Persona(987654320, "David", "Enrique", "Castillo", "Serrano"),
+            Persona(976543219, "Elena", "Patricia", "Mendoza", "Garcia"),
+            Persona(965432198, "Alberto", "Rafael", "Soto", "Jimenez"),
+            Persona(954321087, "Julia", "Consuelo", "Dominguez", "Moreno"),
+            Persona(943210976, "Fernando", "Ignacio", "Gil", "Ortiz"),
+            Persona(932109865, "Ana", "Carolina", "Pérez", "Reyes"),
+            Persona(921098754, "Jose", "Manuel", "Ruiz", "Alvarez"),
+            Persona(910987643, "Sandra", "Cecilia", "Ramirez", "Guzman"),
+            Persona(909876532, "Ricardo", "Javier", "Herrera", "Ponce"),
+            Persona(998765421, "Patricia", "Teresa", "Vargas", "Medina")
         )
         fun getPersonaByDni(dni: Int): Persona? {
             return ReniecProvider.listUserReniec.find { it.dni_persona == dni }

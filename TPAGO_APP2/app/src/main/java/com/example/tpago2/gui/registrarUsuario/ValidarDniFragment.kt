@@ -33,6 +33,13 @@ class ValidarDniFragment : Fragment(R.layout.fragment_validar_dni) {
     }
 
     private fun eventos(view: View) {
+
+        val btnBack = view.findViewById<ImageButton>(R.id.btn_atras_nfc)
+
+        btnBack.setOnClickListener() {
+            view.findNavController().popBackStack()
+        }
+
         val btnContinuar = view.findViewById<ImageButton>(R.id.imagefoto)
         val delivery = Bundle()
         delivery.putSerializable(KEY_PERSONA, personaRegistroActual) // Cuidado

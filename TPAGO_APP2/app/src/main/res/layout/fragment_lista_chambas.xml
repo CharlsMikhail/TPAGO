@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="30dp"
+    android:padding="25dp"
     tools:context=".gui.gestionChamba.ListaChambasFragment">
 
     <ImageButton
@@ -37,7 +37,7 @@
         android:layout_height="50dp"
         android:layout_marginEnd="28dp"
         android:gravity="center"
-        android:text="Jefes"
+        android:text="Chambas"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
