@@ -99,7 +99,7 @@ class ListaAccesosFragment : Fragment(R.layout.fragment_lista_accesos) {
     private fun onItemSelected(user: AccesoAndChamba) {
         Toast.makeText(
             requireContext(),
-            "${user.nombres} tiene acceso a tu historial",
+            "El usuario ${user.nombres.uppercase()} tiene acceso a tu historial",
             Toast.LENGTH_SHORT
         ).show()
     }

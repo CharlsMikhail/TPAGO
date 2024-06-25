@@ -31,14 +31,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nombre del Usuario"
-                android:textSize="18sp" />
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/txt_movil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="986654321"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:textColor="#757575" />
 
         </LinearLayout>

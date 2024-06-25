@@ -14,6 +14,7 @@ import com.example.tpago2.data.dao.UsuarioDAO
 import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.Usuario
+import com.example.tpago2.gui.utilitarios.showCustomSnackBar
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
@@ -40,7 +41,9 @@ class IniciarSesionFragment : Fragment(R.layout.fragment_iniciar_sesion) {
         btnLog.setOnClickListener {
 
             if (editDNI.text.isEmpty() or editMOVIL.text.isEmpty() or editKEY.text.isEmpty()) {
-                Toast.makeText(requireContext(), "Datos incompletos, intente de nuevo", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), "Datos incompletos, intente de nuevo", Toast.LENGTH_SHORT).show()
+                showCustomSnackBar(requireView(),  "¡Atención!", "Datos incompletos, intente de nuevo")
+
                 return@setOnClickListener
             }
 
@@ -81,7 +84,8 @@ class IniciarSesionFragment : Fragment(R.layout.fragment_iniciar_sesion) {
                 view.findNavController().navigate(R.id.menuFragment,delivery)
             } else {
                 // Mostrar mensaje de error o realizar otra acción según necesites
-                Toast.makeText(requireContext(), "Datos incorrectos, intente de nuevo", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), "Datos incorrectos, intente de nuevo", Toast.LENGTH_SHORT).show()
+                showCustomSnackBar(requireView(),  "Datos incorrectos", "Intente de nuevo")
             }
         }
     }

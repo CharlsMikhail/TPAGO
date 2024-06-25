@@ -22,6 +22,7 @@ import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.Usuario
 import com.example.tpago2.gui.utilitarios.mostrarErrorDeConexion
+import com.example.tpago2.gui.utilitarios.showCustomSnackBar
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_DATE_OPER
 import com.example.tpago2.service.KEY_MONTO_PAGO
@@ -99,7 +100,9 @@ class PagarFragment : Fragment(R.layout.fragment_pagar) {
                 return@setOnClickListener
             }
             if (txtMonto.text.isEmpty()) {
-                Toast.makeText(requireContext(), "Escriba un monto, mínimo 1 sol", Toast.LENGTH_LONG).show()
+                //Toast.makeText(requireContext(), "Escriba un monto, mínimo 1 sol", Toast.LENGTH_LONG).show()
+                txtMonto.error = "Escriba un monto, mínimo 1 sol"
+                //showCustomSnackBar(requireView(),  "!Atención¡", "Escriba un monto, mínimo 1 sol")
                 return@setOnClickListener
             }
             val monto = txtMonto.text.toString().toInt()
@@ -123,7 +126,8 @@ class PagarFragment : Fragment(R.layout.fragment_pagar) {
                     .navigate(R.id.action_pagarFragment_to_detalleOperacionFragment, delivery)
             }
             else if (monto > 500) {
-               Toast.makeText(requireContext(), "Límite de monto superado", Toast.LENGTH_LONG).show()
+               //Toast.makeText(requireContext(), "Límite de monto superado", Toast.LENGTH_LONG).show()
+                showCustomSnackBar(requireView(),  "!Atención¡", "Límite de monto superado")
             }
             else if (monto > cuentaActual.saldo) {
                 saldoIsuiciente()
@@ -157,7 +161,7 @@ class PagarFragment : Fragment(R.layout.fragment_pagar) {
         dialog.setTitle("Saldo Insuficiente")
         dialog.setMessage("¿Desea realizar una recarga?")
         dialog.setPositiveButton("Recargar") { dialog, which ->
-            Toast.makeText(requireContext(), "Recargar" , Toast.LENGTH_SHORT).show()
+            //Toast.makeText(requireContext(), "Recargar" , Toast.LENGTH_SHORT).show()
             val delivery = Bundle()
             delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
             delivery.putSerializable(KEY_USUARIO, usuarioActual)

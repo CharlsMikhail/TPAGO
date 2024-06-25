@@ -65,12 +65,12 @@ class IngresarSesionFragment : Fragment(R.layout.fragment_ingresar_sesion) {
                     view.findNavController()
                         .navigate(R.id.action_ingresarSesionFragment_to_menuFragment, delivery)
                 } else {
-                    Toast.makeText(requireActivity(), "Contraseña incorrecta", Toast.LENGTH_SHORT)
-                        .show()
+                    //Toast.makeText(requireActivity(), "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
+                    txtKey.error = "Contraseña incorrecta"
                 }
             } else {
-                Toast.makeText(requireActivity(), "Ingrese su contraseña", Toast.LENGTH_SHORT)
-                    .show()
+                //Toast.makeText(requireActivity(), "Ingrese su contraseña", Toast.LENGTH_SHORT).show()
+                txtKey.error = "Ingrese su contraseña"
             }
         }
     }

@@ -20,10 +20,6 @@ class CargaMasiva(private val context: Context) {
             cargarDatosDesdeCSV(db, "csv_files_wos/cuenta_administrador.csv", TABLE_CUENTA_ADMINISTRADOR_INSERT)
             cargarDatosDesdeCSV(db, "csv_files_wos/usuario.csv", TABLE_USUARIO_INSERT)
             cargarDatosDesdeCSV(db, "csv_files_wos/cuenta_usuario.csv", TABLE_CUENTA_USUARIO_INSERT)
-            cargarDatosDesdeCSV(db, "csv_files_wos/departamento.csv", TABLE_DEPARTAMENTO_INSERT)
-            cargarDatosDesdeCSV(db, "csv_files_wos/provincia.csv", TABLE_PROVINCIA_INSERT)
-            cargarDatosDesdeCSV(db, "csv_files_wos/distrito.csv", TABLE_DISTRITO_INSERT)
-            cargarDatosDesdeCSV(db, "csv_files_wos/direccion_usuario.csv", TABLE_DIRECCION_USUARIO_INSERT)
             cargarDatosDesdeCSV(db, "csv_files_wos/operacion.csv", TABLE_OPERACION_INSERT)
             cargarDatosDesdeCSV(db, "csv_files_wos/tarjeta_usuario.csv", TABLE_TARJETA_USUARIO_INSERT)
             cargarDatosDesdeCSV(db, "csv_files_wos/recarga.csv", TABLE_RECARGA_INSERT)
@@ -59,10 +55,6 @@ class CargaMasiva(private val context: Context) {
         const val TABLE_CUENTA_ADMINISTRADOR_INSERT = "INSERT INTO cuenta_administrador (dni_persona, email, ip_cuenta_admin, contrasenia, estado_de_actividad) VALUES (?, ?, ?, ?, ?)"
         const val TABLE_USUARIO_INSERT = "INSERT INTO usuario (dni_persona, fecha_inicio, observaciones) VALUES (?, ?, ?)"
         const val TABLE_CUENTA_USUARIO_INSERT = "INSERT INTO cuenta_usuario (num_movil, dni_persona, saldo, ip_cuenta_usuario, contrasenia, limite_por_transaccion, email, estado_de_actividad) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
-        const val TABLE_DEPARTAMENTO_INSERT = "INSERT INTO departamento (id_departamento, nombre_departamento, descripcion) VALUES (?, ?, ?)"
-        const val TABLE_PROVINCIA_INSERT = "INSERT INTO provincia (id_departamento, id_provincia, nombre_provincia, descripcion) VALUES (?, ?, ?, ?)"
-        const val TABLE_DISTRITO_INSERT = "INSERT INTO distrito (id_distrito, id_provincia, nombre_distrito, descripcion) VALUES (?, ?, ?, ?)"
-        const val TABLE_DIRECCION_USUARIO_INSERT = "INSERT INTO direccion_usuario (num_movil, direccion_exacta, id_distrito) VALUES (?, ?, ?)"
         const val TABLE_OPERACION_INSERT = "INSERT INTO operacion (id_operacion, num_cuenta_origen, num_cuenta_destino, hora_operacion, fecha_operacion, monto_operacion) VALUES (?, ?, ?, ?, ?, ?)"
         const val TABLE_TARJETA_USUARIO_INSERT = "INSERT INTO tarjeta_usuario (num_tarjeta, num_movil, fecha_vencimiento, codigo_csv) VALUES (?, ?, ?, ?)"
         const val TABLE_RECARGA_INSERT = "INSERT INTO recarga (id_recarga, tipo, num_tarjeta, codigo_generado, monto, fecha, hora) VALUES (?, ?, ?, ?, ?, ?, ?)"

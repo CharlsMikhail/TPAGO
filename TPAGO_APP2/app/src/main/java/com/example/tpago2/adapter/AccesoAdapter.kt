@@ -2,17 +2,15 @@ package com.example.tpago2.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tpago2.R
 import com.example.tpago2.data.dao.AccesoEmpleadoDAO
-import com.example.tpago2.data.dao.TarjetaUsuarioDAO
 import com.example.tpago2.data.entidades.AccesoAndChamba
-import com.example.tpago2.data.entidades.TarjetaUsuario
 import com.example.tpago2.gui.utilitarios.mostrarErrorDeConexion
+import com.example.tpago2.gui.utilitarios.showCustomSnackBar
 import com.example.tpago2.service.falla
 
 class AccesoAdapter(private val items: MutableList<AccesoAndChamba>, private val idLayout: Int, val onItemSelected: (AccesoAndChamba) -> Unit): RecyclerView.Adapter<AccesoViewHolder>() {
@@ -29,7 +27,7 @@ class AccesoAdapter(private val items: MutableList<AccesoAndChamba>, private val
     override fun onBindViewHolder(holder: AccesoViewHolder, position: Int) {
         val item = items[position]
         holder.render(item, onItemSelected) {
-            deleteTarjeta(position, item)
+            deleteTarjeta(position, item, holder.itemView)
         }
     }
 
@@ -38,7 +36,7 @@ class AccesoAdapter(private val items: MutableList<AccesoAndChamba>, private val
         notifyItemInserted(0)
     }
 
-    private fun deleteTarjeta(index: Int, item: AccesoAndChamba) {
+    private fun deleteTarjeta(index: Int, item: AccesoAndChamba, itemView: View) {
         if (falla) {
             mostrarErrorDeConexion(context2)
             return
@@ -54,7 +52,8 @@ class AccesoAdapter(private val items: MutableList<AccesoAndChamba>, private val
             items.removeAt(index)
             notifyItemRemoved(index)
             notifyItemRangeChanged(index, items.size)
-            Toast.makeText(context2, "Acceso eliminado correctamente", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context2, "Acceso eliminado correctamente", Toast.LENGTH_SHORT).show()
+            showCustomSnackBar(itemView,  "!Atención¡", "Acceso eliminado correctamente", 2)
         }
         builder.setNegativeButton("Cancelar") { dialog, _ ->
             // Acción a realizar si el usuario cancela la eliminación

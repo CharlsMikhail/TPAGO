@@ -27,6 +27,7 @@ import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.TarjetaUsuario
 import com.example.tpago2.data.entidades.Usuario
 import com.example.tpago2.gui.utilitarios.mostrarErrorDeConexion
+import com.example.tpago2.gui.utilitarios.showCustomSnackBar
 import com.example.tpago2.service.ContactoProvider
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
@@ -77,7 +78,8 @@ class ListarTarjetasFragment : Fragment(R.layout.fragment_listar_tarjetas) {
             val daoTarjeta = TarjetaUsuarioDAO(requireContext())
 
             if (daoTarjeta.obtenerTotalTarjetasPorUsuario(cuentaActual.num_movil) >= 4) {
-                Toast.makeText(requireContext(), "Límite de tarjetas superado", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), "Límite de tarjetas superado", Toast.LENGTH_SHORT).show()
+                showCustomSnackBar(requireView(), "¡Atención!", "Límite de tarjetas superado", 1)
                 // Cambiar el color del botón a rojo para indicar un error
                 btnAdd.isEnabled = false
                 // Volver a cambiar el color a su color original después de 2 segundos
@@ -103,6 +105,6 @@ class ListarTarjetasFragment : Fragment(R.layout.fragment_listar_tarjetas) {
     }
 
     private fun onItemSelected(user: TarjetaUsuario) {
-        Toast.makeText(context, "Vence en " + user.fecha_vencimiento, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(context, "Vence en " + user.fecha_vencimiento, Toast.LENGTH_SHORT).show()
     }
 }

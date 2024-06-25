@@ -22,6 +22,7 @@ import com.example.tpago2.data.entidades.Contacto
 import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.Usuario
+import com.example.tpago2.gui.utilitarios.showCustomSnackBar
 import com.example.tpago2.service.ContactoProvider
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
@@ -77,7 +78,9 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
             if (restanteAccesos > 0) {
                 showDialogNumber(view)
             } else {
-                Toast.makeText(context, "No hay más accesos disponibles", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "No hay más accesos disponibles", Toast.LENGTH_SHORT).show()
+                showCustomSnackBar(requireView(),  "¡Atención!", "No hay más accesos disponibles", 1)
+
             }
 
         }
@@ -96,9 +99,12 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
 
                     daoAccesosEmpleado.insertarAccesoEmpleado(numMovilEmpleador, numMovilEmpleado, estadoAcceso, fechaAcceso)
                 }
-                Toast.makeText(context, "Accesos agregados correctamente", Toast.LENGTH_SHORT).show()
+                showCustomSnackBar(requireView(),  "!Todo salio bien¡", "Accesos agregados correctamente", 2)
+                //Toast.makeText(context, "Accesos agregados correctamente", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(context, "No hay usuarios para agregar", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "No hay usuarios para agregar", Toast.LENGTH_SHORT).show()
+                showCustomSnackBar(requireView(),  "!Atención¡", "No hay usuarios para agregar")
+
                 return@setOnClickListener
             }
 
@@ -170,7 +176,7 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
             } else if (listaAcceso.any { it.numMovil == inputNumber.toInt() }) {
                 // Caso: El número ya está en la lista
                // Toast.makeText(requireContext(), "El número ${inputNumber.toInt()} esta en la lista de espera.", Toast.LENGTH_SHORT).show()
-                input.error = "El número ${inputNumber.toInt()} esta en la lista de espera."
+                input.error = "El número ${inputNumber.toInt()} ya esta en la lista de espera."
             } else {
                 val daoCueUsu = CuentaUsuarioDAO(requireContext())
                 val cuentaDestino = daoCueUsu.obtenerUsuarioDestinoPorNumMovil(inputNumber.toInt())
@@ -182,11 +188,14 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
                     if (inputNumber.toInt() == cuentaActual.num_movil) {
                         // Caso: No puede darse acceso a sí mismo
                         //Toast.makeText(requireContext(), "No puede darse acceso a sí mismo.", Toast.LENGTH_SHORT).show()
-                        input.error = "No puede darse acceso a sí mismo."
+                        //input.error = "No puede darse acceso a sí mismo."
+                        showCustomSnackBar(requireView(),  "!Atención¡", "No puede darse acceso a sí mismo.")
+
                     } else if (daoAccesosEmpleado.verificarEmpleadoDelEmpleador(cuentaActual.num_movil, numMovilDestino)) {
                         // Caso: El número ya es empleado
                         //Toast.makeText(requireContext(), "Este número ya forma parte de sus empleados.", Toast.LENGTH_SHORT).show()
-                        input.error = "Esta cuenta ya tiene acceso a su historial"
+                        //input.error = "Esta cuenta ya tiene acceso a su historial"
+                        showCustomSnackBar(requireView(),  "!Atención¡", "Esta cuenta ya tiene acceso a su historial")
                     } else if (!daoAccesosEmpleado.verificarEmpleadoDelEmpleador(cuentaActual.num_movil, numMovilDestino)) {
                         // Caso: Insertar acceso empleado
                         val currentDateTime = LocalDateTime.now()
@@ -194,14 +203,15 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
 
                         daoAccesosEmpleado.insertarAccesoEmpleado(cuentaActual.num_movil, numMovilDestino, 1, fechaAcceso)
                         restanteAccesos--
-                        Toast.makeText(requireContext(), "Restante: $restanteAccesos", Toast.LENGTH_SHORT).show()
-                        Toast.makeText(requireContext(), "Agregado exitosamente", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(requireContext(), "Restante: $restanteAccesos", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(requireContext(), "Agregado exitosamente", Toast.LENGTH_SHORT).show()
                         alertDialog.dismiss() // Cerrar el diálogo si la operación es exitosa
                     }
                 } else {
                     // Caso: El número no pertenece a TPAGO
                     //Toast.makeText(requireContext(), "El número ${inputNumber.toInt()} no pertenece a TPAGO.", Toast.LENGTH_SHORT).show()
-                    input.error = "El número ${inputNumber.toInt()} no pertenece a TPAGO."
+                    //input.error = "El número ${inputNumber.toInt()} no pertenece a TPAGO."
+                    showCustomSnackBar(requireView(),  "!Atención¡", "El número ${inputNumber.toInt()} no pertenece a TPAGO.")
                 }
             }
         }

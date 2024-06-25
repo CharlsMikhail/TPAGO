@@ -17,6 +17,7 @@ import com.example.tpago2.data.dao.TarjetaUsuarioDAO
 import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.Usuario
+import com.example.tpago2.gui.utilitarios.showCustomSnackBar
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
@@ -80,7 +81,8 @@ class AgregarTarjetaFragment : Fragment(R.layout.fragment_agregar_tarjeta) {
 
             // Validar que no este vinculada a nigun usuario a en la base de datos
             if (daoTarjeta.tarjetaExiste(numTarjeta)) {
-                Toast.makeText(requireContext(), "La tarjeta ya esta vinculada con una cuenta TPAGO", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), "La tarjeta ya esta vinculada con una cuenta TPAGO", Toast.LENGTH_SHORT).show()
+                showCustomSnackBar(requireView(),  "!Atención¡", "Tarjeta ya vinculada con una tarjeta TPAGO", 1)
                 return@setOnClickListener
             }
 
@@ -88,7 +90,8 @@ class AgregarTarjetaFragment : Fragment(R.layout.fragment_agregar_tarjeta) {
 
 
             daoTarjeta.insertarTarjetaUsuario(numTarjeta, cuentaActual.num_movil,fecha, csv)
-            Toast.makeText(view.context, "Se agrego la tarjeta correctamente!", Toast.LENGTH_LONG).show()
+            //Toast.makeText(view.context, "Se agrego la tarjeta correctamente!", Toast.LENGTH_LONG).show()
+            showCustomSnackBar(requireView(), "Tarjeta agregada", "Se agrego la tarjeta correctamente!", 2)
             view.findNavController().popBackStack()
         }
     }
@@ -100,7 +103,7 @@ class AgregarTarjetaFragment : Fragment(R.layout.fragment_agregar_tarjeta) {
         val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
         val currentDateTime = LocalDateTime.now()
 
-        val datePickerDialog = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { _, selectedYear, selectedMonth, selectedDay ->
+        val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
             // Formatear la fecha seleccionada al formato deseado
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             calendar.set(selectedYear, selectedMonth, selectedDay)
@@ -111,9 +114,11 @@ class AgregarTarjetaFragment : Fragment(R.layout.fragment_agregar_tarjeta) {
                 // Establecer la fecha formateada en el TextView
                 ediFecha.error = null
                 ediFecha.text = fechaSeleccionada
+                //showCustomSnackBar(view, "¡Atención!", "Fecha seleccionada: $fechaSeleccionada", 2)
             } else {
                 ediFecha.error = "Fecha expirada"
                 ediFecha.text = ""
+                showCustomSnackBar(view, "¡Error!", "Fecha expirada", 1)
             }
 
         }, year, month, dayOfMonth)

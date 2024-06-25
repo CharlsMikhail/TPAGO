@@ -22,6 +22,7 @@ import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.TarjetaUsuario
 import com.example.tpago2.data.entidades.Usuario
+import com.example.tpago2.gui.utilitarios.showCustomSnackBar
 import com.example.tpago2.service.ContactoProvider
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_MONTO_RECARGA
@@ -91,7 +92,8 @@ class VerTarjetasFragment : Fragment(R.layout.fragment_ver_tarjetas) {
         val date = currentDateTime.toLocalDate().toString()
 
         if (tarjeta.fecha_vencimiento < date) {
-            Toast.makeText(requireContext(), "Fecha tarjeta expirada", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(requireContext(), "Fecha tarjeta expirada", Toast.LENGTH_SHORT).show()
+            showCustomSnackBar(requireView(), "¡Atención!", "Fecha tarjeta expirada", 1)
             return
         }
 

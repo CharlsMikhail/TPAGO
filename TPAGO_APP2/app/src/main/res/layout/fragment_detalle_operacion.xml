@@ -263,7 +263,7 @@
             android:layout_height="wrap_content"
             android:textSize="22sp"
             android:textAlignment="center"
-            android:text="I al Menu" />
+            android:text="Ir al Menu" />
     </TableRow>
 
 </LinearLayout>

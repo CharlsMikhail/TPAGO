@@ -24,6 +24,8 @@ import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
 import com.example.tpago2.service.KEY_USUARIO_DESTINO
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
+import com.example.tpago2.gui.utilitarios.showCustomSnackBar
 
 class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
 
@@ -91,9 +93,9 @@ class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
 
             // Validar el número de teléfono ingresado
             if (inputNumber.isBlank()) {
-                input.error = "Por favor, ingrese un número."
+                input.error = "Por favor, ingrese un número"
             } else if (!isValidPhoneNumber(inputNumber)) {
-                input.error = "Celular debe contener 9 dígitos y comenzar con el '9'."
+                input.error = "Celular debe contener 9 dígitos y comenzar con el '9'"
             } else {
                 val daoCueUsu = CuentaUsuarioDAO(requireContext())
                 val cuentaDestino = daoCueUsu.obtenerUsuarioDestinoPorNumMovil(inputNumber.toInt())
@@ -107,9 +109,13 @@ class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
                     view.findNavController().navigate(R.id.action_listarContactosFragment_to_pagarFragment, delivery)
                     alertDialog.dismiss() // Cerrar el diálogo si la operación es exitosa
                 } else if (inputNumber.toInt() == cuentaActual.num_movil) {
-                    Toast.makeText(requireContext(), "No puede transferirse a sí mismo.", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(requireContext(), "No puede transferirse a sí mismo.", Toast.LENGTH_SHORT).show()
+                    showCustomSnackBar(dialogView,  "¡Atención!", "No puede transferirse a sí mismo")
+
                 } else {
-                    Toast.makeText(requireContext(), "El número ${inputNumber.toInt()} no pertenece a TPAGO.", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(requireContext(), "El número ${inputNumber.toInt()} no pertenece a TPAGO.", Toast.LENGTH_SHORT).show()
+                    //Snackbar.make(requireView(), "El número ${inputNumber.toInt()} no pertenece a TPAGO.", Snackbar.LENGTH_SHORT).show()
+                    showCustomSnackBar(dialogView,  "¡Atención!", "El número ${inputNumber.toInt()} no pertenece a TPAGO")
                 }
             }
         }
@@ -146,10 +152,13 @@ class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
             view?.findNavController()?.navigate(R.id.action_listarContactosFragment_to_pagarFragment, delivery)
         }
         else if (user.numMovil == cuentaActual.num_movil) {
-            Toast.makeText(requireContext(), "No puede trasferirse a si mismo", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(requireContext(), "No puede trasferirse a si mismo", Toast.LENGTH_SHORT).show()
+            showCustomSnackBar(requireView(),  "¡Atención!", "No puede transferirse a sí mismo")
         }
         else {
-            Toast.makeText(requireContext(), "El contacto ${user.nombres} no pertence a TPAGO", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(requireContext(), "El contacto ${user.nombres} no pertence a TPAGO", Toast.LENGTH_SHORT).show()
+            showCustomSnackBar(requireView(),  "¡Atención!", "El contacto ${user.nombres.toUpperCase()} no pertenece a TPAGO")
+
         }
     }
 }

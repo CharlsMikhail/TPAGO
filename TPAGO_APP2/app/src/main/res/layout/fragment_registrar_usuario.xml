@@ -135,6 +135,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Registar Cuenta"
+        android:text="Registrar Cuenta"
         android:textSize="30dp"/>
 </LinearLayout>

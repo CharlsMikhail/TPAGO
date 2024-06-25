@@ -15,6 +15,7 @@ import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.Usuario
 import com.example.tpago2.gui.utilitarios.mostrarErrorDeConexion
+import com.example.tpago2.gui.utilitarios.showCustomSnackBar
 import com.example.tpago2.service.KEY_CODIGO_PE
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_MONTO_RECARGA
@@ -85,7 +86,8 @@ class MetodoRecargaFragment : Fragment(R.layout.fragment_metodo_recarga) {
                 view.findNavController().navigate(R.id.action_metodoRecargaFragment_to_detallePagoEfectivoFragment, delivery)
 
             } else {
-                Toast.makeText(view.context, "Seleccione una opcion", Toast.LENGTH_LONG).show()
+                //Toast.makeText(view.context, "Seleccione una opcion", Toast.LENGTH_LONG).show()
+                showCustomSnackBar(requireView(),  "!Atención¡", "Seleccione una opcion")
             }
         }
     }
@@ -116,8 +118,8 @@ class MetodoRecargaFragment : Fragment(R.layout.fragment_metodo_recarga) {
             horaMinutoString
         )
 
-        Toast.makeText(requireContext(), "Orden de pago generado", Toast.LENGTH_SHORT).show()
-
+        //Toast.makeText(requireContext(), "Orden de pago generado", Toast.LENGTH_SHORT).show()
+        showCustomSnackBar(requireView(), "¡Éxito!", "Orden de pago generado", 2)
     }
 
 }

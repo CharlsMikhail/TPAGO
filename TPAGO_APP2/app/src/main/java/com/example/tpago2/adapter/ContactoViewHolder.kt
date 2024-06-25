@@ -1,5 +1,6 @@
 package com.example.tpago2.adapter
 
+import android.graphics.Color
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
@@ -10,6 +11,7 @@ import com.example.tpago2.R
 import com.example.tpago2.data.dao.AccesoEmpleadoDAO
 import com.example.tpago2.data.dao.CuentaUsuarioDAO
 import com.example.tpago2.data.entidades.Contacto
+import com.example.tpago2.gui.utilitarios.showCustomSnackBar
 import com.example.tpago2.service.restanteAccesos
 
 class ContactoViewHolder(private val userNumMovil: Int?, itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -17,6 +19,7 @@ class ContactoViewHolder(private val userNumMovil: Int?, itemView: View) : Recyc
     private val viewNombre = itemView.findViewById<TextView>(R.id.txt_name_user)
     private val viewCelular = itemView.findViewById<TextView>(R.id.txt_movil)
     private val btnAdd = itemView.findViewById<ImageButton>(R.id.agregar_acceso)
+    private val contactoDAO = CuentaUsuarioDAO(itemView.context)
 
     init {
         if (userNumMovil != null) btnAdd.visibility = View.VISIBLE
@@ -28,6 +31,10 @@ class ContactoViewHolder(private val userNumMovil: Int?, itemView: View) : Recyc
     ) {
         viewCelular.text = item.numMovil.toString()
         viewNombre.text = item.nombres
+
+        if (contactoDAO.obtenerUsuarioDestinoPorNumMovil(item.numMovil) != null) {
+            viewCelular.setBackgroundColor(Color.argb(50, 128, 0, 128)); // Morado suave y casi transparente
+        }
 
         // Obtener drawables
         val agregarVerde = ResourcesCompat.getDrawable(itemView.resources, R.drawable.agregar_verde, null)
@@ -53,11 +60,12 @@ class ContactoViewHolder(private val userNumMovil: Int?, itemView: View) : Recyc
                         btnAdd.setImageDrawable(agregarGris)
                         item.isAdd = false
                         restanteAccesos++
-                        Toast.makeText(itemView.context, "Restante: ${restanteAccesos}", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(itemView.context, "Restante: ${restanteAccesos}", Toast.LENGTH_SHORT).show()
 
                     } else {
                         if (restanteAccesos == 0) {
                             Toast.makeText(itemView.context, "Límite de accesos superado", Toast.LENGTH_SHORT).show()
+                            showCustomSnackBar(itemView, "¡Atención!","Límite de accesos superado", 1)
                             return@setOnClickListener
                         }
 
@@ -65,18 +73,21 @@ class ContactoViewHolder(private val userNumMovil: Int?, itemView: View) : Recyc
                         val daoAcceso = AccesoEmpleadoDAO(itemView.context)
 
                         if (item.numMovil == userNumMovil) {
-                            Toast.makeText(itemView.context, "No puede darse acceso a sí mismo", Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(itemView.context, "No puede darse acceso a sí mismo", Toast.LENGTH_SHORT).show()
+                            showCustomSnackBar(itemView, "¡Atención!","No puede darse acceso a sí mismo")
                             return@setOnClickListener
                         } else if (daoAcceso.verificarEmpleadoDelEmpleador(userNumMovil, item.numMovil)) {
-                            Toast.makeText(itemView.context, "El contacto ${item.nombres} ya forma parte de tus empleados", Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(itemView.context, "El contacto ${item.nombres} ya forma parte de tus empleados", Toast.LENGTH_SHORT).show()
+                            showCustomSnackBar(itemView, "¡Atención!","El contacto ${item.nombres} ya forma parte de tus empleados")
                             return@setOnClickListener
                         } else if (daoCueUsu.obtenerUsuarioDestinoPorNumMovil(item.numMovil) == null) {
-                            Toast.makeText(itemView.context, "El contacto ${item.nombres} no pertenece a TPAGO", Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(itemView.context, "El contacto ${item.nombres} no pertenece a TPAGO", Toast.LENGTH_SHORT).show()
+                            showCustomSnackBar(itemView, "¡Atención!","El contacto ${item.nombres} no pertenece a TPAGO")
                             return@setOnClickListener
                         }
                         item.isAdd = true
                         restanteAccesos--
-                        Toast.makeText(itemView.context, "Restante: ${restanteAccesos}", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(itemView.context, "Restante: ${restanteAccesos}", Toast.LENGTH_SHORT).show()
                         btnAdd.setImageDrawable(agregarVerde)
                     }
                     onClickListener(item)

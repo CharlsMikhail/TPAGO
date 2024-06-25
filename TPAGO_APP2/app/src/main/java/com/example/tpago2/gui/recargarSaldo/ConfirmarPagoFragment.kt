@@ -16,6 +16,7 @@ import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.TarjetaUsuario
 import com.example.tpago2.data.entidades.Usuario
 import com.example.tpago2.gui.utilitarios.mostrarErrorDeConexion
+import com.example.tpago2.gui.utilitarios.showCustomSnackBar
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_DATE_RECARGA
 import com.example.tpago2.service.KEY_MONTO_RECARGA
@@ -94,8 +95,8 @@ class ConfirmarPagoFragment : Fragment(R.layout.fragment_confirmar_pago) {
                 horaMinutoString
             )
 
-            Toast.makeText(view.context, "Se recargo exitosamente", Toast.LENGTH_SHORT).show()
-
+            //Toast.makeText(view.context, "Se recargo exitosamente", Toast.LENGTH_SHORT).show()
+            showCustomSnackBar(requireView(),  "¡Éxito!", "Se recargo exitosamente", 2)
             val delivery = Bundle()
             delivery.putSerializable(KEY_CUENTA_USUARIO, cuentaActual)
             delivery.putSerializable(KEY_USUARIO, usuarioActual)

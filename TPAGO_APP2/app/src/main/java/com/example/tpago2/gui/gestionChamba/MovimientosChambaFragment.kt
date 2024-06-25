@@ -19,6 +19,7 @@ import com.example.tpago2.data.entidades.CuentaUsuario
 import com.example.tpago2.data.entidades.Movimiento
 import com.example.tpago2.data.entidades.Persona
 import com.example.tpago2.data.entidades.Usuario
+import com.example.tpago2.gui.utilitarios.showCustomSnackBar
 import com.example.tpago2.service.KEY_ACCESO
 import com.example.tpago2.service.KEY_CUENTA_USUARIO
 import com.example.tpago2.service.KEY_PERSONA
@@ -67,7 +68,9 @@ class MovimientosChambaFragment : Fragment(R.layout.fragment_movimientos_chamba)
         val manager = LinearLayoutManager(context)
         val listaMovimientos = operDAO.obtenerMovimientosPorCuenta(acceso.numMovil)
         if (listaMovimientos.isEmpty()) {
-            Toast.makeText(context, "No hay movimientos", Toast.LENGTH_LONG).show()
+            //Toast.makeText(context, "No hay movimientos", Toast.LENGTH_LONG).show()
+            showCustomSnackBar(requireView(),  "!Atención¡", "No hay movimientos")
+            return
         }
         moviAdapter = MovimientosAdapter(listaMovimientos) { user -> onItemSelected(user) } //ojito
         val decoration = DividerItemDecoration(context, manager.orientation)

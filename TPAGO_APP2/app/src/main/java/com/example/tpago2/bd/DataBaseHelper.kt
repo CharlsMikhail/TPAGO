@@ -12,10 +12,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db?.execSQL(CREATE_TABLE_CUENTA_ADMINISTRADOR)
         db?.execSQL(CREATE_TABLE_USUARIO)
         db?.execSQL(CREATE_TABLE_CUENTA_USUARIO)
-        db?.execSQL(CREATE_TABLE_DEPARTAMENTO)
-        db?.execSQL(CREATE_TABLE_PROVINCIA)
-        db?.execSQL(CREATE_TABLE_DISTRITO)
-        db?.execSQL(CREATE_TABLE_DIRECCION_USUARIO)
+        db?.execSQL(CREATE_TABLE_NOTIFICACION_USUARIO)
         db?.execSQL(CREATE_TABLE_OPERACION)
         db?.execSQL(CREATE_TABLE_TARJETA_USUARIO)
         db?.execSQL(CREATE_TABLE_RECARGA)
@@ -27,10 +24,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db?.execSQL("DROP TABLE IF EXISTS cuenta_administrador")
         db?.execSQL("DROP TABLE IF EXISTS usuario")
         db?.execSQL("DROP TABLE IF EXISTS cuenta_usuario")
-        db?.execSQL("DROP TABLE IF EXISTS departamento")
-        db?.execSQL("DROP TABLE IF EXISTS provincia")
-        db?.execSQL("DROP TABLE IF EXISTS distrito")
-        db?.execSQL("DROP TABLE IF EXISTS direccion_usuario")
+        db?.execSQL("DROP TABLE IF EXISTS notificacion_usuario")
         db?.execSQL("DROP TABLE IF EXISTS operacion")
         db?.execSQL("DROP TABLE IF EXISTS tarjeta_usuario")
         db?.execSQL("DROP TABLE IF EXISTS recarga")
@@ -83,37 +77,14 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             )
         """
 
-        const val CREATE_TABLE_DEPARTAMENTO = """
-            CREATE TABLE departamento (
-                id_departamento INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                nombre_departamento TEXT NOT NULL,
-                descripcion TEXT
-            )
-        """
-
-        const val CREATE_TABLE_PROVINCIA = """
-            CREATE TABLE provincia (
-                id_departamento INTEGER NOT NULL REFERENCES departamento(id_departamento),
-                id_provincia INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                nombre_provincia TEXT NOT NULL,
-                descripcion TEXT
-            )
-        """
-
-        const val CREATE_TABLE_DISTRITO = """
-            CREATE TABLE distrito (
-                id_provincia INTEGER NOT NULL REFERENCES provincia(id_provincia),
-                id_distrito INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                nombre_distrito TEXT NOT NULL,
-                descripcion TEXT
-            )
-        """
-
-        const val CREATE_TABLE_DIRECCION_USUARIO = """
-            CREATE TABLE direccion_usuario (
-                num_movil INTEGER NOT NULL PRIMARY KEY REFERENCES cuenta_usuario(num_movil),
-                direccion_exacta TEXT NOT NULL,
-                id_distrito INTEGER NOT NULL REFERENCES distrito(id_distrito)
+        const val CREATE_TABLE_NOTIFICACION_USUARIO = """
+            CREATE TABLE notificacion_usuario (
+                cod_notificacion INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                num_movil INTEGER NOT NULL REFERENCES cuenta_usuario(num_movil),
+                titulo_notificacion TEXT NOT NULL,
+                cuerpo_notificacion TEXT NOT NULL,
+                hora_notificacion TIME NOT NULL,
+                fecha_notificacion DATE NOT NULL
             )
         """
 
