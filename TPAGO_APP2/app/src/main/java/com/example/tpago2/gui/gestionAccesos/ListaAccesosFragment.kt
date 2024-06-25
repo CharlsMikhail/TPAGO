@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.ImageButton
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -29,13 +30,15 @@ import com.example.tpago2.service.KEY_USUARIO_DESTINO
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlin.properties.Delegates
 
-class ListaAccesosFragment : Fragment(R.layout.fragment_lista_accesos) {
+class ListaAccesosFragment : Fragment(R.layout.fragment_lista_accesos), SearchView.OnQueryTextListener {
 
     private lateinit var userAdapter: AccesoAdapter
 
     private lateinit var cuentaActual: CuentaUsuario
     private lateinit var usuarioActual: Usuario
     private lateinit var personaActual: Persona
+
+    private lateinit var searchView: SearchView
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,6 +49,8 @@ class ListaAccesosFragment : Fragment(R.layout.fragment_lista_accesos) {
             usuarioActual = it.getSerializable(KEY_USUARIO) as Usuario
             personaActual = it.getSerializable(KEY_PERSONA) as Persona
         }
+
+        searchView = view.findViewById(R.id.searchView)
 
         initRecycleView(view)
         actualizarInterfaz(view)
@@ -58,6 +63,9 @@ class ListaAccesosFragment : Fragment(R.layout.fragment_lista_accesos) {
         btnBack.setOnClickListener() {
             view.findNavController().popBackStack()
         }
+
+        searchView.setOnQueryTextListener(this)
+
 
         val btnNumber = view.findViewById<FloatingActionButton>(R.id.btnNumber)
         btnNumber.setOnClickListener{
@@ -103,4 +111,14 @@ class ListaAccesosFragment : Fragment(R.layout.fragment_lista_accesos) {
             Toast.LENGTH_SHORT
         ).show()
     }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        userAdapter.filtrado(newText)
+        return false
+    }
+
 }

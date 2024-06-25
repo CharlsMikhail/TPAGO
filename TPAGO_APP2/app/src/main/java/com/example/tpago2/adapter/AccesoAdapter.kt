@@ -16,10 +16,26 @@ import com.example.tpago2.service.falla
 class AccesoAdapter(private val items: MutableList<AccesoAndChamba>, private val idLayout: Int, val onItemSelected: (AccesoAndChamba) -> Unit): RecyclerView.Adapter<AccesoViewHolder>() {
 
     private lateinit var context2: Context
+    private var listaOriginal: MutableList<AccesoAndChamba> = items.toMutableList()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccesoViewHolder {
         context2 = parent.context
         val itemView = LayoutInflater.from(parent.context).inflate(idLayout, parent, false)
         return AccesoViewHolder(itemView)
+    }
+
+    fun filtrado(txtBuscar: String?) {
+        if (txtBuscar.isNullOrEmpty()) {
+            items.clear()
+            items.addAll(listaOriginal)
+        } else {
+            val listaFiltrada = items.filter {
+                it.nombres.contains(txtBuscar, ignoreCase = true) || it.numMovil.toString().contains(txtBuscar, ignoreCase = true)
+            }
+            items.clear()
+            items.addAll(listaFiltrada)
+        }
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = items.size
