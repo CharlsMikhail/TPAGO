@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.findNavController
@@ -27,17 +28,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.example.tpago2.gui.utilitarios.showCustomSnackBar
 
-class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
+class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos), SearchView.OnQueryTextListener  {
 
     private lateinit var userAdapter: ContactoAdapter
+
+    private lateinit var searchView: SearchView
 
     private lateinit var cuentaActual: CuentaUsuario
     private lateinit var usuarioActual: Usuario
     private lateinit var personaActual: Persona
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -48,6 +48,10 @@ class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
         }
 
         initRecycleView(view)
+
+        searchView = view.findViewById(R.id.searchView)
+
+
         eventos(view)
     }
 
@@ -57,6 +61,8 @@ class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
         btnBack.setOnClickListener() {
             view.findNavController().popBackStack()
         }
+
+        searchView.setOnQueryTextListener(this)
 
         val btnNumber = view.findViewById<FloatingActionButton>(R.id.btnNumber)
         btnNumber.setOnClickListener{
@@ -161,4 +167,14 @@ class ListarContactosFragment : Fragment(R.layout.fragment_listar_contactos) {
 
         }
     }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        userAdapter.filtrado(newText)
+        return false
+    }
+
 }

@@ -40,10 +40,17 @@ class IniciarSesionFragment : Fragment(R.layout.fragment_iniciar_sesion) {
 
         btnLog.setOnClickListener {
 
-            if (editDNI.text.isEmpty() or editMOVIL.text.isEmpty() or editKEY.text.isEmpty()) {
-                //Toast.makeText(requireContext(), "Datos incompletos, intente de nuevo", Toast.LENGTH_SHORT).show()
-                showCustomSnackBar(requireView(),  "¡Atención!", "Datos incompletos, intente de nuevo")
-
+            // Verificar si los campos están vacíos
+            if (editDNI.text.isEmpty()) {
+                editDNI.error = "Campo requerido"
+                return@setOnClickListener
+            }
+            if (editMOVIL.text.isEmpty()) {
+                editMOVIL.error = "Campo requerido"
+                return@setOnClickListener
+            }
+            if (editKEY.text.isEmpty()) {
+                editKEY.error = "Campo requerido"
                 return@setOnClickListener
             }
 
@@ -57,12 +64,10 @@ class IniciarSesionFragment : Fragment(R.layout.fragment_iniciar_sesion) {
             val usuarioDAO = UsuarioDAO(requireContext())
             val cuentaUsuarioDAO = CuentaUsuarioDAO(requireContext())
 
-
             // Suponiendo que el usuario se valida por DNI y móvil
             val persona = personaDAO.obtenerPersonaPorDni(dni)
             val usuario = usuarioDAO.obtenerUsuarioPorDni(dni)
             val cuentaUsuario = cuentaUsuarioDAO.obtenerCuentaUsuarioPorNumMovil(movil)
-
 
             if (usuario != null && cuentaUsuario != null && persona != null && persona.dni_persona == cuentaUsuario.dni_persona && key == cuentaUsuario.contrasenia) {
                 // Usuario y cuenta validados correctamente
@@ -81,11 +86,13 @@ class IniciarSesionFragment : Fragment(R.layout.fragment_iniciar_sesion) {
                 delivery.putSerializable(KEY_USUARIO, usuarioActual)
                 delivery.putSerializable(KEY_PERSONA, personaActual)
 
-                view.findNavController().navigate(R.id.menuFragment,delivery)
+                view.findNavController().navigate(R.id.menuFragment, delivery)
             } else {
                 // Mostrar mensaje de error o realizar otra acción según necesites
-                //Toast.makeText(requireContext(), "Datos incorrectos, intente de nuevo", Toast.LENGTH_SHORT).show()
-                showCustomSnackBar(requireView(),  "Datos incorrectos", "Intente de nuevo")
+                // Aquí puedes decidir si quieres mostrar un mensaje o simplemente dejar los errores en los EditText
+                // Si quieres mostrar un mensaje globalmente, puedes usar un Snackbar como antes
+                //showCustomSnackBar(view.rootView,  "Datos incorrectos", "Intente de nuevo")
+                Toast.makeText(requireContext(), "Datos incorrectos", Toast.LENGTH_SHORT).show()
             }
         }
     }

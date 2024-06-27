@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.ImageButton
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -24,8 +25,9 @@ import com.example.tpago2.service.KEY_PERSONA
 import com.example.tpago2.service.KEY_USUARIO
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class ListaChambasFragment : Fragment(R.layout.fragment_lista_chambas) {
+class ListaChambasFragment : Fragment(R.layout.fragment_lista_chambas), SearchView.OnQueryTextListener {
     private lateinit var userAdapter: AccesoAdapter
+    private lateinit var searchView: SearchView
 
     private lateinit var cuentaActual: CuentaUsuario
     private lateinit var usuarioActual: Usuario
@@ -41,6 +43,8 @@ class ListaChambasFragment : Fragment(R.layout.fragment_lista_chambas) {
             personaActual = it.getSerializable(KEY_PERSONA) as Persona
         }
 
+        searchView = view.findViewById(R.id.searchView)
+
         initRecycleView(view)
         actualizarInterfaz(view)
         eventos(view)
@@ -51,6 +55,8 @@ class ListaChambasFragment : Fragment(R.layout.fragment_lista_chambas) {
         btnBack.setOnClickListener() {
             view.findNavController().popBackStack()
         }
+
+        searchView.setOnQueryTextListener(this)
 
     }
 
@@ -88,6 +94,15 @@ class ListaChambasFragment : Fragment(R.layout.fragment_lista_chambas) {
 
         requireView().findNavController().navigate(R.id.action_listaChambasFragment2_to_movimientosChambaFragment, delivery)
 
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        userAdapter.filtrado(newText)
+        return false
     }
 
 

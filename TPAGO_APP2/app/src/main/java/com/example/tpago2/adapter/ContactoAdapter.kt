@@ -5,9 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tpago2.R
+import com.example.tpago2.data.entidades.AccesoAndChamba
 import com.example.tpago2.data.entidades.Contacto
 
 class ContactoAdapter(private val userNumMovil: Int?, private val items: MutableList<Contacto>, val onItemSelected: (Contacto) -> Unit): RecyclerView.Adapter<ContactoViewHolder>() {
+
+    private var listaOriginal: MutableList<Contacto> = items.toMutableList()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactoViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_contacto,parent, false)
@@ -44,5 +48,20 @@ class ContactoAdapter(private val userNumMovil: Int?, private val items: Mutable
         items[index] = usuario
         notifyItemChanged(index)
     }
+
+    fun filtrado(txtBuscar: String?) {
+        if (txtBuscar.isNullOrEmpty()) {
+            items.clear()
+            items.addAll(listaOriginal)
+        } else {
+            val listaFiltrada = items.filter {
+                it.nombres.contains(txtBuscar, ignoreCase = true) || it.numMovil.toString().contains(txtBuscar, ignoreCase = true)
+            }
+            items.clear()
+            items.addAll(listaFiltrada)
+        }
+        notifyDataSetChanged()
+    }
+
 
 }
