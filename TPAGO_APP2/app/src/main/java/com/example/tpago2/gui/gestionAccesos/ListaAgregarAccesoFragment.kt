@@ -56,7 +56,7 @@ class ListaAgregarAccesoFragment : Fragment(R.layout.fragment_lista_agregar_acce
 
         // Obtener  el limite de restante de accesos
         daoAccesosEmpleado = AccesoEmpleadoDAO(requireContext())
-        restanteAccesos = 10 - daoAccesosEmpleado.obtenerCantidadEmpleadosVinculados(cuentaActual.num_movil)
+        restanteAccesos = 20 - daoAccesosEmpleado.obtenerCantidadEmpleadosVinculados(cuentaActual.num_movil)
 
         initRecycleView(view)
 
