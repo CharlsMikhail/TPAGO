@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDT T'PAGO - Árbol Interactivo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .tree-container {
+            overflow-x: auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .tree {
+            display: inline-block;
+            min-width: 100%;
+        }
+        
+        .tree ul {
+            padding-left: 0;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .tree li {
+            list-style-type: none;
+            position: relative;
+            padding: 10px 5px 10px 30px;
+            transition: all 0.3s;
+        }
+        
+        .tree li::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10px;
+            border-left: 2px solid #ccc;
+            height: 100%;
+        }
+        
+        .tree li::after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 10px;
+            border-top: 2px solid #ccc;
+            width: 20px;
+        }
+        
+        .tree li:last-child::before {
+            height: 25px;
+        }
+        
+        .tree > ul > li::before,
+        .tree > ul > li::after {
+            border: 0;
+        }
+        
+        .node {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            background: white;
+            border: 2px solid #667eea;
+            margin: 3px 0;
+        }
+        
+        .node:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .node.level-0 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+            padding: 12px 20px;
+        }
+        
+        .node.level-1 {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+            border-color: #667eea;
+        }
+        
+        .node.level-2 {
+            background: #8b9ce8;
+            color: white;
+            border-color: #8b9ce8;
+        }
+        
+        .node.level-3 {
+            background: #b0bcea;
+            color: #333;
+            border-color: #b0bcea;
+        }
+        
+        .node.level-4 {
+            background: #e8ebf7;
+            color: #333;
+            border-color: #667eea;
+        }
+        
+        .toggle {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 18px;
+            text-align: center;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            margin-right: 8px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .node.level-0 .toggle {
+            background: rgba(255,255,255,0.4);
+        }
+        
+        .collapsed > ul {
+            display: none;
+        }
+        
+        .code {
+            font-family: 'Courier New', monospace;
+            background: rgba(0,0,0,0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            margin-right: 8px;
+        }
+        
+        .search-box {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .search-box input {
+            padding: 10px 20px;
+            width: 400px;
+            max-width: 90%;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        .search-box input:focus {
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .highlight {
+            background: #32c8c8b2 !important;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .stats {
+            text-align: center;
+            color: #666;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 8px;
+        }
+        
+        .stats span {
+            margin: 0 15px;
+            font-weight: bold;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 EDT - T'PAGO</h1>
+        <p class="subtitle">Estructura de Desglose del Trabajo - Billetera Virtual</p>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Buscar en el EDT...">
+        </div>
+        
+        <div class="controls">
+            <button onclick="expandAll()">➕ Expandir Todo</button>
+            <button onclick="collapseAll()">➖ Contraer Todo</button>
+            <button onclick="expandLevel(1)">Nivel 1</button>
+            <button onclick="expandLevel(2)">Nivel 2</button>
+            <button onclick="expandLevel(3)">Nivel 3</button>
+            <button onclick="printTree()">🖨️ Imprimir</button>
+        </div>
+        
+        <div class="tree-container">
+            <div class="tree" id="tree">
+                <ul>
+                    <li>
+                        <div class="node level-0" onclick="toggleNode(this)">
+                            <span class="toggle">−</span>
+                            <span class="code">1.0</span>
+                            <span>T'PAGO - Billetera Virtual</span>
+                        </div>
+                        <ul>
+                            <!-- Módulo 1 -->
+                            <li>
+                                <div class="node level-1" onclick="toggleNode(this)">
+                                    <span class="toggle">−</span>
+                                    <span class="code">1.1</span>
+                                    <span>Módulo de Autenticación y Seguridad</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.1.1</span>
+                                            <span>Componente de Registro</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.1.1.1</span> Validación DNI</div></li>
+                                            <li><div class="node level-3"><span class="code">1.1.1.2</span> Escaneo DNI</div></li>
+                                            <li><div class="node level-3"><span class="code">1.1.1.3</span> Verificación datos</div></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.1.2</span>
+                                            <span>Componente de Login</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.1.2.1</span> Autenticación biométrica</div></li>
+                                            <li><div class="node level-3"><span class="code">1.1.2.2</span> Autenticación PIN</div></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.1.3</span>
+                                            <span>Componente de Seguridad</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.1.3.1</span> Encriptación datos</div></li>
+                                            <li><div class="node level-3"><span class="code">1.1.3.2</span> Cumplimiento PCI-DSS</div></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <!-- Módulo 2 -->
+                            <li>
+                                <div class="node level-1" onclick="toggleNode(this)">
+                                    <span class="toggle">−</span>
+                                    <span class="code">1.2</span>
+                                    <span>Módulo de Gestión de Usuarios</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.2.1</span>
+                                            <span>Componente de Perfil</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.2.1.1</span> Datos personales</div></li>
+                                            <li><div class="node level-3"><span class="code">1.2.1.2</span> Foto de perfil</div></li>
+                                            <li><div class="node level-3"><span class="code">1.2.1.3</span> Información contacto</div></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.2.2</span>
+                                            <span>Componente de Configuración</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.2.2.1</span> Preferencias notificaciones</div></li>
+                                            <li><div class="node level-3"><span class="code">1.2.2.2</span> Configuración seguridad</div></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <!-- Módulo 3 -->
+                            <li>
+                                <div class="node level-1" onclick="toggleNode(this)">
+                                    <span class="toggle">−</span>
+                                    <span class="code">1.3</span>
+                                    <span>Módulo de Operaciones Financieras</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.3.1</span>
+                                            <span>Componente de Transacciones</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.3.1.1</span> Envío dinero</div></li>
+                                            <li><div class="node level-3"><span class="code">1.3.1.2</span> Recepción dinero</div></li>
+                                            <li><div class="node level-3"><span class="code">1.3.1.3</span> Validación límites</div></li>
+                                            <li><div class="node level-3"><span class="code">1.3.1.4</span> Validación saldo</div></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.3.2</span>
+                                            <span>Componente de Recarga</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.3.2.1</span> Recarga con tarjeta</div></li>
+                                            <li><div class="node level-3"><span class="code">1.3.2.2</span> Recarga efectivo</div></li>
+                                            <li><div class="node level-3"><span class="code">1.3.2.3</span> Validación recarga</div></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.3.3</span>
+                                            <span>Componente de Pagos</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.3.3.1</span> Pago por QR</div></li>
+                                            <li><div class="node level-3"><span class="code">1.3.3.2</span> Pago por NFC</div></li>
+                                            <li><div class="node level-3"><span class="code">1.3.3.3</span> Generación comprobante</div></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <!-- Módulo 4 -->
+                            <li>
+                                <div class="node level-1" onclick="toggleNode(this)">
+                                    <span class="toggle">−</span>
+                                    <span class="code">1.4</span>
+                                    <span>Módulo de Gestión de Tarjetas</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.4.1</span>
+                                            <span>Componente de Registro Tarjetas</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.4.1.1</span> Agregar tarjeta</div></li>
+                                            <li><div class="node level-3"><span class="code">1.4.1.2</span> Validación tarjeta</div></li>
+                                            <li><div class="node level-3"><span class="code">1.4.1.3</span> Verificación límite</div></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.4.2</span>
+                                            <span>Componente de Gestión Tarjetas</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.4.2.1</span> Listar tarjetas</div></li>
+                                            <li><div class="node level-3"><span class="code">1.4.2.2</span> Eliminar tarjeta</div></li>
+                                            <li><div class="node level-3"><span class="code">1.4.2.3</span> Tarjeta principal</div></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <!-- Módulo 5 -->
+                            <li>
+                                <div class="node level-1" onclick="toggleNode(this)">
+                                    <span class="toggle">−</span>
+                                    <span class="code">1.5</span>
+                                    <span>Módulo de Reportes y Consultas</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.5.1</span>
+                                            <span>Componente de Consultas</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.5.1.1</span> Ver saldo</div></li>
+                                            <li><div class="node level-3"><span class="code">1.5.1.2</span> Ver movimientos</div></li>
+                                            <li><div class="node level-3"><span class="code">1.5.1.3</span> Historial transacciones</div></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.5.2</span>
+                                            <span>Componente de Reportes</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.5.2.1</span> Reporte movimientos</div></li>
+                                            <li><div class="node level-3"><span class="code">1.5.2.2</span> Reporte por período</div></li>
+                                            <li><div class="node level-3"><span class="code">1.5.2.3</span> Exportación datos</div></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <!-- Módulo 6 -->
+                            <li>
+                                <div class="node level-1" onclick="toggleNode(this)">
+                                    <span class="toggle">−</span>
+                                    <span class="code">1.6</span>
+                                    <span>Módulo de Gestión de Accesos</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.6.1</span>
+                                            <span>Componente de Permisos</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.6.1.1</span> Otorgar acceso</div></li>
+                                            <li><div class="node level-3"><span class="code">1.6.1.2</span> Revocar acceso</div></li>
+                                            <li><div class="node level-3"><span class="code">1.6.1.3</span> Gestión permisos</div></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.6.2</span>
+                                            <span>Componente de Invitados</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.6.2.1</span> Agregar empleado</div></li>
+                                            <li><div class="node level-3"><span class="code">1.6.2.2</span> Acceso solo lectura</div></li>
+                                            <li><div class="node level-3"><span class="code">1.6.2.3</span> Lista invitados</div></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <!-- Módulo 7 -->
+                            <li>
+                                <div class="node level-1" onclick="toggleNode(this)">
+                                    <span class="toggle">−</span>
+                                    <span class="code">1.7</span>
+                                    <span>Módulo de Administración</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.7.1</span>
+                                            <span>Componente de Monitoreo</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.7.1.1</span> Dashboard admin</div></li>
+                                            <li><div class="node level-3"><span class="code">1.7.1.2</span> Métricas sistema</div></li>
+                                            <li><div class="node level-3"><span class="code">1.7.1.3</span> Alertas seguridad</div></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.7.2</span>
+                                            <span>Componente de Mantenimiento</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.7.2.1</span> Gestión usuarios</div></li>
+                                            <li><div class="node level-3"><span class="code">1.7.2.2</span> Configuración sistema</div></li>
+                                            <li><div class="node level-3"><span class="code">1.7.2.3</span> Logs auditoria</div></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <!-- Módulo 8 -->
+                            <li>
+                                <div class="node level-1" onclick="toggleNode(this)">
+                                    <span class="toggle">−</span>
+                                    <span class="code">1.8</span>
+                                    <span>Módulo de Integración</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.8.1</span>
+                                            <span>Componente API</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.8.1.1</span> API bancaria</div></li>
+                                            <li><div class="node level-3"><span class="code">1.8.1.2</span> API pasarelas pago</div></li>
+                                            <li><div class="node level-3"><span class="code">1.8.1.3</span> API validación</div></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="node level-2" onclick="toggleNode(this)">
+                                            <span class="toggle">−</span>
+                                            <span class="code">1.8.2</span>
+                                            <span>Componente Tecnologías</span>
+                                        </div>
+                                        <ul>
+                                            <li><div class="node level-3"><span class="code">1.8.2.1</span> Integración NFC</div></li>
+                                            <li><div class="node level-3"><span class="code">1.8.2.2</span> Generador QR</div></li>
+                                            <li><div class="node level-3"><span class="code">1.8.2.3</span> Scanner QR</div></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <span>8 Módulos</span> • 
+            <span>16 Componentes</span> • 
+            <span>48 Funcionalidades</span>
+        </div>
+    </div>
+    
+    <script>
+        function toggleNode(element) {
+            const li = element.parentElement;
+            li.classList.toggle('collapsed');
+            const toggle = element.querySelector('.toggle');
+            if (li.classList.contains('collapsed')) {
+                toggle.textContent = '+';
+            } else {
+                toggle.textContent = '−';
+            }
+        }
+        
+        function expandAll() {
+            document.querySelectorAll('li').forEach(li => {
+                li.classList.remove('collapsed');
+                const toggle = li.querySelector('.toggle');
+                if (toggle) toggle.textContent = '−';
+            });
+        }
+        
+        function collapseAll() {
+            document.querySelectorAll('li').forEach(li => {
+                const node = li.querySelector('.node');
+                if (node && !node.classList.contains('level-0')) {
+                    li.classList.add('collapsed');
+                    const toggle = li.querySelector('.toggle');
+                    if (toggle) toggle.textContent = '+';
+                }
+            });
+        }
+        
+        function expandLevel(level) {
+            collapseAll();
+            document.querySelectorAll('li').forEach(li => {
+                const node = li.querySelector('.node');
+                if (node) {
+                    const nodeLevel = parseInt(node.className.match(/level-(\d+)/)[1]);
+                    if (nodeLevel < level) {
+                        li.classList.remove('collapsed');
+                        const toggle = li.querySelector('.toggle');
+                        if (toggle) toggle.textContent = '−';
+                    }
+                }
+            });
+        }
+        
+        function printTree() {
+            window.print();
+        }
+        
+        // Búsqueda
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            document.querySelectorAll('.node').forEach(node => {
+                node.classList.remove('highlight');
+                if (searchTerm && node.textContent.toLowerCase().includes(searchTerm)) {
+                    node.classList.add('highlight');
+                    let parent = node.parentElement;
+                    while (parent) {
+                        if (parent.tagName === 'LI') {
+                            parent.classList.remove('collapsed');
+                            const toggle = parent.querySelector('.toggle');
+                            if (toggle) toggle.textContent = '−';
+                        }
+                        parent = parent.parentElement;
+                    }
+                }
+            });
+        });
+        
+        // Inicializar con nivel 1 expandido
+        expandLevel(2);
+    </script>
+</body>
+</html>
